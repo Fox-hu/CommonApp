@@ -22,4 +22,46 @@ class KotlinTest {
         }
         println(double(x))
     }
+
+    //枚举申明
+    enum class Day {
+        MON, TUE, WEN, THU, FRI, SAT, SUN
+    }
+
+    //包含成员变量的枚举类
+    enum class DayOfWeek(val day: Int) {
+        MON(1), TUE(2), WEN(3), THU(4), FRI(5), SAT(6), SUN(7);
+
+        fun getDayNum(): Int {
+            return day
+        }
+    }
+
+    //when else用法
+    fun schedule(sunny: Boolean, day: Day) = when {
+        day == Day.SAT -> println("sat")
+        day == Day.SUN -> println("sun")
+        sunny -> println("sunny")
+        else -> println("study")
+    }
+
+    //step until downTo用法
+    fun fortest(){
+        for (i in 1..10 step 2) print(i)
+        for (i in 1 until 10) print(i)
+        for (i in 10 downTo 1 step 2) print(i)
+    }
+
+    //中綴表达式
+    class Person(){
+        infix fun called(name: String){
+            println("my name is $name.")
+        }
+    }
+
+    fun personTest(){
+        val person = Person()
+        person called "fox"
+    }
+
 }
