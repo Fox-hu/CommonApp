@@ -14,12 +14,31 @@ class Prize(val name: String, val count: Int, val type: Int) {
     }
 
     //使用object关键字来创建的单例
-    object singleton {
-        var host:String = "127.0.0.1"
+    object Singleton {
+        var host: String = "127.0.0.1"
     }
 
 }
 
-fun singletonTest(){
-    Prize.singleton.host
+data class dataClass(
+    var name: String = "zhangsan",
+    var street: String = "五家渠警校",
+    var city: String = "上海",
+    var state: String = "单身"
+)
+
+fun singletonTest() {
+    Prize.Singleton.host
+    val address = dataClass(city = "北京")
+    address.name = "李四"
 }
+
+//扩展方法
+fun MutableList<Int>.swap(index1: Int, index2: Int) {
+    val i = this[index1]
+    this[index1] = this[index2]
+    this[index2] = i
+}
+
+//扩展属性 他们的⾏为只能由显式提供的 getters/setters 定义。
+val <T> List<T>.lastIndex: Int get() = size - 1
