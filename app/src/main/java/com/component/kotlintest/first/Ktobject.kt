@@ -1,6 +1,6 @@
 package com.component.kotlintest.first
 
-class Prize(val name: String, val count: Int, val type: Int) {
+class Prize(val name: String = "hhh", val count: Int = 123, val type: Int =0) {
     //kt中的companion object 用于取代java中的static关键字
     //在companion object中包裹所有的静态属性和方法
     //可以用于更优雅的实现java中的单例
@@ -29,6 +29,7 @@ data class dataClass(
 
 fun singletonTest() {
     Prize.Singleton.host
+    Prize.isRedpack(prize = Prize())
     val address = dataClass(city = "北京")
     address.name = "李四"
 }
