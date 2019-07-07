@@ -1,12 +1,38 @@
 package com.component.kotlintest
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.Toolbar
+import com.component.kotlintest.extensions.DelegatesExt
+import com.component.kotlintest.ui.activity.CoroutineScopeActivity
+import com.component.kotlintest.ui.activity.SettingActivity
+import com.component.kotlintest.ui.activity.ToolbarManager
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.launch
+import org.jetbrains.anko.find
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : CoroutineScopeActivity(), ToolbarManager {
+
+    override val toolbar by lazy { find<Toolbar>(R.id.toolbar) }
+    private val zipCode: Long by DelegatesExt.preference(
+        this, SettingActivity.ZIP_CODE,
+        SettingActivity.DEFAULT_ZIP
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initToolbar()
+
+        forecastList.layoutManager = LinearLayoutManager(this)
+        attachToScroll(forecastList)
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    private fun loadForecast() = launch {
+
     }
 }

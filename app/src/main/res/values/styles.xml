@@ -5,6 +5,5 @@
         <item name="colorPrimary">#ff212121</item>
         <item name="colorPrimaryDark">@android:color/black</item>
     </style>
-    >
 
 </resources >
