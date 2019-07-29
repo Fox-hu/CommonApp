@@ -1,6 +1,7 @@
 package com.component.kotlintest.first
 
 import java.util.*
+import kotlin.reflect.KProperty
 
 class Turtle {
     fun penDown() = "penDown"
@@ -252,3 +253,91 @@ class DelegatingCollection1<T>(
 var ret3 = DelegatingCollection1<String>().size
 var ret4 = DelegatingCollection1<String>().isEmpty()
 var ret5 = DelegatingCollection1<String>().contains("hhh")
+
+fun findTheOldest(people: List<Person>) {
+    var maxAge = 0
+    var theOldest: Person? = null
+    for (person in people) {
+        if (person.age > maxAge) {
+            maxAge = person.age
+            theOldest = person
+        }
+    }
+    println(theOldest)
+}
+
+
+fun findTheOldestWithLambda(people: List<Person>) {
+    val people = listOf(Person("Alice", 29), Person("Bob", 31))
+    println(people.maxBy({ person: Person -> person.age }))
+
+    //如果lambda表达式是函数调用的最后一个实参，它可以放到括号的外边去
+
+    println(people.maxBy() { person: Person -> person.age })
+
+    //如果lambda是函数的唯一实参时。可以去掉调用代码中的空括号对
+    println(people.maxBy { person: Person -> person.age })
+
+    //如果可以推导出参数类型，就不需要显式的指定它
+    //这个it 是自动生成的参数名称 类型是Person
+    println(people.maxBy { it.age })
+}
+
+//返回a到z的字母表
+fun alphabet(): String {
+    val result = StringBuilder()
+    for (letter in 'A'..'Z') {
+        result.append(letter)
+    }
+    result.append("\nNow I know the alphabet!")
+    return result.toString()
+}
+
+fun alphabetUsingWith() = with(StringBuilder()) {
+    for (letter in 'A'..'Z') {
+        append(letter)
+    }
+    append("\nNow I know the alphabet!")
+    toString()
+}
+
+fun alphabetUsingApply() = StringBuilder().apply {
+    for (letter in 'A'..'Z') {
+        append(letter)
+    }
+    append("\nNow I know the alphabet!")
+}.toString()
+
+
+class Foo {
+    var p: Person by PersonDelegate()
+}
+
+class PersonDelegate<T> {
+    private var value: T? = null
+
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): T =
+        value ?: throw IllegalStateException("${property.name} not initialized")
+
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
+        this.value = if (this.value == null) value
+        else throw IllegalStateException("${property.name} already initialized")
+    }
+
+}
+
+class MapByTest() {
+    private val attributes = hashMapOf<String, String>()
+
+    fun setAttributes(key: String, value: String) {
+        attributes[key] = value
+    }
+
+    //name这一属性会在map中查找key为map的值
+    val name by attributes
+}
+
+//高阶函数，以callback函数作为参数
+fun lambdaTest(url: String, callback: (code: Int, content: String) -> String ) {
+    
+}
