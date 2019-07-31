@@ -20,9 +20,13 @@ class ForecastProvider(private val sources: List<ForecastDataSource> = ForecastP
 
     private fun <T : Any> requestToSources(f: (ForecastDataSource) -> T?): T = sources.firstResult { f(it) }
 
-//    fun requestByZipCode1(zipCode: Long, days: Int) = requestToSources1 {
-//
-//    }
-//
-//    private fun <T : Any> requestToSources1(f: (String, ForecastDataSource) -> T?): T = MAPS.firstResult { f() }
+    fun requestByZipCodeWithMap(zipCode: Long, days: Int) = requestToSourcesWithMap { s, forecastDataSource ->
+        val result = forecastDataSource.requestForecastByZipCode(zipCode, todayTimeSpan())
+        if (result != null && result.size > days) result else null
+    }
+
+    private fun <T : Any> requestToSourcesWithMap(f: (String, ForecastDataSource) -> T?): T =
+        MAPS.firstResult { s: String, forecastDataSource: ForecastDataSource ->
+            f(s, forecastDataSource)
+        }
 }
