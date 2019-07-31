@@ -9,6 +9,11 @@ class KtList {
 
         val filter = list.filter { it % 2 == 0 }
 
+        //匿名函数的方式
+        val filter1 = list.filter(fun(item): Boolean {
+            return item % 2 == 0
+        })
+
         val filterNot = list.filterNot { it % 2 == 0 }
 
         val count = list.count { it % 2 == 0 }

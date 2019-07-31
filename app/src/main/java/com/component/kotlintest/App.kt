@@ -4,8 +4,9 @@ import android.app.Application
 import com.component.kotlintest.extensions.DelegatesExt
 
 class App :Application(){
-    //属性委托 将属性委托给一个对象
+    //伴生对象，相当于static
     companion object{
+        //属性委托 将属性委托给一个对象
         var instance:App by DelegatesExt.notNullSingleValue()
     }
 

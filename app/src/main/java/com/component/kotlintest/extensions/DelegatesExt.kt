@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import kotlin.reflect.KProperty
 
+//单例对象
 object DelegatesExt {
     fun <T> notNullSingleValue() = NotNullSingleValueVar<T>()
     fun <T> preference(context: Context, name: String, default: T) = Preference(context, name, default)

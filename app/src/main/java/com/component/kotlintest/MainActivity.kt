@@ -30,6 +30,7 @@ class MainActivity : CoroutineScopeActivity(), ToolbarManager {
 
     override fun onResume() {
         super.onResume()
+        loadForecast()
     }
 
     private fun loadForecast() = launch {

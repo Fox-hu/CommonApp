@@ -3,27 +3,6 @@ package com.component.kotlintest.first
 import java.util.*
 import kotlin.reflect.KProperty
 
-class Turtle {
-    fun penDown() = "penDown"
-    fun penUp() = "penUp"
-    fun turn(degrees: Double) = degrees * 2
-    fun forward(pixels: Double) = pixels * 3
-
-    //对一个实例对象调用多个方法
-    fun withTest() {
-        val myTurtle = Turtle()
-        with(myTurtle) {
-            penDown()
-            for (i in 1..4) {
-                forward(100.0)
-                turn(90.0)
-            }
-            penUp()
-        }
-    }
-
-}
-
 class Rectangle(val height: Int, val width: Int) {
     val isSquare: Boolean
         get() {
@@ -338,6 +317,7 @@ class MapByTest() {
 }
 
 //高阶函数，以callback函数作为参数
-fun lambdaTest(url: String, callback: (code: Int, content: String) -> String ) {
-    
+//同时 callback有默认实现
+fun <T> lambdaTest1(url: String, callback: (T) -> String = {it.toString()}) {
+
 }
