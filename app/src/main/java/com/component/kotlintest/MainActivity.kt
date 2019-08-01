@@ -3,6 +3,8 @@ package com.component.kotlintest
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
+import com.component.kotlintest.adapter.ForecastListAdapter
+import com.component.kotlintest.demain.commands.RequestForecastCommand
 import com.component.kotlintest.extensions.DelegatesExt
 import com.component.kotlintest.ui.activity.CoroutineScopeActivity
 import com.component.kotlintest.ui.activity.SettingActivity
@@ -10,6 +12,7 @@ import com.component.kotlintest.ui.activity.ToolbarManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.find
+import org.jetbrains.anko.startActivity
 
 class MainActivity : CoroutineScopeActivity(), ToolbarManager {
 
@@ -34,6 +37,12 @@ class MainActivity : CoroutineScopeActivity(), ToolbarManager {
     }
 
     private fun loadForecast() = launch {
-
+        val result = RequestForecastCommand(zipCode).execute()
+        val forecastListAdapter = ForecastListAdapter(result.dailyForecast.toMutableList()) {
+            //todo detailActivity
+            startActivity<MainActivity>()
+        }
+        forecastList.adapter = forecastListAdapter
+        toolbarTitle = "${result.city} (${result.country})"
     }
 }

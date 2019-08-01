@@ -1,4 +1,4 @@
-package com.component.kotlintest.data
+package com.component.kotlintest.data.db
 
 class CityForecast(val map: MutableMap<String, Any?>, val dailyForecast: List<DayForecast>) {
     var _id: Long by map

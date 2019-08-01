@@ -1,7 +1,5 @@
 package com.component.kotlintest.data.db
 
-import com.component.kotlintest.data.CityForecast
-import com.component.kotlintest.data.DayForecast
 import com.component.kotlintest.demain.datasource.ForecastDataSource
 import com.component.kotlintest.demain.model.Forecast
 import com.component.kotlintest.demain.model.ForecastList
@@ -27,7 +25,11 @@ class ForecastDb(
     }
 
     override fun requestDayForecast(id: Long): Forecast? = forecastDbHelper.use {
-        val dayForecast = select(DayForecastTable.NAME).byId(id).parseOpt { DayForecast(HashMap(it)) }
+        val dayForecast = select(DayForecastTable.NAME).byId(id).parseOpt {
+            DayForecast(
+                HashMap(it)
+            )
+        }
 
         dayForecast?.let { DbDataMapper.convertDayToDomain(it) }
     }

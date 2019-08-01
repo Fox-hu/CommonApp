@@ -1,7 +1,5 @@
 package com.component.kotlintest.data.db
 
-import com.component.kotlintest.data.CityForecast
-import com.component.kotlintest.data.DayForecast
 import com.component.kotlintest.demain.model.Forecast
 import com.component.kotlintest.demain.model.ForecastList
 
