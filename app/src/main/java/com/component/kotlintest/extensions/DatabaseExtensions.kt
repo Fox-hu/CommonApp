@@ -1,5 +1,6 @@
 package com.component.kotlintest.extensions
 
+import android.database.sqlite.SQLiteDatabase
 import org.jetbrains.anko.db.MapRowParser
 import org.jetbrains.anko.db.SelectQueryBuilder
 
@@ -14,3 +15,7 @@ fun <T : Any> SelectQueryBuilder.parseOpt(parser: (Map<String, Any?>) -> T): T? 
     })
 
 fun SelectQueryBuilder.byId(id: Long) = whereSimple("_id = ?", id.toString())
+
+fun SQLiteDatabase.clear(tableName: String) {
+    execSQL("delete from $tableName")
+}

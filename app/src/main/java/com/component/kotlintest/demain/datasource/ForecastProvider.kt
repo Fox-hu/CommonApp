@@ -1,19 +1,25 @@
 package com.component.kotlintest.demain.datasource
 
 import com.component.kotlintest.data.db.ForecastDb
+import com.component.kotlintest.data.server.ForecastServer
+import com.component.kotlintest.demain.model.Forecast
 import com.component.kotlintest.extensions.firstResult
 
 class ForecastProvider(private val sources: List<ForecastDataSource> = ForecastProvider.SOURCES) {
 
     companion object {
         const val DAY_IN_MILLIS = 1000 * 60 * 60 * 24
-        val SOURCES by lazy { listOf(ForecastDb()) }
+        val SOURCES by lazy { listOf(ForecastDb(), ForecastServer()) }
         val MAPS by lazy { hashMapOf<String, ForecastDataSource>("db" to ForecastDb()) }
     }
 
     fun requestByZipCode(zipCode: Long, days: Int) = requestToSources {
         val result = it.requestForecastByZipCode(zipCode, todayTimeSpan())
-        if (result != null && result.size > days) result else null
+        if (result != null && result.size >= days) result else null
+    }
+
+    fun requestForecast(id:Long):Forecast = requestToSources {
+        it.requestDayForecast(id)
     }
 
     private fun todayTimeSpan() = System.currentTimeMillis() / DAY_IN_MILLIS * DAY_IN_MILLIS

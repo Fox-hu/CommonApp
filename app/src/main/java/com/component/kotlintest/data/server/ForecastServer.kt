@@ -12,7 +12,10 @@ class ForecastServer(
     ForecastDataSource {
 
     override fun requestForecastByZipCode(zipCode: Long, date: Long): ForecastList? {
-        return null
+        val result = ForecastByZipCodeRequest(zipCode).execute()
+        val converted = dataMapper.convertToDomain(zipCode, result)
+        forecastDb.saveForecast(converted)
+        return forecastDb.requestForecastByZipCode(zipCode,date)
     }
 
     override fun requestDayForecast(id: Long): Forecast? {

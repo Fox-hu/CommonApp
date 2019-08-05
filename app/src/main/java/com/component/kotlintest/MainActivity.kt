@@ -7,6 +7,7 @@ import com.component.kotlintest.adapter.ForecastListAdapter
 import com.component.kotlintest.demain.commands.RequestForecastCommand
 import com.component.kotlintest.extensions.DelegatesExt
 import com.component.kotlintest.ui.activity.CoroutineScopeActivity
+import com.component.kotlintest.ui.activity.DetailActivity
 import com.component.kotlintest.ui.activity.SettingActivity
 import com.component.kotlintest.ui.activity.ToolbarManager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -39,8 +40,7 @@ class MainActivity : CoroutineScopeActivity(), ToolbarManager {
     private fun loadForecast() = launch {
         val result = RequestForecastCommand(zipCode).execute()
         val forecastListAdapter = ForecastListAdapter(result.dailyForecast.toMutableList()) {
-            //todo detailActivity
-            startActivity<MainActivity>()
+            startActivity<DetailActivity>(DetailActivity.ID to it.id, DetailActivity.CITY_NAME to result.city)
         }
         forecastList.adapter = forecastListAdapter
         toolbarTitle = "${result.city} (${result.country})"

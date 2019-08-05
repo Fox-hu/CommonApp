@@ -3,9 +3,9 @@ package com.component.kotlintest.data.db
 import com.component.kotlintest.demain.datasource.ForecastDataSource
 import com.component.kotlintest.demain.model.Forecast
 import com.component.kotlintest.demain.model.ForecastList
-import com.component.kotlintest.extensions.byId
-import com.component.kotlintest.extensions.parseList
-import com.component.kotlintest.extensions.parseOpt
+import com.component.kotlintest.extensions.*
+import org.jetbrains.anko.db.insert
+
 import org.jetbrains.anko.db.select
 
 class ForecastDb(
@@ -34,4 +34,13 @@ class ForecastDb(
         dayForecast?.let { DbDataMapper.convertDayToDomain(it) }
     }
 
+    fun saveForecast(forecastList: ForecastList) = forecastDbHelper.use {
+        clear(CityForecastTable.NAME)
+        clear(DayForecastTable.NAME)
+
+        with(DbDataMapper.convertFromDomain(forecastList)) {
+            insert(CityForecastTable.NAME, *map.toVarargArray())
+            dailyForecast.forEach { insert(DayForecastTable.NAME, *it.map.toVarargArray()) }
+        }
+    }
 }
