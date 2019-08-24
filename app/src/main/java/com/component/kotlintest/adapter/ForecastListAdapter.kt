@@ -11,24 +11,18 @@ import com.squareup.picasso.Picasso
 
 
 class ForecastListAdapter(
-    layoutResId: Int = R.layout.item_forecast,
     data: MutableList<Forecast>?,
     private val itemClick: (Forecast) -> Unit
 ) :
-    BaseQuickAdapter<Forecast, BaseViewHolder>(layoutResId, data), BaseQuickAdapter.OnItemClickListener {
+    BaseQuickAdapter<Forecast, BaseViewHolder>(R.layout.item_forecast, data), BaseQuickAdapter.OnItemClickListener {
+
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
         itemClick(adapter?.getItem(position) as Forecast)
     }
 
     init {
-        this.setOnItemClickListener(this)
+        this.onItemClickListener = this
     }
-
-    constructor(data: MutableList<Forecast>?, itemClick: (Forecast) -> Unit) : this(
-        R.layout.item_forecast,
-        data,
-        itemClick
-    )
 
     override fun convert(helper: BaseViewHolder?, item: Forecast?) {
         if (helper != null && item != null) {

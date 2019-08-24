@@ -8,6 +8,7 @@ class App :Application(){
     companion object{
         //属性委托 将属性委托给一个对象
         var instance:App by DelegatesExt.notNullSingleValue()
+        // var instance:App by NotNullSingleValue()
     }
 
     override fun onCreate() {
