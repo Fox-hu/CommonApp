@@ -9,6 +9,7 @@ import kotlin.coroutines.CoroutineContext
 
 abstract class CoroutineScopeActivity : AppCompatActivity(), CoroutineScope {
     override val coroutineContext: CoroutineContext
+        //+是操作符重载 一个 CoroutineContext需要一个调度器，用于管理一个任务job
         get() = Dispatchers.Main + job
 
     lateinit var job: Job

@@ -197,6 +197,16 @@ interface InterfaceTest {
         }
 }
 
+class interfaceImpl1 : InterfaceTest{
+    override val user: User
+        get() = User(1,"张三","火星")
+}
+
+class interfaceImpl2 : InterfaceTest{
+    override val user: User
+        get() = User(2,"李四","地球")
+}
+
 class User1(val nickname: String)
 
 class User2 constructor(_nickname: String) {
