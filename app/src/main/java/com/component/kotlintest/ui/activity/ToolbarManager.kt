@@ -35,6 +35,7 @@ interface ToolbarManager {
 
     fun enableHomeAsUp(up: () -> Unit) {
         toolbar.navigationIcon = createUpDrawable()
+        toolbar.setNavigationOnClickListener { up() }
     }
 
     fun createUpDrawable() = DrawerArrowDrawable(toolbar.ctx).apply { progress = 1f }
