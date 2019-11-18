@@ -1,7 +1,6 @@
 package com.component.kotlintest.koans
 
 import java.util.*
-import kotlin.reflect.KProperty
 
 //task4
 fun containsEven(collection: Collection<Int>): Boolean = collection.any { it % 2 == 0 }
@@ -72,7 +71,11 @@ fun getList(): List<Int> {
 fun getDescendList(): List<Int> {
     val arrayList = arrayListOf(1, 5, 2)
     arrayList.sortWith(Comparator{i:Int, j:Int -> j-i})
+    Person1(name ="lisi")
+    Person1(age = 20)
     return arrayList
 }
+
+class Person1(var name: String = "lili", var age:Int = 20,var num:Int = 200)
 
 

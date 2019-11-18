@@ -11,6 +11,7 @@ class Prize(val name: String = "hhh", val count: Int = 123, val type: Int =0) {
         fun isRedpack(prize: Prize): Boolean {
             return prize.type == TYPE_REDPACK
         }
+
     }
 
     //使用object关键字来创建的单例

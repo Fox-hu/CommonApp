@@ -7,12 +7,12 @@ android {
 
 
     defaultConfig {
-        minSdkVersion 20
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
 
@@ -41,7 +41,7 @@ dependencies {
     api 'com.hyman:flowlayout-lib:1.1.2'
     api 'de.psdev.licensesdialog:licensesdialog:2.1.0'
     api 'com.afollestad.material-dialogs:input:3.1.1'
-    api 'com.afollestad.material-dialogs:core:3.1.0'
+    api 'com.afollestad.material-dialogs:core:3.1.1'
     api 'androidx.recyclerview:recyclerview:1.1.0-rc01'
 
 

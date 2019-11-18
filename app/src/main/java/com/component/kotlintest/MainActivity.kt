@@ -2,7 +2,6 @@ package com.component.kotlintest
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.Toolbar
 import com.component.kotlintest.adapter.ForecastListAdapter
 import com.component.kotlintest.demain.commands.RequestForecastCommand
 import com.component.kotlintest.extensions.DelegatesExt
@@ -17,10 +16,11 @@ import org.jetbrains.anko.startActivity
 
 class MainActivity : CoroutineScopeActivity(), ToolbarManager {
 
-    override val toolbar by lazy { find<Toolbar>(R.id.toolbar) }
+    override val toolbar by lazy { find<android.support.v7.widget.Toolbar>(R.id.toolbar) }
     private val zipCode: Long by DelegatesExt.preference(
         this, SettingActivity.ZIP_CODE,
         SettingActivity.DEFAULT_ZIP
+
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
