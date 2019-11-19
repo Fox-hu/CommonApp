@@ -1,7 +1,9 @@
 package com.component.kotlintest
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.widget.Toolbar
+
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.component.kotlintest.adapter.ForecastListAdapter
 import com.component.kotlintest.demain.commands.RequestForecastCommand
 import com.component.kotlintest.extensions.DelegatesExt
@@ -16,7 +18,7 @@ import org.jetbrains.anko.startActivity
 
 class MainActivity : CoroutineScopeActivity(), ToolbarManager {
 
-    override val toolbar by lazy { find<android.support.v7.widget.Toolbar>(R.id.toolbar) }
+    override val toolbar by lazy { find<Toolbar>(R.id.toolbar) }
     private val zipCode: Long by DelegatesExt.preference(
         this, SettingActivity.ZIP_CODE,
         SettingActivity.DEFAULT_ZIP
@@ -40,7 +42,10 @@ class MainActivity : CoroutineScopeActivity(), ToolbarManager {
     private fun loadForecast() = launch {
         val result = RequestForecastCommand(zipCode).execute()
         val forecastListAdapter = ForecastListAdapter(result.dailyForecast.toMutableList()) {
-            startActivity<DetailActivity>(DetailActivity.ID to it.id, DetailActivity.CITY_NAME to result.city)
+            startActivity<DetailActivity>(
+                DetailActivity.ID to it.id,
+                DetailActivity.CITY_NAME to result.city
+            )
         }
         forecastList.adapter = forecastListAdapter
         toolbarTitle = "${result.city} (${result.country})"

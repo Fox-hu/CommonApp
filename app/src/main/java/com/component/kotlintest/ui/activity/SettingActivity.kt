@@ -1,8 +1,9 @@
 package com.component.kotlintest.ui.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.component.kotlintest.R
 import com.component.kotlintest.extensions.DelegatesExt
 import kotlinx.android.synthetic.main.activity_settings.*

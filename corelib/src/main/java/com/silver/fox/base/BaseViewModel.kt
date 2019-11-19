@@ -8,9 +8,10 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import org.koin.core.KoinComponent
 
 
-open class BaseViewModel : ViewModel(), LifecycleObserver {
+open class BaseViewModel : ViewModel(), LifecycleObserver, KoinComponent {
 
     private val mException: MutableLiveData<Throwable> = MutableLiveData()
 

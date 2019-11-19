@@ -1,8 +1,9 @@
 package com.component.kotlintest.ui.activity
 
-import android.support.v7.graphics.drawable.DrawerArrowDrawable
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
+
+import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.RecyclerView
 import com.component.kotlintest.App
 import com.component.kotlintest.R
 import com.component.kotlintest.extensions.ctx

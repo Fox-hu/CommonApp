@@ -1,8 +1,8 @@
 package com.component.kotlintest.ui.activity
 
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import com.component.kotlintest.R
 import com.component.kotlintest.demain.commands.RequestDayForecastCommand
 import com.component.kotlintest.demain.model.Forecast
