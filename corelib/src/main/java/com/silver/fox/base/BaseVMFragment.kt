@@ -1,11 +1,11 @@
 package com.silver.fox.base
 
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 
 abstract class BaseVMFragment<VM : BaseViewModel>(useBinding: Boolean = false) : BaseFragment() {
 

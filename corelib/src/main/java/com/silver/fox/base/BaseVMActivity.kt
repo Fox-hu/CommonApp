@@ -1,8 +1,10 @@
 package com.silver.fox.base
 
+
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+
 
 abstract class BaseVMActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseActivity() {
 
@@ -16,7 +18,7 @@ abstract class BaseVMActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseAc
 
     override fun setContentView(layoutResID: Int) {
         dataBinding = DataBindingUtil.inflate(layoutInflater, getLayoutResId(), null, false)
-//        dataBinding.setVariable(BR.viewModel, viewModel)
+        dataBinding.setVariable(BR.viewModel, viewModel)
         dataBinding.executePendingBindings()
         super.setContentView(dataBinding.root)
     }

@@ -1,5 +1,6 @@
 package com.silver.fox.binding
 
+
 import androidx.databinding.ObservableField
 
 open class BindingField<T>

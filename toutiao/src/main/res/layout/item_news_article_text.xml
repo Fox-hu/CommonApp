@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -91,4 +91,4 @@
                 tools:text="美国总统当选人特朗普日前暗示，可能拿美国的“一中政策”当谈判筹码，与中国大陆就诸如人民币汇率及南海等争议讨价还价。" />
         </LinearLayout >
     </RelativeLayout >
-</android.support.v7.widget.CardView >
+</androidx.cardview.widget.CardView >

@@ -23,11 +23,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:background="@color/viewBackground"
-                android:bind_bn_onItemSelected="@{homeViewModel}"
+                android:bind_bn_onItemSelected="@{homeViewModel.onItemSelected}"
                 app:elevation="16dp"
                 app:itemIconTint="@drawable/nav_item_color_state"
                 app:itemTextColor="@drawable/nav_item_color_state"
-                app:layout_behavior="app.mrobot.cn.toutiaoexample.BottomNavigationBehavior"
                 app:menu="@menu/bottom_navigation_main" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -36,8 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:layout_margin="@dimen/fab_margin"
-                android:visibility="gone"
-                app:srcCompat="@android:drawable/ic_dialog_email" />
+                android:visibility="gone"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

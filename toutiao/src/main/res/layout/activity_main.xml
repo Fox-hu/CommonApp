@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -18,10 +19,11 @@
             tools:openDrawer="start">
 
         <include
+                android:id="@+id/app_bar"
                 layout="@layout/app_bar_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:viewModel="@{homeViewModel}" />
+                bind:homeViewModel="@{homeViewModel}" />
 
         <com.google.android.material.navigation.NavigationView
                 android:id="@+id/nav_view"
