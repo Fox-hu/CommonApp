@@ -4,6 +4,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.silver.fox.SnackbarModel
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
@@ -12,6 +13,8 @@ import org.koin.core.KoinComponent
 
 
 open class BaseViewModel : ViewModel(), LifecycleObserver, KoinComponent {
+
+    val snackbarData = MutableLiveData<SnackbarModel>()
 
     private val mException: MutableLiveData<Throwable> = MutableLiveData()
 

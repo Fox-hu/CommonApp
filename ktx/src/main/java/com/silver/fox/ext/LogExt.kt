@@ -1,7 +1,7 @@
 package com.silver.fox.ext
 
 import android.util.Log
-import com.silver.fox.common.BuildConfig
+import com.silver.fox.BuildConfig
 
 
 const val TAG = "ktx"

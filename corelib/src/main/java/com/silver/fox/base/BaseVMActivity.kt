@@ -20,8 +20,7 @@ abstract class BaseVMActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseAc
 
     override fun setContentView(layoutResID: Int) {
         dataBinding = DataBindingUtil.inflate(LayoutInflater.from(this), layoutResID, null, false)
-
-        dataBinding.setVariable(BR.viewModel,viewModel)
+        dataBinding.setVariable(BR.viewModel, viewModel)
         dataBinding.executePendingBindings()
         super.setContentView(dataBinding.root)
     }

@@ -28,7 +28,7 @@ class Ktx : ContentProvider() {
     ): Cursor? = null
 
     override fun onCreate(): Boolean {
-        var application = context.applicationContext as Application
+        var application = context!!.applicationContext as Application
         install(application)
         return true
     }

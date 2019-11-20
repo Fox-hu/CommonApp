@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 应用主色调 -->
+    <color name="view_app_colorPrimary">#3C83FC</color>
+    <!-- 应用主要暗色调 -->
+    <color name="view_app_colorPrimaryDark">#3C83FC</color>
+    <!-- 控件选中默认颜色 -->
+    <color name="view_app_colorAccent">#D81B60</color>
+
+    <color name="view_white">#FFFFFF</color>
+</resources>

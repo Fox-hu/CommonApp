@@ -7,20 +7,20 @@
         android:enabled="true"
         android:icon="@drawable/ic_newspaper_white_24dp"
         android:title="@string/news"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/action_photo"
         android:enabled="true"
         android:icon="@drawable/ic_gallery_white_24dp"
         android:title="@string/photos"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
     <item
         android:id="@+id/action_video"
         android:enabled="true"
         android:icon="@drawable/ic_youtube_white_24dp"
         android:title="@string/video"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         />
 
     <item
@@ -28,5 +28,5 @@
         android:enabled="true"
         android:icon="@drawable/ic_library_books_white_24dp"
         android:title="@string/media"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
 </menu >
