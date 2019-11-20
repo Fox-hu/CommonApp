@@ -1,14 +1,12 @@
 package com.fox.toutiao
 
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GravityCompat
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import com.fox.toutiao.databinding.ActivityMainBinding
 import com.fox.toutiao.ui.ToolbarManager
 import com.fox.toutiao.ui.home.HomeViewModel
 import com.silver.fox.base.BaseVMActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,7 +21,6 @@ class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>(), Toolb
 //    private var newsFragment: NewsFragment? = null
 //    private var videoFragment: NewsFragment? = null
     private var index: Int = 0
-
 
     override fun startObserver() {
         viewModel.tabPosition.observe(this, Observer {
@@ -83,11 +80,11 @@ class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>(), Toolb
     }
 
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
+//        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+//            drawer_layout.closeDrawer(GravityCompat.START)
+//        } else {
+//            super.onBackPressed()
+//        }
     }
 
 }

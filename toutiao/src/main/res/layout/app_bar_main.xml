@@ -4,7 +4,7 @@
 
     <data>
         <variable
-                name="homeViewModel"
+                name="viewModel"
                 type="com.fox.toutiao.ui.home.HomeViewModel" />
     </data>
 
@@ -23,19 +23,19 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:background="@color/viewBackground"
-                android:bind_bn_onItemSelected="@{homeViewModel.onItemSelected}"
+                android:bind_bn_onItemSelected="@{viewModel.onItemSelected}"
                 app:elevation="16dp"
                 app:itemIconTint="@drawable/nav_item_color_state"
                 app:itemTextColor="@drawable/nav_item_color_state"
                 app:menu="@menu/bottom_navigation_main" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="@dimen/fab_margin"
-                android:visibility="gone"/>
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--                android:id="@+id/fab"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="bottom|end"-->
+<!--                android:layout_margin="@dimen/fab_margin"-->
+<!--                android:visibility="gone"/>-->
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
