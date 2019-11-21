@@ -30,7 +30,7 @@ dependencies {
     api 'com.squareup.retrofit2:retrofit:2.6.2'
     api 'com.squareup.retrofit2:converter-gson:2.6.2'
     api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
-    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
+    api 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
     api files('libs/tbs_sdk_thirdapp_v3.6.0.1183_43604_sharewithdownload_withoutGame_obfs_20180211_105126.jar')
 
     api "androidx.appcompat:appcompat:$androidx_appcompat_version"

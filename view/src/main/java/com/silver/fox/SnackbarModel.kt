@@ -22,3 +22,5 @@ constructor(
     constructor(@StringRes resId: Int) : this(resId.getString())
 }
 
+
+fun String?.toSnackbarMsg(): SnackbarModel = SnackbarModel(this.orEmpty())

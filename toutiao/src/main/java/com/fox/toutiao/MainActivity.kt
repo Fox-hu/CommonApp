@@ -7,15 +7,19 @@ import androidx.lifecycle.Observer
 import com.fox.toutiao.databinding.ActivityMainBinding
 import com.fox.toutiao.ui.home.HomeViewModel
 import com.silver.fox.base.BaseVMActivity
+import com.silver.fox.ext.getString
+import com.silver.fox.toSnackbarMsg
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.math.absoluteValue
 
 class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>() {
 
     override val viewModel: HomeViewModel by viewModel()
 
+    private var lastBackPressMs = 0L
 
     //    override val toolbar: Toolbar by lazy { find<Toolbar>(R.id.toolbar) }
     private val titleList = arrayOf("新闻", "图片", "视频", "头条号")
@@ -74,11 +78,18 @@ class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>() {
     override fun getLayoutResId() = R.layout.activity_main
 
     override fun onBackPressed() {
-//        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-//            drawer_layout.closeDrawer(GravityCompat.START)
-//        } else {
-//            super.onBackPressed()
-//        }
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            var currentTimeMillis = System.currentTimeMillis()
+            if ((currentTimeMillis - lastBackPressMs).absoluteValue > 2000L) {
+                viewModel.snackbarData.postValue(R.string.exit.getString().toSnackbarMsg())
+                lastBackPressMs = currentTimeMillis
+            } else {
+                //这个是退到后台 进入onstop 并未finish
+                moveTaskToBack(true)
+            }
+        }
     }
 
 }
