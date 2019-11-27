@@ -2,6 +2,7 @@ package com.fox.toutiao
 
 import android.app.Application
 import android.content.Context
+import com.arialyy.aria.core.Aria
 import com.fox.toutiao.modlue.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -17,6 +18,7 @@ class InitApp : Application() {
     override fun onCreate() {
         super.onCreate()
         CONTEXT = applicationContext
+        Aria.init(this)
         startKoin {
             androidContext(this@InitApp)
             modules(appModule)

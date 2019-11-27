@@ -10,9 +10,12 @@ class HomeViewModel : BaseViewModel() {
     val tabPosition = MutableLiveData<Int>()
 
     val onTabSelected: (Int) -> Boolean = { itemId ->
-        var targetPosition = when (itemId) {
+        val targetPosition = when (itemId) {
             R.id.action_news -> 0
-            else -> 1
+            R.id.action_photo -> 1
+            R.id.action_video -> 2
+            R.id.action_media -> 3
+            else -> -1
         }
         tabPosition.value = targetPosition
         true
@@ -21,7 +24,7 @@ class HomeViewModel : BaseViewModel() {
     val drawerPostion = MutableLiveData<Int>()
 
     val onNavSelected: (Int) -> Boolean = { itemId ->
-        var targetPosition = when (itemId) {
+        val targetPosition = when (itemId) {
             R.id.nav_camera -> 0
             R.id.nav_gallery -> 1
             R.id.nav_slideshow -> 2

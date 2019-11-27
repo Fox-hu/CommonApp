@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
     buildToolsVersion "29.0.0"
@@ -32,12 +33,6 @@ dependencies {
     api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
     api 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
     api files('libs/tbs_sdk_thirdapp_v3.6.0.1183_43604_sharewithdownload_withoutGame_obfs_20180211_105126.jar')
-
-    //下载组件
-    api 'com.arialyy.aria:core:3.7.8-pre-1'
-    api 'com.arialyy.aria:compiler:3.7.8-pre-1'
-    api 'com.arialyy.aria:ftpComponent:3.7.8-pre-1'
-    api 'com.arialyy.aria:m3u8Component:3.7.8-pre-1'
 
     api "androidx.appcompat:appcompat:$androidx_appcompat_version"
     testImplementation 'junit:junit:4.12'
