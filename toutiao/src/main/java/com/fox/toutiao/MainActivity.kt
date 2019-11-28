@@ -37,7 +37,7 @@ class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>() {
             }
         })
 
-        viewModel.drawerPostion.observe(this, Observer {
+        viewModel.drawerPosition.observe(this, Observer {
             toast("" + it)
             drawer_layout.closeDrawer(GravityCompat.START)
         })

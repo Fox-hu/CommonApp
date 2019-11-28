@@ -21,7 +21,7 @@ class HomeViewModel : BaseViewModel() {
         true
     }
 
-    val drawerPostion = MutableLiveData<Int>()
+    val drawerPosition = MutableLiveData<Int>()
 
     val onNavSelected: (Int) -> Boolean = { itemId ->
         val targetPosition = when (itemId) {
@@ -33,7 +33,7 @@ class HomeViewModel : BaseViewModel() {
             R.id.nav_send -> 5
             else -> -1
         }
-        drawerPostion.value = targetPosition
+        drawerPosition.value = targetPosition
         true
     }
 }
