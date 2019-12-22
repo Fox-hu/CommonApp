@@ -1,1 +1,1 @@
-include ':app', ':ktx', ':network', ':view', ':corelib', ':toutiao'
+include ':app', ':ktx', ':network', ':view', ':corelib', ':toutiao', ':storage'
