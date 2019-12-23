@@ -5,11 +5,11 @@ import com.arialyy.annotations.Download
 import com.arialyy.aria.core.Aria
 import com.arialyy.aria.core.download.DownloadEntity
 import com.arialyy.aria.core.task.DownloadTask
+import com.fox.network.download.Downloader
 import com.fox.network.download.entity.DownloadInfo
 import com.fox.network.download.interfaces.DownloadAble
 import com.fox.network.download.interfaces.DownloadEvent
 import com.j256.ormlite.dao.Dao
-import com.fox.network.download.Downloader
 import com.job.network.entity.DownloadState
 import com.silver.fox.ext.isNotNullAndEmpty
 import com.silver.fox.ext.logi
@@ -24,6 +24,8 @@ import java.util.concurrent.CopyOnWriteArrayList
  */
 
 class AriaDownloader : Downloader {
+
+    private val TAG = AriaDownloader::class.java.simpleName
 
     override var listenerList: MutableList<DownloadEvent.Listener> = CopyOnWriteArrayList()
 
@@ -42,7 +44,7 @@ class AriaDownloader : Downloader {
             val items = downloadInfoDao.queryBuilder().where().eq("url", downloadEntity.url).query()
             if (items.isNotNullAndEmpty()) {
                 val downloadInfo = items[0]
-                ("has Downloaded $downloadInfo").logi("AriaDownloader")
+                ("has Downloaded $downloadInfo").logi(TAG)
                 Aria.download(this).load(downloadInfo.getUrl()).setFilePath(downloadInfo.getPath()).create()
             }
             true
@@ -52,11 +54,11 @@ class AriaDownloader : Downloader {
             val downloadInfo = downloadAble.run {
                 DownloadInfo.Builder().url(getUrl()).path(path).name(getName()).belong(getBelong()).tag(getTag()).build()
             }
-            ("has not Download $downloadInfo").logi("AriaDownloader")
+            ("has not Download $downloadInfo").logi(TAG)
             if (taskId != -1L) {
                 downloadInfo.id = taskId
                 downloadInfoDao.create(downloadInfo)
-                ("taskId error").logi("AriaDownloader")
+                ("taskId error").logi(TAG)
                 return false
             }
             true
@@ -154,7 +156,7 @@ class AriaDownloader : Downloader {
             retList?.let {
                 if (it.isNotEmpty()) {
                     val downloadInfo = it[0]
-                    (downloadInfo.getName() + " " + downloadState.name).logi("download")
+                    (downloadInfo.getName() + " " + downloadState.name).logi(TAG)
                     convertTask2Info(t, downloadInfo, downloadState)
                     downloadInfoDao.update(downloadInfo)
                     callback(downloadInfo)
