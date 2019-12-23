@@ -64,7 +64,7 @@ class KotlinTest {
         person called "fox"
     }
 
-    //结构声明 data class自动可用 如果不是data class 需要声明component1
+    //结构声明 data class自动可用 如果不是data class 需要声明component
     class NameComponents(val name: String, val extension: String) {
         operator fun component1() = name
         operator fun component2() = extension
@@ -81,7 +81,6 @@ class KotlinTest {
     }
 
     data class NameComponents1(val name: String, val extension: String) {
-
         fun splitFileName(fullName: String): NameComponents1 {
             val ret = fullName.split('.', limit = 2)
             return NameComponents1(ret[0], ret[1])
@@ -89,7 +88,32 @@ class KotlinTest {
 
         fun test() {
             val (name, ext) = splitFileName("example.kt")
+            val action = ::splitFileName
         }
-
     }
+
+    //lambda作为参数 并且有默认实现
+    fun <T> Collection<T>.joinToString(
+        separator: String = ",",
+        prefix: String = "",
+        postfix: String = "",
+        transform: (T) -> String = { it.toString() }
+    ): String {
+        val result = StringBuilder(prefix)
+        for ((index, element) in this.withIndex()) {
+            if (index > 0) result.append(separator)
+            result.append(transform(element))
+        }
+        result.append(postfix)
+        return result.toString()
+    }
+
+    val letters = listOf("Alpha", "Beta")
+    val ret1 = letters.joinToString()
+    val ret2 = letters.joinToString { it.toLowerCase() }
+    val rets = letters.joinToString(
+        separator = "!",
+        postfix = "_",
+        prefix = "/",
+        transform = { it.toUpperCase() })
 }
