@@ -34,6 +34,15 @@ dependencies {
     api 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
     api files('libs/tbs_sdk_thirdapp_v3.6.0.1183_43604_sharewithdownload_withoutGame_obfs_20180211_105126.jar')
 
+
+    api 'com.j256.ormlite:ormlite-android:5.0'
+    api 'com.j256.ormlite:ormlite-core:5.0'
+
+    api('com.arialyy.aria:core:3.8'){
+        exclude group: 'com.android.support'
+    }
+    kapt 'com.arialyy.aria:compiler:3.8'
+
     api "androidx.appcompat:appcompat:$androidx_appcompat_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

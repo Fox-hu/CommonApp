@@ -46,22 +46,50 @@ class KotlinTest {
     }
 
     //step until downTo用法
-    fun fortest(){
+    fun fortest() {
         for (i in 1..10 step 2) print(i)
         for (i in 1 until 10) print(i)
         for (i in 10 downTo 1 step 2) print(i)
     }
 
     //中綴表达式
-    class Person(){
-        infix fun called(name: String){
+    class Person() {
+        infix fun called(name: String) {
             println("my name is $name.")
         }
     }
 
-    fun personTest(){
+    fun personTest() {
         val person = Person()
         person called "fox"
     }
 
+    //结构声明 data class自动可用 如果不是data class 需要声明component1
+    class NameComponents(val name: String, val extension: String) {
+        operator fun component1() = name
+        operator fun component2() = extension
+
+        fun splitFileName(fullName: String): NameComponents {
+            val ret = fullName.split('.', limit = 2)
+            return NameComponents(ret[0], ret[1])
+        }
+
+        fun test() {
+            val (name1, ext1) = splitFileName("example.kt")
+        }
+
+    }
+
+    data class NameComponents1(val name: String, val extension: String) {
+
+        fun splitFileName(fullName: String): NameComponents1 {
+            val ret = fullName.split('.', limit = 2)
+            return NameComponents1(ret[0], ret[1])
+        }
+
+        fun test() {
+            val (name, ext) = splitFileName("example.kt")
+        }
+
+    }
 }
