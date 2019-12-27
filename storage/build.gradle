@@ -28,11 +28,12 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(path: ':ktx')
     api "androidx.appcompat:appcompat:$androidx_appcompat_version"
     api "androidx.room:room-runtime:2.2.3"
+    api 'com.tencent:mmkv:1.0.23'
     kapt "androidx.room:room-compiler:2.2.3"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    api project(path: ':ktx')
 }

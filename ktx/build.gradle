@@ -48,6 +48,8 @@ dependencies {
 
     api "org.jetbrains.anko:anko-common:$anko_version"
     api "org.jetbrains.anko:anko-sqlite:$anko_version"
+    //gson
+    api 'com.google.code.gson:gson:2.8.5'
 
     api "androidx.appcompat:appcompat:$androidx_appcompat_version"
     testImplementation 'junit:junit:4.12'
