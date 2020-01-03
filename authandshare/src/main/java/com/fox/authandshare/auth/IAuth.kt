@@ -1,8 +1,8 @@
-package com.fox.authandshare.auth;
+package com.fox.authandshare.auth
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 
 /**
  *
@@ -11,20 +11,20 @@ import android.content.Intent;
  * @date 2018/8/16
  */
 
-public interface IAuth{
+interface IAuth {
     /**
      * 第三方登录平台是否已经安装
      * @param context
      * @return 第三方登录平台是否已经安装
      */
-    boolean isInstall(Context context);
+    fun isInstall(context: Context): Boolean
 
     /**
      * 获取第三方登录平台的用户信息
      * @param activity
      * @param listener 通用回调方法，不同的平台使用统一的回调，在此处统一
      */
-    void fetchPlatFormInfo(Activity activity, AuthListener listener);
+    fun fetchPlatFormInfo(activity: Activity, listener: AuthListener)
 
     /**
      * 在activity 的onActivityResult使用 QQ和新浪需要
@@ -32,6 +32,6 @@ public interface IAuth{
      * @param resultCode
      * @param data
      */
-    void onActivityResultData(int requestCode, int resultCode, Intent data);
+    fun onActivityResultData(requestCode: Int, resultCode: Int, data: Intent)
 
 }
