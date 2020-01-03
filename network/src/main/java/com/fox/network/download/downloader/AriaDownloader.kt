@@ -34,8 +34,7 @@ class AriaDownloader : Downloader {
     override fun init(context: Context) {
         Aria.init(context)
         onAttach()
-        val dBHelper = DownloadInfoDBHelper(context)
-        downloadInfoDao = dBHelper.getDao(DownloadInfo::class.java)
+        downloadInfoDao = DownloadInfoDBHelper(context).getDao(DownloadInfo::class.java)
     }
 
     override fun download(downloadAble: DownloadAble): Boolean {
