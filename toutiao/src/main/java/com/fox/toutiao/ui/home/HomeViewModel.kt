@@ -7,8 +7,6 @@ import com.silver.fox.base.BaseViewModel
 
 class HomeViewModel : BaseViewModel() {
 
-    val tabPosition = MutableLiveData<Int>()
-
     val onTabSelected: (Int) -> Boolean = { itemId ->
         val targetPosition = when (itemId) {
             R.id.action_news -> 0
@@ -17,7 +15,6 @@ class HomeViewModel : BaseViewModel() {
             R.id.action_media -> 3
             else -> -1
         }
-        tabPosition.value = targetPosition
         true
     }
 

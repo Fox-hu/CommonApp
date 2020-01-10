@@ -28,10 +28,6 @@ class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>() {
     private var index: Int = 0
 
     override fun startObserver() {
-        viewModel.tabPosition.observe(this, Observer {
-            toast(titleList[it])
-        })
-
         viewModel.drawerPosition.observe(this, Observer {
             toast("" + it)
             drawer_layout.closeDrawer(GravityCompat.START)
