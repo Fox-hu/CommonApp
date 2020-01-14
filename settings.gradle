@@ -1,1 +1,1 @@
-include ':app', ':ktx', ':network', ':view', ':corelib', ':toutiao', ':storage', ':authandshare'
+include ':app', ':ktx', ':network', ':view', ':corelib', ':toutiao', ':storage', ':authandshare', ':annotation', ':annotation-compiler'

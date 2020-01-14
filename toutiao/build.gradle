@@ -53,7 +53,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    kapt project(':annotation-compiler')
+    //一定要有一个path 否则无法生成
+    implementation project(path:':annotation')
     api project(path: ':corelib')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
