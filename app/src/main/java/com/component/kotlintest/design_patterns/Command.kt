@@ -1,10 +1,10 @@
 package com.component.kotlintest.design_patterns
 
 /**
+ * 一个命令模式的案例 俄罗斯方块
  * @Author fox.hu
  * @Date 2020/1/13 14:27
  */
-
 
 interface Command {
     fun execute()
@@ -46,10 +46,10 @@ class TransformCommand(private val machine: TetrisMachine) : Command {
 }
 
 class Buttons(
-    val leftCommand: LeftCommand,
-    val rightCommand: RightCommand,
-    val fastToBottomCommand: FastToBottomCommand,
-    val transformCommand: TransformCommand
+    private val leftCommand: LeftCommand,
+    private val rightCommand: RightCommand,
+    private val fastToBottomCommand: FastToBottomCommand,
+    private val transformCommand: TransformCommand
 ) {
     fun toLeft() = leftCommand.execute()
 
