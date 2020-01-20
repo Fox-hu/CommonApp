@@ -23,11 +23,13 @@ class Branch(name: String, position: String, salary: Int) : Corp(name, position,
         subordinateList += corp
     }
 
-
     operator fun minusAssign(corp: Corp) {
         subordinateList -= corp
     }
 
+    operator fun get(index: Int) {
+        subordinateList[index]
+    }
 }
 
 class Leaf(name: String, position: String, salary: Int) : Corp(name, position, salary)
