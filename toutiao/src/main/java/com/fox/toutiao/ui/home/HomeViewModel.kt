@@ -6,6 +6,8 @@ import com.fox.toutiao.R
 import com.silver.fox.base.BaseViewModel
 
 class HomeViewModel : BaseViewModel() {
+    val tabPosition = MutableLiveData<Int>()
+    val drawerPosition = MutableLiveData<Int>()
 
     val onTabSelected: (Int) -> Boolean = { itemId ->
         val targetPosition = when (itemId) {
@@ -15,10 +17,9 @@ class HomeViewModel : BaseViewModel() {
             R.id.action_media -> 3
             else -> -1
         }
+        tabPosition.value = targetPosition
         true
     }
-
-    val drawerPosition = MutableLiveData<Int>()
 
     val onNavSelected: (Int) -> Boolean = { itemId ->
         val targetPosition = when (itemId) {

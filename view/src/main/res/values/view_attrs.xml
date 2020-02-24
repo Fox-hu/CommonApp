@@ -1,0 +1,23 @@
+<resources>
+    <declare-styleable name="view_MyTextView">
+        <attr name="view_myText" format="string" />
+        <attr name="view_myTextColor" format="color" />
+        <attr name="view_myTextSize" format="dimension" />
+        <attr name="view_MaxLength" format="integer" />
+
+        <attr name="view_InputType" format="enum">
+            <enum name="number" value="1" />
+            <enum name="text" value="2" />
+            <enum name="password" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="view_QQstepView">
+        <attr name="view_outerColor" format="color" />
+        <attr name="view_innerColor" format="color" />
+        <attr name="view_borderWidth" format="dimension" />
+        <attr name="view_stepTextSize" format="dimension" />
+        <attr name="view_stepTextColor" format="color" />
+
+    </declare-styleable>
+</resources>

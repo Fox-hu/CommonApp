@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import com.fox.authandshare.Util
 import com.fox.authandshare.platform.PlatForm
 import com.fox.authandshare.share.IShare
 import com.fox.authandshare.share.ShareListener

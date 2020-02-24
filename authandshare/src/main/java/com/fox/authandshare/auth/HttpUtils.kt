@@ -2,21 +2,13 @@ package com.fox.authandshare.auth
 
 import android.os.Handler
 import android.os.Looper
-
 import com.google.gson.Gson
 import com.google.gson.internal.`$Gson$Types`
-
+import okhttp3.*
 import java.io.IOException
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import java.util.concurrent.TimeUnit
-
-import okhttp3.Callback
-import okhttp3.FormBody
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody
-import okhttp3.Response
 
 /**
  *
@@ -94,9 +86,9 @@ class HttpUtils private constructor() {
         }
     }
 
-    private fun sendSuccessCallBack(callback: ResultCallback<*>?, obj: Any) {
+    private fun<T> sendSuccessCallBack(callback: ResultCallback<T>, obj: Any) {
         mDelivery.post {
-            callback?.onSuccess(obj)
+            callback?.onSuccess(obj as T)
         }
     }
 
@@ -151,8 +143,8 @@ class HttpUtils private constructor() {
      */
     class Param {
 
-        internal var key: String
-        internal var value: String
+        internal lateinit var key: String
+        internal lateinit var value: String
 
         constructor() {}
 
@@ -171,7 +163,7 @@ class HttpUtils private constructor() {
             if (mInstance == null) {
                 mInstance = HttpUtils()
             }
-            return mInstance
+            return mInstance as HttpUtils
         }
 
 
