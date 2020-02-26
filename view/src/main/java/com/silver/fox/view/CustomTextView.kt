@@ -9,7 +9,7 @@ import android.util.AttributeSet
 import android.view.View
 
 
-class MyTextView @JvmOverloads constructor(
+class CustomTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -35,12 +35,7 @@ class MyTextView @JvmOverloads constructor(
             recycle()
         }
 
-        paint.apply {
-            //开启抗锯齿
-            isAntiAlias = true
-            textSize = this@MyTextView.textSize.toFloat()
-            color = textColor
-        }
+        paint.config(textColor, textSize.toFloat())
     }
 
 

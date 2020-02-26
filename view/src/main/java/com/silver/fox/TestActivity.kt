@@ -2,7 +2,9 @@ package com.silver.fox
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.silver.fox.view.ColorTrackTextView
 import com.silver.fox.view.R
 import kotlinx.android.synthetic.main.view_activity_test.*
 
@@ -16,6 +18,24 @@ class TestActivity : AppCompatActivity() {
         animator.duration = 1000
         animator.addUpdateListener {
             step_view.currentStep = it.animatedValue as Int
+        }
+        animator.start()
+    }
+
+    fun leftToRight(view: View) {
+        sideToSide(ColorTrackTextView.Direction.LEFT_TO_RIGHT)
+    }
+
+    fun rightToLeft(view: View) {
+        sideToSide(ColorTrackTextView.Direction.RIGHT_TO_LEFT)
+    }
+
+    private fun sideToSide(direction: ColorTrackTextView.Direction) {
+        colorTrackTextView.direction = direction
+        val animator = ObjectAnimator.ofFloat(0f, 1f)
+        animator.duration = 2000
+        animator.addUpdateListener {
+            colorTrackTextView.currentProgress = it.animatedValue as Float
         }
         animator.start()
     }

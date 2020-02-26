@@ -18,14 +18,14 @@ class QQstepView @JvmOverloads constructor(
 ) :
     View(context, attrs, defStyleAttr) {
 
-    var outPaint = Paint()
-    var innerPaint = Paint()
-    var textPaint = Paint()
-    var outColor = Color.RED
-    var innerColor = Color.BLUE
-    var borderWidth = 8
-    var stepTextSize = 20
-    var stepTextColor = Color.BLUE
+    private var outPaint = Paint()
+    private var innerPaint = Paint()
+    private var textPaint = Paint()
+    private var outColor = Color.RED
+    private var innerColor = Color.BLUE
+    private var borderWidth = 8
+    private var stepTextSize = 20
+    private var stepTextColor = Color.BLUE
     var stepMax = 100
     var currentStep = 50
         @Synchronized set(value) {

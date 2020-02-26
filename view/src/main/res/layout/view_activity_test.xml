@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         tools:context="com.silver.fox.TestActivity">
 
-    <com.silver.fox.view.MyTextView
+    <com.silver.fox.view.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
@@ -25,4 +25,31 @@
             app:view_stepTextColor="@color/colorAccent"
             app:view_stepTextSize="20sp" />
 
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <com.silver.fox.view.ColorTrackTextView
+                android:id="@+id/colorTrackTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="hello World"
+                app:view_changeColor="@android:color/holo_blue_bright"
+                app:view_originColor="@android:color/holo_red_light" />
+
+        <Button
+                android:id="@+id/right_to_left"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:onClick="rightToLeft"
+                android:text="rightToLeft" />
+
+        <Button
+                android:id="@+id/left_to_right"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:onClick="leftToRight"
+                android:text="leftToRight" />
+    </LinearLayout>
 </LinearLayout>

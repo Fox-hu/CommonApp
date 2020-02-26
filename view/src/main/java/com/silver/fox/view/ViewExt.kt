@@ -1,5 +1,6 @@
 package com.silver.fox.view
 
+import android.graphics.Paint
 import android.util.TypedValue
 import android.view.View
 
@@ -12,3 +13,13 @@ fun View.px2sp(sp: Int) = TypedValue.applyDimension(
     sp.toFloat(),
     resources.displayMetrics
 ).toInt()
+
+fun Paint.config(paintColor: Int, configTextSize: Float) {
+    apply {
+        isAntiAlias = true
+        color = paintColor
+        //防抖动
+        isDither = true
+        textSize = configTextSize
+    }
+}
