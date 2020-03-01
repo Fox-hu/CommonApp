@@ -39,4 +39,19 @@ class TestActivity : AppCompatActivity() {
         }
         animator.start()
     }
+
+    fun exchange(view: View) {
+        Thread {
+            while (true) {
+                runOnUiThread {
+                    shape_view.exchange()
+                }
+                Thread.sleep(1000)
+            }
+        }.start()
+    }
+
+    fun stopExchange(view: View) {
+        shape_view.stopExchange()
+    }
 }
