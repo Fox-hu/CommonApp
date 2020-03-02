@@ -63,28 +63,42 @@
     </LinearLayout>
 
     <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-        <com.silver.fox.view.ShapeView
-                android:id="@+id/shape_view"
-                android:layout_width="@dimen/dp_40"
-                android:layout_height="@dimen/dp_40"/>
-
-        <Button
-                android:id="@+id/start"
-                android:gravity="center"
+        <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:onClick="exchange"
-                android:text="exchange" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <Button
-                android:id="@+id/end"
+            <com.silver.fox.view.ShapeView
+                    android:id="@+id/shape_view"
+                    android:layout_width="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_40" />
+
+            <Button
+                    android:id="@+id/start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:gravity="center"
+                    android:onClick="exchange"
+                    android:text="exchange" />
+
+            <Button
+                    android:id="@+id/end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:onClick="stopExchange"
+                    android:text="stop" />
+        </LinearLayout>
+
+        <com.silver.fox.view.RatingBar
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:onClick="stopExchange"
-                android:text="stop" />
+                android:layout_height="wrap_content"
+                app:view_gradeNum="5"
+                app:view_starFocus="@drawable/star_selected"
+                app:view_starNormal="@drawable/star_normal" />
+
     </LinearLayout>
 </LinearLayout>
