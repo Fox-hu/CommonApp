@@ -31,4 +31,10 @@
         <attr name="view_starFocus" format="reference" />
         <attr name="view_gradeNum" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="view_LetterSideBar">
+        <attr name="view_textSize" format="dimension" />
+        <attr name="view_textColor" format="color" />
+    </declare-styleable>
+
 </resources>

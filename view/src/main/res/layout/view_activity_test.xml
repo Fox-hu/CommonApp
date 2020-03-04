@@ -100,5 +100,13 @@
                 app:view_starFocus="@drawable/star_selected"
                 app:view_starNormal="@drawable/star_normal" />
 
+
     </LinearLayout>
+
+    <com.silver.fox.view.LetterSideBar
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            app:view_textColor="@color/colorPrimary" />
 </LinearLayout>
