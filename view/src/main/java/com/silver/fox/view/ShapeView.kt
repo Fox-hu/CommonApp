@@ -10,6 +10,7 @@ import android.util.AttributeSet
 import android.view.View
 
 /**
+ * 形状变化的view
  * @Author fox
  * @Date 2020/2/29 15:29
  */

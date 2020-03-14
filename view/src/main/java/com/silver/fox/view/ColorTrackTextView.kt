@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 
 /**
+ * 颜色可以变色的TextView
  * @Author fox
  * @Date 2020/2/25 18:26
  */

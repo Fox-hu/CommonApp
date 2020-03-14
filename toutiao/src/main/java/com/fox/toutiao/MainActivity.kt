@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import com.fox.toutiao.databinding.ActivityMainBinding
 import com.fox.toutiao.ui.home.HomeViewModel
-import com.silver.fox.TestActivity
+import com.silver.fox.SlideActivity
 import com.silver.fox.base.BaseVMActivity
 import com.silver.fox.ext.getString
 import com.silver.fox.ext.startKtxActivity
@@ -33,7 +33,7 @@ class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>() {
         viewModel.drawerPosition.observe(this, Observer {
             toast("" + it)
             drawer_layout.closeDrawer(GravityCompat.START)
-            startKtxActivity<TestActivity>()
+            startKtxActivity<SlideActivity>()
         })
     }
 

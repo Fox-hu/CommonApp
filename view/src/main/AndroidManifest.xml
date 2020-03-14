@@ -5,7 +5,11 @@
     <application>
         <activity
                 android:name="com.silver.fox.TestActivity"
-                android:theme="@style/view_AppTheme.NoActionBar"/>
+                android:theme="@style/view_AppTheme.NoActionBar" />
+
+        <activity
+                android:name="com.silver.fox.SlideActivity"
+                android:theme="@style/view_AppTheme.NoActionBar" />
     </application>
 
 </manifest>

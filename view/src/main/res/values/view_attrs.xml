@@ -37,4 +37,7 @@
         <attr name="view_textColor" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="view_SlidingMenu">
+        <attr name="view_rightSlideMargin" format="dimension" />
+    </declare-styleable>
 </resources>
