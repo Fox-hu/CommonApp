@@ -1,12 +1,14 @@
 package com.silver.fox.view
 
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.HorizontalScrollView
+import android.widget.RelativeLayout
 import androidx.core.view.ViewCompat
 
 /**
@@ -14,7 +16,7 @@ import androidx.core.view.ViewCompat
  * @Author fox
  * @Date 2020/3/14 13:22
  */
-class SlidingMenu @JvmOverloads constructor(
+class QQSlidingMenu @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : HorizontalScrollView(context, attrs, defStyleAttr) {
 
@@ -26,10 +28,11 @@ class SlidingMenu @JvmOverloads constructor(
     private var menuWidth = 0f
     private lateinit var contentView: View
     private lateinit var menuView: View
+    private lateinit var shadowView: View
 
     private var menuIsOpen = false
-
     private var isIntercept = false
+
     private val gestureListener: GestureDetector.OnGestureListener =
         object : GestureDetector.SimpleOnGestureListener() {
             override fun onFling(
@@ -59,10 +62,10 @@ class SlidingMenu @JvmOverloads constructor(
 
     init {
         val array =
-            context.obtainStyledAttributes(attrs, R.styleable.view_SlidingMenu)
+            context.obtainStyledAttributes(attrs, R.styleable.view_QQSlidingMenu)
         array.apply {
             menuRightMargin = getDimension(
-                R.styleable.view_SlidingMenu_view_rightSlideMargin,
+                R.styleable.view_QQSlidingMenu_view_rightQQSlideMargin,
                 dp2px(context, 50f).toFloat()
             )
             menuWidth = getScreenWidth(context) - menuRightMargin
@@ -106,8 +109,18 @@ class SlidingMenu @JvmOverloads constructor(
         //设置content宽高
         contentView = container.getChildAt(1)
         val contentParams = contentView.layoutParams
+        container.removeView(contentView)
+
+        val shadowContainer = RelativeLayout(context)
+        shadowContainer.addView(contentView)
+        shadowView = View(context)
+        shadowView.setBackgroundColor(Color.parseColor("#55000000"))
+        shadowContainer.addView(shadowView)
+
+
         contentParams.width = getScreenWidth(context)
-        contentView.layoutParams = contentParams
+        shadowContainer.layoutParams = contentParams
+        container.addView(shadowContainer)
 
         //初始化菜单是关闭的 此时调用scrollto是无效的 因为这个适合onLayout未执行
         //scrollTo(menuWidth,0)
@@ -138,10 +151,8 @@ class SlidingMenu @JvmOverloads constructor(
                 //打开
                 openMenu()
             }
-            //注意!! 这里的true是放到up事件中来的
+            //注意 这里的true是放到up事件中来的
             //确保up事件不会调用super的onTouchEvent事件
-            //确保openMenu或closeMenu是抬起手的最后一个方法
-
             return true
         }
         return super.onTouchEvent(ev)
@@ -149,32 +160,11 @@ class SlidingMenu @JvmOverloads constructor(
 
     override fun onScrollChanged(l: Int, t: Int, oldl: Int, oldt: Int) {
         super.onScrollChanged(l, t, oldl, oldt)
-        //计算梯度值 总滑动距离是menuWidth
+        //计算梯度值
         val scale = 1f * l / menuWidth
-
-        //右边的缩放0.7f-1f
-        val rightScale = 0.7f + 0.3f * scale
-        // 缩放的中心点默认是在中心 但是这个效果需要在contentView左边的中间位置
-        // 设置缩放中心
-        ViewCompat.setPivotX(contentView, 0f)
-        ViewCompat.setPivotY(contentView, measuredHeight / 2.toFloat())
-
-        ViewCompat.setScaleX(contentView, rightScale)
-        ViewCompat.setScaleY(contentView, rightScale)
-
-        //菜单的缩放和透明度
-        val alpha = 0.5f + (1 - scale) * 0.5f
-        ViewCompat.setAlpha(menuView, alpha)
-        //缩放 0.7f-1.0f
-        val leftScale = 0.7f + (1 - scale) * 0.3f
-        ViewCompat.setScaleX(menuView, leftScale)
-        ViewCompat.setScaleY(menuView, leftScale)
-        ViewCompat.setTranslationX(menuView, 0.25f * l)
-
-//        抽屉效果
-//        ViewCompat.setTranslationX(menuView,l.toFloat())
-//        "translationX = ${menuView.translationX} L = $l".logd(TAG)
-
+// 阴影变色是反过来的
+        shadowView.alpha = 1 - scale
+        ViewCompat.setTranslationX(menuView, 0.7f * l)
     }
 
     //打开菜单 滚动到0的位置

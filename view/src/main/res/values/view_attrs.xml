@@ -40,4 +40,8 @@
     <declare-styleable name="view_SlidingMenu">
         <attr name="view_rightSlideMargin" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="view_QQSlidingMenu">
+        <attr name="view_rightQQSlideMargin" format="dimension" />
+    </declare-styleable>
 </resources>
