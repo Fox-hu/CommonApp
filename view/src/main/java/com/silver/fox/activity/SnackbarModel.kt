@@ -1,4 +1,4 @@
-package com.silver.fox
+package com.silver.fox.activity
 
 import android.view.View
 import androidx.annotation.ColorInt
@@ -23,4 +23,5 @@ constructor(
 }
 
 
-fun String?.toSnackbarMsg(): SnackbarModel = SnackbarModel(this.orEmpty())
+fun String?.toSnackbarMsg(): SnackbarModel =
+    SnackbarModel(this.orEmpty())

@@ -1,4 +1,4 @@
-package com.silver.fox.view
+package com.silver.fox.viewgroup
 
 import android.content.Context
 import android.graphics.Color
@@ -10,6 +10,9 @@ import android.view.ViewGroup
 import android.widget.HorizontalScrollView
 import android.widget.RelativeLayout
 import androidx.core.view.ViewCompat
+import com.silver.fox.view.R
+import com.silver.fox.viewext.dp2px
+import com.silver.fox.viewext.getScreenWidth
 
 /**
  * 仿照酷狗的首页
@@ -62,7 +65,9 @@ class QQSlidingMenu @JvmOverloads constructor(
 
     init {
         val array =
-            context.obtainStyledAttributes(attrs, R.styleable.view_QQSlidingMenu)
+            context.obtainStyledAttributes(attrs,
+                R.styleable.view_QQSlidingMenu
+            )
         array.apply {
             menuRightMargin = getDimension(
                 R.styleable.view_QQSlidingMenu_view_rightQQSlideMargin,

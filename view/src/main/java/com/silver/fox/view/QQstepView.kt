@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import com.silver.fox.viewext.px2sp
 
 /**
  * 仿qq步数

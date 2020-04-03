@@ -7,6 +7,8 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
+import com.silver.fox.viewext.config
+import com.silver.fox.viewext.px2sp
 
 
 class CustomTextView @JvmOverloads constructor(

@@ -1,4 +1,4 @@
-package com.silver.fox.view
+package com.silver.fox.viewext
 
 import android.content.Context
 import android.graphics.Paint
@@ -22,9 +22,13 @@ fun dp2px(context: Context, dpValue: Float): Int{
     return (dpValue * scale + 0.5).toInt()
 }
 
-fun getScreenWidth(context: Context): Int = getDisplayMetrics(context).widthPixels
+fun getScreenWidth(context: Context): Int = getDisplayMetrics(
+    context
+).widthPixels
 
-fun getScreenHeight(context: Context): Int = getDisplayMetrics(context).heightPixels
+fun getScreenHeight(context: Context): Int = getDisplayMetrics(
+    context
+).heightPixels
 
 private fun getDisplayMetrics(context: Context): DisplayMetrics {
     val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager

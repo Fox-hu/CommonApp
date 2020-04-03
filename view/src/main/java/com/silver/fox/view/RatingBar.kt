@@ -17,10 +17,10 @@ class RatingBar @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    var gradeNum = 5
-    var currentGrade = 0
-    var starNormalBM: Bitmap
-    var starFocusBM: Bitmap
+    private var gradeNum = 5
+    private var currentGrade = 0
+    private var starNormalBM: Bitmap
+    private var starFocusBM: Bitmap
 
     init {
         val array =

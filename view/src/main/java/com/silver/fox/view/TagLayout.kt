@@ -16,13 +16,13 @@ class TagLayout @JvmOverloads constructor(
 ) : ViewGroup(context, attrs, defStyleAttr) {
 
     //一行的内容使用一个List<View>来表示
-    var childViews: MutableList<MutableList<View>> = mutableListOf()
+    private var childViews: MutableList<MutableList<View>> = mutableListOf()
 
     //需要注意margin
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        var width = MeasureSpec.getSize(widthMeasureSpec)
+        val width = MeasureSpec.getSize(widthMeasureSpec)
         var height = paddingBottom + paddingTop
         var lineWidth = paddingLeft
         childViews.clear()
@@ -32,10 +32,10 @@ class TagLayout @JvmOverloads constructor(
 
         var maxHeight = 0
         for (i in 0 until childCount) {
-            var childView = getChildAt(i)
+            val childView = getChildAt(i)
             measureChild(childView, widthMeasureSpec, heightMeasureSpec)
 
-            var layoutParams = childView.layoutParams as MarginLayoutParams
+            val layoutParams = childView.layoutParams as MarginLayoutParams
 
             if (lineWidth + childView.measuredWidth + layoutParams.leftMargin + layoutParams.rightMargin > width) {
                 //换行 将宽度清空，新增一个新行view到容器中
@@ -76,7 +76,7 @@ class TagLayout @JvmOverloads constructor(
             for (view in childView) {
                 val params = view.layoutParams as MarginLayoutParams
                 left += params.leftMargin
-                var childTop = top + params.topMargin
+                val childTop = top + params.topMargin
                 right = left + view.measuredWidth
                 bottom = childTop + view.measuredHeight
 
@@ -85,7 +85,7 @@ class TagLayout @JvmOverloads constructor(
             }
 
             //换行 top+ 一行的height
-            var layoutParams = childView[0].layoutParams as MarginLayoutParams
+            val layoutParams = childView[0].layoutParams as MarginLayoutParams
             top += childView[0].measuredHeight + layoutParams.topMargin + layoutParams.bottomMargin
         }
     }

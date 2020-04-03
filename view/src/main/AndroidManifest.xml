@@ -3,12 +3,12 @@
         package="com.silver.fox.view">
 
     <application>
+        <activity android:name="com.silver.fox.activity.VerticalDragActivity"></activity>
         <activity
-                android:name="com.silver.fox.TestActivity"
+                android:name="com.silver.fox.activity.TestActivity"
                 android:theme="@style/view_AppTheme.NoActionBar" />
-
         <activity
-                android:name="com.silver.fox.SlideActivity"
+                android:name="com.silver.fox.activity.SlideActivity"
                 android:theme="@style/view_AppTheme.NoActionBar" />
     </application>
 

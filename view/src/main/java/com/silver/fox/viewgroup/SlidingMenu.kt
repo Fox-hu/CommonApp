@@ -1,4 +1,4 @@
-package com.silver.fox.view
+package com.silver.fox.viewgroup
 
 import android.content.Context
 import android.util.AttributeSet
@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.HorizontalScrollView
 import androidx.core.view.ViewCompat
+import com.silver.fox.view.R
+import com.silver.fox.viewext.dp2px
+import com.silver.fox.viewext.getScreenWidth
 
 /**
  * 仿照酷狗的首页
@@ -59,7 +62,9 @@ class SlidingMenu @JvmOverloads constructor(
 
     init {
         val array =
-            context.obtainStyledAttributes(attrs, R.styleable.view_SlidingMenu)
+            context.obtainStyledAttributes(attrs,
+                R.styleable.view_SlidingMenu
+            )
         array.apply {
             menuRightMargin = getDimension(
                 R.styleable.view_SlidingMenu_view_rightSlideMargin,

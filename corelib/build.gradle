@@ -30,10 +30,11 @@ android {
 }
 
 dependencies {
-    api "androidx.appcompat:appcompat:$androidx_appcompat_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     api project(path: ':network')
     api project(path: ':view')
+    api project(path: ':authandshare')
+    api project(path: ':storage')
 }

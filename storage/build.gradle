@@ -29,7 +29,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(path: ':ktx')
-    api "androidx.appcompat:appcompat:$androidx_appcompat_version"
     api "androidx.room:room-runtime:2.2.3"
     api "androidx.room:room-ktx:2.2.3"
     api 'com.tencent:mmkv:1.0.23'

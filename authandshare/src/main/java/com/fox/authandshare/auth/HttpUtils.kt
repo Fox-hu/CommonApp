@@ -57,7 +57,7 @@ class HttpUtils private constructor() {
             @Throws(IOException::class)
             override fun onResponse(call: okhttp3.Call, response: Response) {
                 try {
-                    val str = response.body!!.string()
+                    val str = response.body().toString()
                     if (callback.mType === String::class.java) {
                         /**
                          * 返回字符串

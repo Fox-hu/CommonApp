@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
+import com.silver.fox.viewext.config
 
 /**
  * 颜色可以变色的TextView

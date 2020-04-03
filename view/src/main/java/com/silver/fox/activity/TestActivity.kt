@@ -1,4 +1,4 @@
-package com.silver.fox
+package com.silver.fox.activity
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
