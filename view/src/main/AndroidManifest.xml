@@ -3,7 +3,8 @@
         package="com.silver.fox.view">
 
     <application>
-        <activity android:name="com.silver.fox.activity.VerticalDragActivity"></activity>
+        <activity android:name="com.silver.fox.activity.LockPatternActivity"></activity>
+        <activity android:name="com.silver.fox.activity.VerticalDragActivity" />
         <activity
                 android:name="com.silver.fox.activity.TestActivity"
                 android:theme="@style/view_AppTheme.NoActionBar" />

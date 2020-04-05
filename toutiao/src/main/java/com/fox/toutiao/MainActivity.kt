@@ -6,13 +6,10 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import com.fox.toutiao.databinding.ActivityMainBinding
 import com.fox.toutiao.ui.home.HomeViewModel
-import com.silver.fox.activity.SlideActivity
-import com.silver.fox.activity.TestActivity
-import com.silver.fox.activity.VerticalDragActivity
+import com.silver.fox.activity.*
 import com.silver.fox.base.BaseVMActivity
 import com.silver.fox.ext.getString
 import com.silver.fox.ext.startKtxActivity
-import com.silver.fox.activity.toSnackbarMsg
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.toast
@@ -39,6 +36,7 @@ class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>() {
                 0 -> startKtxActivity<SlideActivity>()
                 1 -> startKtxActivity<TestActivity>()
                 2 -> startKtxActivity<VerticalDragActivity>()
+                3 -> startKtxActivity<LockPatternActivity>()
             }
         })
     }
