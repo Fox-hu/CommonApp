@@ -18,6 +18,22 @@ class LockPatternView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
+    //绘制结果的回调
+    interface RetListener {
+        fun onRet(ret: String)
+    }
+
+    var retListener: RetListener? = null
+
+    //由外部设置整个view的状态
+    var pointStatus: Point.STATUS = Point.STATUS.STATUS_NORMAL
+        set(value) {
+            field = value
+            selectPoints.forEach {
+                it.status = value
+            }
+        }
+
     private var isInit = false
 
     //外圆的半径
@@ -61,7 +77,7 @@ class LockPatternView @JvmOverloads constructor(
                         canvas.drawCircle(
                             point.centerX.toFloat(),
                             point.centerY.toFloat(),
-                            dotRadius.toFloat(),
+                            dotRadius,
                             normalPaint
                         )
                         normalPaint.color = innerNormalColor
@@ -77,7 +93,7 @@ class LockPatternView @JvmOverloads constructor(
                         canvas.drawCircle(
                             point.centerX.toFloat(),
                             point.centerY.toFloat(),
-                            dotRadius.toFloat(),
+                            dotRadius,
                             pressedPaint
                         )
                         pressedPaint.color = innerPressedColor
@@ -93,10 +109,10 @@ class LockPatternView @JvmOverloads constructor(
                         canvas.drawCircle(
                             point.centerX.toFloat(),
                             point.centerY.toFloat(),
-                            dotRadius.toFloat(),
+                            dotRadius,
                             errorPaint
                         )
-                        errorPaint.color = outerErrorColor
+                        errorPaint.color = innerErrorColor
                         canvas.drawCircle(
                             point.centerX.toFloat(),
                             point.centerY.toFloat(),
@@ -119,13 +135,6 @@ class LockPatternView @JvmOverloads constructor(
                 drawLine(first, second, canvas, linePaint)
             }
             val lastPoint = selectPoints.last()
-//            var lastPoint = selectPoints[0]
-//
-//            for (index in 1 until selectPoints.size) {
-//                drawLine(lastPoint, selectPoints[index], canvas, linePaint)
-//                lastPoint = selectPoints[index]
-//            }
-
             //绘制最后一个点到手指当前位置的连线
             //如果手指在内圆里就不要绘制
             val isInnerPoint = checkInRound(
@@ -141,7 +150,6 @@ class LockPatternView @JvmOverloads constructor(
                 )
             }
         }
-
     }
 
     private fun drawLine(start: Point, end: Point, canvas: Canvas, paint: Paint): Point {
@@ -198,6 +206,13 @@ class LockPatternView @JvmOverloads constructor(
 
             MotionEvent.ACTION_UP -> {
                 isTouchPoint = false
+                var ret = ""
+                retListener?.run {
+                    selectPoints.forEach {
+                        ret += it.index
+                    }
+                    onRet(ret)
+                }
             }
         }
         invalidate()
@@ -213,25 +228,25 @@ class LockPatternView @JvmOverloads constructor(
         linePaint.color = innerPressedColor
         linePaint.style = Paint.Style.STROKE
         linePaint.isAntiAlias = true
-        linePaint.strokeWidth = (dotRadius / 9).toFloat()
+        linePaint.strokeWidth = dotRadius / 9
 
         //按下的画笔
         pressedPaint = Paint()
         pressedPaint.style = Paint.Style.STROKE
         pressedPaint.isAntiAlias = true
-        pressedPaint.strokeWidth = (dotRadius / 6).toFloat()
+        pressedPaint.strokeWidth = dotRadius / 6
 
         //错误的画笔
         errorPaint = Paint()
         errorPaint.style = Paint.Style.STROKE
         errorPaint.isAntiAlias = true
-        errorPaint.strokeWidth = (dotRadius / 6).toFloat()
+        errorPaint.strokeWidth = dotRadius / 6
 
         //默认的画笔
         normalPaint = Paint()
         normalPaint.style = Paint.Style.STROKE
         normalPaint.isAntiAlias = true
-        normalPaint.strokeWidth = (dotRadius / 9).toFloat()
+        normalPaint.strokeWidth = dotRadius / 9
     }
 
     private fun initDot() {
@@ -283,5 +298,4 @@ class LockPatternView @JvmOverloads constructor(
             }
             return null
         }
-
 }

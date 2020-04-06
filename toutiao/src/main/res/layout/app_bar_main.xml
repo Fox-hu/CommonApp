@@ -30,15 +30,8 @@
                 app:itemIconTint="@drawable/nav_item_color_state"
                 app:itemTextColor="@drawable/nav_item_color_state"
                 app:labelVisibilityMode="labeled"
+                app:layout_behavior="com.silver.fox.behavior.BottomNavigationBehavior"
                 app:menu="@menu/bottom_navigation_main" />
-
-        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-        <!--                android:id="@+id/fab"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_gravity="bottom|end"-->
-        <!--                android:layout_margin="@dimen/fab_margin"-->
-        <!--                android:visibility="gone"/>-->
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

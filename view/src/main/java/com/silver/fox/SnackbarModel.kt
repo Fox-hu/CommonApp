@@ -1,4 +1,4 @@
-package com.silver.fox.activity
+package com.silver.fox
 
 import android.view.View
 import androidx.annotation.ColorInt

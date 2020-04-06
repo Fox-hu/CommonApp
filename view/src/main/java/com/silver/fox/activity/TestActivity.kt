@@ -52,6 +52,6 @@ class TestActivity : AppCompatActivity() {
     }
 
     fun stopExchange(view: View) {
-        shape_view.stopExchange()
+        loading_view.visibility = View.GONE
     }
 }

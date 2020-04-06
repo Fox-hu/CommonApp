@@ -64,7 +64,6 @@ class ShapeView @JvmOverloads constructor(
             Shape.Square -> Shape.Triangle
             Shape.Triangle -> Shape.Circle
         }
-
         invalidate()
     }
 

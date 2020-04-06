@@ -10,6 +10,7 @@ import com.silver.fox.activity.*
 import com.silver.fox.base.BaseVMActivity
 import com.silver.fox.ext.getString
 import com.silver.fox.ext.startKtxActivity
+import com.silver.fox.toSnackbarMsg
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.toast
@@ -33,10 +34,7 @@ class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>() {
             toast("" + it)
             drawer_layout.closeDrawer(GravityCompat.START)
             when (it) {
-                0 -> startKtxActivity<SlideActivity>()
-                1 -> startKtxActivity<TestActivity>()
-                2 -> startKtxActivity<VerticalDragActivity>()
-                3 -> startKtxActivity<LockPatternActivity>()
+                0 -> startKtxActivity<ViewTestActivity>()
             }
         })
     }
