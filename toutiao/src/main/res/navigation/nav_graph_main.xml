@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        app:startDestination="@+id/home_news">
+
+
+    <fragment
+            android:id="@+id/home_news"
+            android:name="com.fox.toutiao.ui.news.NewsFragment"
+            android:label="@string/news"
+            tools:layout="@layout/fragment_news">
+
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/home_photo"
+            android:name="com.fox.toutiao.ui.photo.PhotoFragment"
+            android:label="@string/photos" />
+
+    <fragment
+            android:id="@+id/home_video"
+            android:name="com.fox.toutiao.ui.video.VideoFragment"
+            android:label="@string/video"
+            tools:layout="@layout/video_fragment" />
+
+    <fragment
+            android:id="@+id/news_article"
+            android:name="com.fox.toutiao.ui.news.NewsArticleFragment"
+            android:label="fragment_news_article"
+            tools:layout="@layout/fragment_news_article">
+
+        <argument
+                android:name="categoryId"
+                android:defaultValue="1"
+                app:argType="integer" />
+    </fragment>
+
+    <activity
+            android:id="@+id/viewTestActivity"
+            android:name="com.silver.fox.activity.ViewTestActivity"
+            android:label="ViewTestActivity" />
+    <activity
+            android:id="@+id/mainActivity"
+            android:name="com.fox.toutiao.MainActivity"
+            android:label="MainActivity" />
+
+
+</navigation>

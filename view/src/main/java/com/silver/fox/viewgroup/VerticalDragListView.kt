@@ -29,6 +29,7 @@ class VerticalDragListView @JvmOverloads constructor(
     private var currentY: Float = 0f
     private var isMenuOpen: Boolean = false
 
+    //ViewDragHelper这个类是用来帮助我们来操作viewgroup中的子类拖拽事件的
     private val dragHelper: ViewDragHelper by lazy {
         create(this, callback)
     }

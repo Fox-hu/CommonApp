@@ -3,20 +3,20 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_news"
+        android:id="@+id/home_news"
         android:enabled="true"
         android:icon="@drawable/ic_newspaper_white_24dp"
         android:title="@string/news"
         app:showAsAction="always"/>
 
     <item
-        android:id="@+id/action_photo"
+        android:id="@+id/home_photo"
         android:enabled="true"
         android:icon="@drawable/ic_gallery_white_24dp"
         android:title="@string/photos"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/action_video"
+        android:id="@+id/home_video"
         android:enabled="true"
         android:icon="@drawable/ic_youtube_white_24dp"
         android:title="@string/video"

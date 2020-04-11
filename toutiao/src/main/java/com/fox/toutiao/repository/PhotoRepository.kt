@@ -2,6 +2,6 @@ package com.fox.toutiao.repository
 
 import com.silver.fox.base.BaseRepository
 
-class ArticleRepository :BaseRepository(){
+class PhotoRepository :BaseRepository(){
 
 }

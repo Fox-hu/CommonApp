@@ -1,5 +1,6 @@
 package com.fox.toutiao.binding
 
+import android.view.MenuItem
 import androidx.databinding.BindingAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -18,9 +19,9 @@ fun setOnNavigationItemSelectedListener(
 @BindingAdapter("android:onNavSelected", requireAll = false)
 fun setOnDrawNavigationItemListener(
     bnv: NavigationView,
-    navSelected: ((Int) -> Boolean)?
+    navSelected: ((MenuItem) -> Boolean)?
 ) {
     bnv.setNavigationItemSelectedListener {
-        navSelected?.invoke(it.itemId).orTrue()
+        navSelected?.invoke(it).orTrue()
     }
 }

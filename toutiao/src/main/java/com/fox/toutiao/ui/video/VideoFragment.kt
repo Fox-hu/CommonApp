@@ -1,9 +1,10 @@
-package com.fox.toutiao.ui.news
+package com.fox.toutiao.ui.video
 
 import com.fox.toutiao.R
 import com.silver.fox.base.BaseVMFragment
 
-class NewsFragment : BaseVMFragment<NewsViewModel>() {
+
+class VideoFragment : BaseVMFragment<VideoViewModel>() {
 
     override fun startObserve() {
     }
@@ -14,5 +15,5 @@ class NewsFragment : BaseVMFragment<NewsViewModel>() {
     override fun initData() {
     }
 
-    override fun getLayoutResId(): Int = R.layout.fragment_news
+    override fun getLayoutResId(): Int = R.layout.fragment_video
 }

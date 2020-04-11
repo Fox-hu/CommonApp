@@ -24,7 +24,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:background="@color/viewBackground"
-                android:onTabSelected="@{viewModel.onTabSelected}"
                 app:elevation="16dp"
                 app:itemHorizontalTranslationEnabled="false"
                 app:itemIconTint="@drawable/nav_item_color_state"
