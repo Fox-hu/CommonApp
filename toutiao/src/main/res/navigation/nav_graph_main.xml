@@ -37,14 +37,5 @@
                 app:argType="integer" />
     </fragment>
 
-    <activity
-            android:id="@+id/viewTestActivity"
-            android:name="com.silver.fox.activity.ViewTestActivity"
-            android:label="ViewTestActivity" />
-    <activity
-            android:id="@+id/mainActivity"
-            android:name="com.fox.toutiao.MainActivity"
-            android:label="MainActivity" />
-
 
 </navigation>
