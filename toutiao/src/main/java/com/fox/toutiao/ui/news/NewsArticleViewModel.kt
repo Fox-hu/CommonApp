@@ -1,8 +1,8 @@
 package com.fox.toutiao.ui.news
 
+import com.fox.framework.BaseViewModel
 import com.fox.toutiao.repository.NewsRepository
-import com.silver.fox.base.BaseViewModel
 
-class NewsArticleViewModel(val repository: NewsRepository) :BaseViewModel(){
+class NewsArticleViewModel(val repository: NewsRepository) : BaseViewModel(){
 
 }

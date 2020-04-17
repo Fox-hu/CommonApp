@@ -62,7 +62,7 @@ dependencies {
     kapt project(':annotation-compiler')
     //一定要有一个path 否则无法生成
     implementation project(path: ':annotation')
-    api project(path: ':corelib')
+    api 'com.fox.core:framework:+'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

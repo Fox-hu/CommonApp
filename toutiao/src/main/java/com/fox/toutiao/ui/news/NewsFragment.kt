@@ -1,7 +1,7 @@
 package com.fox.toutiao.ui.news
 
+import com.fox.framework.BaseVMFragment
 import com.fox.toutiao.R
-import com.silver.fox.base.BaseVMFragment
 
 class NewsFragment : BaseVMFragment<NewsViewModel>() {
 

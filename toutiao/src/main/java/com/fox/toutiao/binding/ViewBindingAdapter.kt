@@ -2,9 +2,9 @@ package com.fox.toutiao.binding
 
 import android.view.MenuItem
 import androidx.databinding.BindingAdapter
+import com.fox.utils.ext.orTrue
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
-import com.silver.fox.ext.orTrue
 
 @BindingAdapter("android:onTabSelected", requireAll = false)
 fun setOnNavigationItemSelectedListener(

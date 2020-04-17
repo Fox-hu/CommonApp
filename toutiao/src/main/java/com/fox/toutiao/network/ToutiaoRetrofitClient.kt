@@ -1,11 +1,11 @@
 package com.fox.toutiao.network
 
 import com.fox.network.BaseRetrofitClient
+import com.fox.utils.Ktx
+import com.fox.utils.ext.isNetWorkAvailable
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
-import com.silver.fox.Ktx
-import com.silver.fox.ext.isNetWorkAvailable
 import okhttp3.Cache
 import okhttp3.CacheControl
 import okhttp3.OkHttpClient

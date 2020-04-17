@@ -1,7 +1,8 @@
 package com.fox.toutiao.repository
 
-import com.silver.fox.base.BaseRepository
+import com.fox.framework.BaseRepository
 
-class NewsRepository :BaseRepository(){
+
+class NewsRepository : BaseRepository(){
 
 }

@@ -1,9 +1,8 @@
 package com.fox.toutiao.ui.news
 
 
-import androidx.navigation.fragment.navArgs
+import com.fox.framework.BaseVMFragment
 import com.fox.toutiao.R
-import com.silver.fox.base.BaseVMFragment
 
 
 class NewsArticleFragment : BaseVMFragment<NewsArticleViewModel>() {

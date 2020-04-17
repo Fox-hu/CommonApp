@@ -10,13 +10,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.fox.framework.BaseVMActivity
 import com.fox.toutiao.databinding.ActivityMainBinding
 import com.fox.toutiao.ui.home.HomeViewModel
-import com.silver.fox.activity.ViewTestActivity
-import com.silver.fox.base.BaseVMActivity
-import com.silver.fox.ext.getString
-import com.silver.fox.ext.startKtxActivity
-import com.silver.fox.toSnackbarMsg
+import com.fox.utils.ext.getString
+import com.fox.utils.ext.startKtxActivity
+import com.fox.view.activity.ViewTestActivity
+import com.fox.view.toSnackbarMsg
+
+
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.toolbar.*

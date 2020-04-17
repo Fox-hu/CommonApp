@@ -68,8 +68,18 @@ data class Issue(
     val description: String
 )
 
+//invoke: 重写invoke方法可以将实例当作函数进行调用
+class Greeter(val greeting: String) {
+    operator fun invoke(name: String) {
+        println("$greeting, $name")
+    }
+}
+
+//ImportantIssuesPredicate类继承了一个表达式 (Issue) -> Boolean 该方法必须通过invoke实现。
+//invoke的方法可以直接通过对象调用：predicate(i1)
 class ImportIssuesPredicate(val project: String) : (Issue) -> Boolean {
 
+    //在invoke方法中实现了继承的lambda
     override fun invoke(issue: Issue): Boolean {
         return issue.priority == project && issue.isImport()
     }

@@ -1,8 +1,6 @@
 package com.component.kotlintest
 
-import com.component.kotlintest.first.KotlinSkill
-import com.component.kotlintest.first.User4
-import com.component.kotlintest.first.User5
+import com.component.kotlintest.first.*
 import org.junit.Test
 
 class Test {
@@ -39,5 +37,28 @@ class Test {
     fun test5() {
         val user5 = User5(mapOf("name" to "fox", "age" to 29))
         println("name = ${user5.name},age = ${user5.age}")
+    }
+
+    @Test
+    fun test6() {
+        Greeter("zhangsan")("hhh")
+    }
+
+    @Test
+    fun test7() {
+        val i1 = Issue("IDEA-154446", "IDEA", "Bug", "Major", "Save settings failed")
+        val i2 = Issue(
+            "KT-12183",
+            "Kotlin",
+            "Feature",
+            "Normal",
+            "Intention: convert several calls on the same receiver to with/apply"
+        )
+        val predicate = ImportIssuesPredicate("Major")
+
+        // 查找满足过滤条件的所有Issue对象，过滤条件在 invoke中
+        for (issue in listOf(i1, i2).filter(predicate)) {
+            println(issue.id)
+        }
     }
 }
