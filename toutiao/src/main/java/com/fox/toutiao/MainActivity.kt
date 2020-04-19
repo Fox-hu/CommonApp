@@ -20,6 +20,7 @@ import com.silver.fox.toSnackbarMsg
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.toolbar.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.absoluteValue
@@ -36,14 +37,10 @@ class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>() {
             toast("" + it)
             drawer_layout.closeDrawer(GravityCompat.START)
             when (it) {
-                R.id.nav_camera -> startKtxActivity<ViewTestActivity>()
+                R.id.nav_camera -> startActivity<ViewTestActivity>()
                 //findNavController().navigate(R.id.flow_step_one_dest, null, option)
             }
         })
-    }
-
-    override fun initData() {
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

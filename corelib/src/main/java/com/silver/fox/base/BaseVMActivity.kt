@@ -2,28 +2,43 @@ package com.silver.fox.base
 
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
 import com.sliver.fox.base.BR
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
+import java.lang.reflect.ParameterizedType
 
 
-abstract class BaseVMActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseActivity() {
+abstract class BaseVMActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompatActivity(), CoroutineScope by MainScope() {
+
+    protected lateinit var dataBinding: DB
+    abstract val viewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        dataBinding = DataBindingUtil.setContentView(
+            this, getLayoutResId()
+        )
+        dataBinding.apply {
+            setVariable(BR.viewModel, viewModel)
+            executePendingBindings()
+            setLifecycleOwner(this@BaseVMActivity)
+        }
+
+        initView()
         startObserver()
     }
 
-    protected lateinit var dataBinding: DB
-    protected abstract val viewModel: VM
-
-    override fun setContentView(layoutResID: Int) {
-        dataBinding = DataBindingUtil.inflate(LayoutInflater.from(this), layoutResID, null, false)
-        dataBinding.setVariable(BR.viewModel, viewModel)
-        dataBinding.executePendingBindings()
-        super.setContentView(dataBinding.root)
-    }
-
+    abstract fun initView()
+    abstract fun getLayoutResId(): Int
     abstract fun startObserver()
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cancel()
+    }
 }

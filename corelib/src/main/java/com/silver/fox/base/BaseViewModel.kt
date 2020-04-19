@@ -1,10 +1,9 @@
 package com.silver.fox.base
 
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.app.Application
+import androidx.lifecycle.*
 import com.silver.fox.SnackbarModel
+import com.silver.fox.common.InitApp
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
@@ -12,7 +11,9 @@ import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 
 
-open class BaseViewModel : ViewModel(), LifecycleObserver, KoinComponent {
+open class BaseViewModel(app: Application = InitApp.CONTEXT as Application) : AndroidViewModel(app),
+    LifecycleObserver,
+    KoinComponent {
 
     val snackbarData = MutableLiveData<SnackbarModel>()
 
