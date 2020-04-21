@@ -53,32 +53,21 @@ class Test {
         //好好理解这个
         data class ApplyEvent(val money: Int, val title: String)
 
-        val groupLeader = {
-            val defineAt: (ApplyEvent) -> Boolean = { it.money <= 200 }
-            val handler: (ApplyEvent) -> Unit =
-                { println("GroupLeader handled application:${it.title}") }
-            PartialFunction(defineAt, handler)
-        }()
+        val groupLeader = PartialFunction<ApplyEvent, Unit>(defineAt = { it.money <= 200 }) {
+            println("GroupLeader handled application:${it.title}")
+        }
 
-        val president = {
-            val defineAt: (ApplyEvent) -> Boolean = { it.money <= 500 }
-            val handler: (ApplyEvent) -> Unit =
-                { println("President handled application:${it.title}") }
-            PartialFunction(defineAt, handler)
-        }()
+        val president = PartialFunction<ApplyEvent, Unit>(defineAt = { it.money <= 500 }) {
+            println("President handled application:${it.title}")
+        }
 
-        val college = {
-            val defineAt: (ApplyEvent) -> Boolean = { true }
-            val handler: (ApplyEvent) -> Unit =
-                {
-                    when {
-                        it.money > 1000 -> println("College: This application is refused.")
-                        else -> println("College handled application:${it.title}")
-                    }
-                }
-            PartialFunction(defineAt, handler)
-        }()
 
+        val college = PartialFunction<ApplyEvent, Unit>(defineAt = { true }) {
+            when {
+                it.money > 1000 -> println("College: This application is refused.")
+                else -> println("College handled application:${it.title}")
+            }
+        }
         val applyChain = groupLeader orElse president orElse college
         applyChain(ApplyEvent(2000, "hold a debate match"))
     }
