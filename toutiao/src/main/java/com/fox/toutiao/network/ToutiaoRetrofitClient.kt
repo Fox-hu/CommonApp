@@ -13,6 +13,8 @@ import java.io.File
 
 object ToutiaoRetrofitClient : BaseRetrofitClient() {
 
+    val service by lazy { getService(ToutiaoService::class.java, ToutiaoService.BASE_URL) }
+
     private val cookieJar by lazy {
         PersistentCookieJar(
             SetCookieCache(),

@@ -3,7 +3,7 @@ package com.component.kotlintest
 import com.component.kotlintest.first.*
 import org.junit.Test
 
-class Test {
+class SkillTest {
 
     fun foo(int: Int) {
         print(int)
@@ -15,19 +15,12 @@ class Test {
     }
 
     @Test
-    fun test2() {
-        val list = listOf<Int>(1, 2, 3, 4, 5, 6, 7)
-        val filter = list.filter { it % 2 == 0 }
-        System.out.print(filter)
-    }
-
-    @Test
-    fun test3() {
+    fun testLambdaMap() {
         keymapInvoke(1)
     }
 
     @Test
-    fun test4() {
+    fun testObserver() {
         val stockUpdate = StockUpdate()
         val stockDisplay = StockDisplay()
         stockUpdate.listeners.add(stockDisplay)
@@ -43,13 +36,17 @@ class Test {
 
 
     @Test
-    fun test6() {
-        val abstractFactory = AbstractFactory<Dell>()
-        print(abstractFactory.produce())
+    fun testAbstractFactory() {
+        val dell = AbstractFactory<Dell>()
+        print(dell.produce())
+        val asus = AbstractFactory<Asus>()
+        print(asus.produce())
+        val acer = AbstractFactory<Acer>()
+        print(acer.produce())
     }
 
     @Test
-    fun test7() {
+    fun testResponseListChain() {
         //好好理解这个
         data class ApplyEvent(val money: Int, val title: String)
 
@@ -73,7 +70,7 @@ class Test {
     }
 
     @Test
-    fun test8() {
+    fun testDecorate() {
         Printer().run {
             decorate {
                 drawStars()
