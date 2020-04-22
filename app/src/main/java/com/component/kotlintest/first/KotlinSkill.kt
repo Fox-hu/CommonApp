@@ -6,6 +6,7 @@ import kotlin.collections.ArrayList
 import kotlin.properties.Delegates
 
 /**
+ * kotlin高阶用法
  * @Author fox
  * @Date 2020/1/15 22:32
  */
@@ -167,3 +168,24 @@ infix fun <P1, R> PartialFunction<P1, R>.orElse(that: PartialFunction<P1, R>): P
     }
 }
 
+//8.使用扩展来代替装饰者
+class Printer {
+
+    fun drawLine() {
+        println("-------------------")
+    }
+
+    fun drawDottedLine() {
+        println("...................")
+    }
+
+    fun drawStars() {
+        println("******************")
+    }
+}
+
+fun <T> T.decorate(decorated: T.() -> Unit) {
+    println("+++ before action +++")
+    decorated()
+    println("+++ end action +++")
+}

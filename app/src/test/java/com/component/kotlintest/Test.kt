@@ -71,4 +71,19 @@ class Test {
         val applyChain = groupLeader orElse president orElse college
         applyChain(ApplyEvent(2000, "hold a debate match"))
     }
+
+    @Test
+    fun test8() {
+        Printer().run {
+            decorate {
+                drawStars()
+            }
+            decorate {
+                drawDottedLine()
+            }
+            decorate {
+                drawLine()
+            }
+        }
+    }
 }
