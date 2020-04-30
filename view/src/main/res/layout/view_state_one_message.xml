@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+                name="viewModel"
+                type="com.silver.fox.stateslayout.StateLayoutCallback" />
+
+        <variable
+                name="presenterModel"
+                type="com.silver.fox.stateslayout.StateParam" />
+    </data>
+
+    <TextView
+            android:id="@+id/tv_empty"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="center_horizontal"
+            android:onClick="@{()->viewModel.onReloadClick()}"
+            android:padding="16dp"
+            android:text="@{presenterModel.text}"
+            android:textColor="@color/view_grey_999999"
+            android:textSize="14sp" />
+</layout>

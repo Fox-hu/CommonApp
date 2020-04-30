@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.onReloadClick()}"
+            android:orientation="vertical">
+
+        <ImageView
+                android:id="@+id/ivCommonEmpty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:imageRes="@{presenterModel.drawableRes}"
+                tools:ignore="ContentDescription" />
+
+        <TextView
+                android:id="@+id/tvCommonEmpty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="32dp"
+                android:text="@{presenterModel.text}"
+                android:textColor="@color/view_grey_999999"
+                android:textSize="14sp" />
+
+        <TextView
+                android:id="@+id/btClickable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:onClick="@{()->viewModel.onButtonClick()}"
+                android:text="@{presenterModel.buttonText}"
+                android:visibility="@{TextUtils.isEmpty(presenterModel.buttonText)?View.GONE:View.VISIBLE}" />
+    </LinearLayout>
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+
+        <variable
+                name="viewModel"
+                type="com.silver.fox.stateslayout.StateLayoutCallback" />
+
+        <variable
+                name="presenterModel"
+                type="com.silver.fox.stateslayout.StateParam" />
+    </data>
+</layout>

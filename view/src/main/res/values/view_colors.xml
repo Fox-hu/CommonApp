@@ -8,4 +8,44 @@
     <color name="view_app_colorAccent">#D81B60</color>
 
     <color name="view_white">#FFFFFF</color>
+
+    <color name="view_topview_title">#222222</color><!--自定义topview中间标题颜色-->
+    <color name="view_white_ffffff">#ffffff</color>
+    <color name="view_white_fcfcfc">#fcfcfc</color>
+    <color name="view_white_f0f0f0">#f0f0f0</color> <!--V8.4.5 原#f2f2f2白色列表的点击色号都统一改成#f0f0f0 lance.lu 2018/9/26-->
+
+    <color name="view_white_00">#00ffffff</color><!--0%白色-->
+    <color name="view_white_20">#33ffffff</color><!--20%白色-->
+    <color name="view_white_30">#4cffffff</color><!---30%白色-->
+
+    <color name="view_black">#000000</color>
+    <color name="view_black_222222">#222222</color>
+    <color name="view_black_03">#08000000</color><!--3%黑色-->
+    <color name="view_black_15">#26000000</color><!--15%黑色-->
+    <color name="view_black_55">#8c000000</color><!--55%黑色-->
+    <color name="view_black_7">#12000000</color> <!--7%黑色-->
+    <color name="view_black_10">#1a000000</color> <!--10%黑色-->
+
+    <color name="view_grey_efefef">#efefef</color>
+    <color name="view_grey_fafafa">#fafafa</color><!--背景色：全局  V8.4.5全局背景色#f5f5f5统一改成#fafafa-->
+    <color name="view_grey_d4d4d4">#d4d4d4</color><!--分割线：全局、底部操作栏上划线 Android点击-->
+    <color name="view_grey_98a0a6">#98a0a6</color><!--小标题、灰色按钮、底部操作栏文字-->
+    <color name="view_grey_999999">#999999</color><!--次要文字（提示文字）-->
+    <color name="view_grey_7a8085">#7a8085</color><!--灰色按钮focus-->
+    <color name="view_grey_7f7f7f">#7f7f7f</color><!--简历中心按钮文字-->
+    <color name="view_grey_666666">#666666</color><!--中等文字-->
+    <color name="view_grey_222222">#222222</color><!--重要文字  V8.4.5原#444444色号的字体都统一改成#222222-->
+    <color name="view_grey_8d8d8d">#8d8d8d</color><!--顶部右侧文字的按压颜色-->
+    <color name="view_grey_6f444444">#6f444444</color><!-- 0.7倍 -->
+    <color name="view_grey_f0f0f0">#f0f0f0</color><!-- 面试邀请分割线  V8.4.5分割线#e5e5e5统一改为#f0f0f0-->
+    <color name="view_grey_b8b8b8">#b8b8b8</color><!-- 时间滚轮分割线颜色#b8b8b8-->
+    <color name="view_grey_b3b3b3">#b3b3b3</color>
+    <color name="view_grey_bababa">#bababa</color>
+    <color name="view_grey_a5a5a5">#a5a5a5</color>
+    <color name="view_grey_e2e2e2">#e2e2e2</color>
+    <color name="view_grey_f4f4f4">#f4f4f4</color>
+    <color name="view_grey_cbcbcb">#cbcbcb</color>
+    <color name="view_grey_e5e5e5">#e5e5e5</color>
+    <color name="view_grey_e4e4e4">#e4e4e4</color>
+
 </resources>

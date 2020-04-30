@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            app:imageRes="@{presenterModel.drawableRes}" />
+    </FrameLayout>
+
+    <data>
+
+        <variable
+                name="presenterModel"
+                type="com.silver.fox.stateslayout.StateParam" />
+    </data>
+</layout>

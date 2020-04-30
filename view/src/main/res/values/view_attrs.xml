@@ -44,4 +44,15 @@
     <declare-styleable name="view_QQSlidingMenu">
         <attr name="view_rightQQSlideMargin" format="dimension" />
     </declare-styleable>
+
+
+    <declare-styleable name="view_StatesLayout">
+        <attr name="view_loadingImageSrc" format="reference" />
+        <attr name="view_failImageSrc" format="reference" />
+        <attr name="view_failText" format="reference" />
+        <attr name="view_failButtonText" format="reference" />
+        <attr name="view_errorImageSrc" format="reference" />
+        <attr name="view_errorText" format="reference" />
+        <attr name="view_errorButtonText" format="reference" />
+    </declare-styleable>
 </resources>

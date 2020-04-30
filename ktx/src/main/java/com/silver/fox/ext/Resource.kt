@@ -6,11 +6,6 @@ import androidx.core.content.ContextCompat
 import com.silver.fox.Ktx
 
 @ColorInt
-fun Int.getColor(): Int = getColor(Ktx.app)
+fun Int.getColor(context: Context = Ktx.app): Int = ContextCompat.getColor(context, this)
 
-@ColorInt
-fun Int.getColor(context: Context): Int = ContextCompat.getColor(context, this)
-
-fun Int.getString(): String = getString(Ktx.app)
-
-fun Int.getString(context: Context) = context.getString(this)
+fun Int.getString(context: Context = Ktx.app) = context.getString(this)
