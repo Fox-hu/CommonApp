@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.LinearLayout
+import androidx.core.animation.doOnEnd
 import com.silver.fox.ext.logi
 import com.silver.fox.view.R
 import com.silver.fox.viewext.dp2px
@@ -43,30 +44,32 @@ class LoadingView @JvmOverloads constructor(
         "startFallAnimator".logi("LoadingView")
         val shapeFallAnimator =
             ObjectAnimator.ofFloat(shape_view, "translationY", 0f, dp2px(context, 80f).toFloat())
-        shapeFallAnimator.duration = ANIMATOR_DURATION
-        shapeFallAnimator.interpolator = AccelerateInterpolator()
+                .apply {
+                    duration = ANIMATOR_DURATION
+                    interpolator = AccelerateInterpolator()
+                }
 
         val shapeRotationAnimator = ObjectAnimator.ofFloat(shape_view, "rotation", 0f, 60f)
-        shapeRotationAnimator.duration = ANIMATOR_DURATION
+            .apply {
+                duration = ANIMATOR_DURATION
+            }
 
         val shadowAnimator = ObjectAnimator.ofFloat(shadow_view, "scaleX", 1f, 0.3f)
-        shadowAnimator.duration = ANIMATOR_DURATION
-        shadowAnimator.interpolator = AccelerateInterpolator()
+            .apply {
+                duration = ANIMATOR_DURATION
+                interpolator = AccelerateInterpolator()
+            }
+        AnimatorSet().apply {
+            playTogether(shapeFallAnimator, shapeRotationAnimator, shadowAnimator)
+            doOnEnd {
 
-        val aniSet = AnimatorSet()
-        aniSet.playTogether(shapeFallAnimator, shapeRotationAnimator, shadowAnimator)
-        aniSet.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator?) {
                 //下落后上抛
                 shape_view.exchange()
                 //改变形状
                 startUpAnimator()
             }
-
-            override fun onAnimationStart(animation: Animator?) {
-            }
-        })
-        aniSet.start()
+            start()
+        }
     }
 
     private fun startUpAnimator() {
@@ -76,22 +79,30 @@ class LoadingView @JvmOverloads constructor(
         "startUpAnimator".logi("LoadingView")
         val shapeUpAnimator =
             ObjectAnimator.ofFloat(shape_view, "translationY", dp2px(context, 80f).toFloat(), 0f)
-        shapeUpAnimator.duration = ANIMATOR_DURATION
-        shapeUpAnimator.interpolator = DecelerateInterpolator()
+                .apply {
+                    duration = ANIMATOR_DURATION
+                    interpolator = DecelerateInterpolator()
+                }
 
 
         val shadowAnimator = ObjectAnimator.ofFloat(shadow_view, "scaleX", 0.3f, 1f)
-        shadowAnimator.duration = ANIMATOR_DURATION
-        shadowAnimator.interpolator = DecelerateInterpolator()
+            .apply {
+                duration = ANIMATOR_DURATION
+                interpolator = DecelerateInterpolator()
+            }
 
-        val aniSet = AnimatorSet()
-        aniSet.playTogether(shapeUpAnimator, shadowAnimator)
-        aniSet.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator?) {
+        AnimatorSet().apply {
+            playTogether(shapeUpAnimator, shadowAnimator)
+            doOnEnd {
                 startFallAnimator()
             }
-        })
-        aniSet.start()
+            start()
+        }
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        isStop = true
     }
 
     override fun setVisibility(visibility: Int) {

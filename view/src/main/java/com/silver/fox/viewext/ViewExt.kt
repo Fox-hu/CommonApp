@@ -6,6 +6,7 @@ import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
 import android.view.WindowManager
+import com.silver.fox.Ktx
 
 /**
  * @Author fox
@@ -17,20 +18,20 @@ fun View.px2sp(sp: Int) = TypedValue.applyDimension(
     resources.displayMetrics
 ).toInt()
 
-fun dp2px(context: Context, dpValue: Float): Int{
+fun dp2px(context: Context = Ktx.app, dpValue: Float): Int {
     val scale = context.resources.displayMetrics.density
     return (dpValue * scale + 0.5).toInt()
 }
 
-fun getScreenWidth(context: Context): Int = getDisplayMetrics(
+fun getScreenWidth(context: Context = Ktx.app): Int = getDisplayMetrics(
     context
 ).widthPixels
 
-fun getScreenHeight(context: Context): Int = getDisplayMetrics(
+fun getScreenHeight(context: Context= Ktx.app): Int = getDisplayMetrics(
     context
 ).heightPixels
 
-private fun getDisplayMetrics(context: Context): DisplayMetrics {
+private fun getDisplayMetrics(context: Context= Ktx.app): DisplayMetrics {
     val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
     val displayMetrics = DisplayMetrics()
     wm.defaultDisplay.getMetrics(displayMetrics)

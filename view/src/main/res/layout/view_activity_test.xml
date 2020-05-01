@@ -126,4 +126,11 @@
             app:layout_constraintBottom_toBottomOf="@+id/viewLettersidebar"
             app:layout_constraintStart_toEndOf="@+id/viewLettersidebar"
             app:layout_constraintTop_toBottomOf="@+id/viewLinearlayout" />
+
+    <com.silver.fox.viewgroup.CircleLoadingView
+            android:id="@+id/circle_loading_view"
+            android:layout_width="100dp"
+            android:layout_height="200dp"
+            app:layout_constraintStart_toEndOf="@+id/loading_view"
+            app:layout_constraintTop_toBottomOf="@+id/viewLinearlayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
