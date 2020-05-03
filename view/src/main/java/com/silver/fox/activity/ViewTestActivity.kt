@@ -8,5 +8,6 @@ class ViewTestActivity : BaseListActivity() {
         activityMap["SlideActivity"] = SlideActivity::class.java
         activityMap["TestActivity"] = TestActivity::class.java
         activityMap["VerticalDragActivity"] = VerticalDragActivity::class.java
+        activityMap["BubbleActivity"] = BubbleActivity::class.java
     }
 }

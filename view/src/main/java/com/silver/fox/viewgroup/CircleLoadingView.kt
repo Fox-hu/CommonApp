@@ -28,7 +28,7 @@ class CircleLoadingView @JvmOverloads constructor(
     private val leftCircle: CircleView = CircleView(context, 10f).apply { color = Color.RED }
     private val centerCircle: CircleView = CircleView(context, 10f).apply { color = Color.BLUE }
     private val rightCircle: CircleView = CircleView(context, 10f).apply { color = Color.GREEN }
-    private val TRANSLATION_DISTANCE = dp2px(dpValue = 20f).toFloat()
+    private val TRANSLATION_DISTANCE = dp2px(20f).toFloat()
     private var isStop = false
 
     //颜色切换的顺序是左给中 中给右 右给左
@@ -114,7 +114,7 @@ class CircleView @JvmOverloads constructor(
         operator fun invoke(context: Context, width: Float): CircleView {
             return CircleView(context).apply {
                 val params =
-                    RelativeLayout.LayoutParams(dp2px(dpValue = width), dp2px(dpValue = width))
+                    RelativeLayout.LayoutParams(dp2px(width), dp2px(width))
                 params.addRule(RelativeLayout.CENTER_IN_PARENT)
                 layoutParams = params
             }

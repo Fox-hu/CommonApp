@@ -43,7 +43,7 @@ class LoadingView @JvmOverloads constructor(
         }
         "startFallAnimator".logi("LoadingView")
         val shapeFallAnimator =
-            ObjectAnimator.ofFloat(shape_view, "translationY", 0f, dp2px(context, 80f).toFloat())
+            ObjectAnimator.ofFloat(shape_view, "translationY", 0f, dp2px(80f).toFloat())
                 .apply {
                     duration = ANIMATOR_DURATION
                     interpolator = AccelerateInterpolator()
@@ -78,7 +78,7 @@ class LoadingView @JvmOverloads constructor(
         }
         "startUpAnimator".logi("LoadingView")
         val shapeUpAnimator =
-            ObjectAnimator.ofFloat(shape_view, "translationY", dp2px(context, 80f).toFloat(), 0f)
+            ObjectAnimator.ofFloat(shape_view, "translationY", dp2px(80f).toFloat(), 0f)
                 .apply {
                     duration = ANIMATOR_DURATION
                     interpolator = DecelerateInterpolator()
@@ -124,7 +124,7 @@ class LoadingView @JvmOverloads constructor(
     private fun startAnimator() {
         //下落 上浮动画
         val startFrame = Keyframe.ofFloat(0f, 0f)
-        val midFrame = Keyframe.ofFloat(0.5f, dp2px(context, 80f).toFloat())
+        val midFrame = Keyframe.ofFloat(0.5f, dp2px(80f).toFloat())
         val endFrame = Keyframe.ofFloat(1f, 0f)
         val holder =
             PropertyValuesHolder.ofKeyframe("translationY", startFrame, midFrame, endFrame)

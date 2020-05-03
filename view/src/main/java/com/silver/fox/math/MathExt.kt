@@ -1,6 +1,5 @@
 package com.silver.fox.math
 
-import com.silver.fox.ext.logi
 import kotlin.math.abs
 import kotlin.math.sqrt
 

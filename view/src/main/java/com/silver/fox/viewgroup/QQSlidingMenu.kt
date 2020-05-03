@@ -71,7 +71,7 @@ class QQSlidingMenu @JvmOverloads constructor(
         array.apply {
             menuRightMargin = getDimension(
                 R.styleable.view_QQSlidingMenu_view_rightQQSlideMargin,
-                dp2px(context, 50f).toFloat()
+                dp2px(50f).toFloat()
             )
             menuWidth = getScreenWidth(context) - menuRightMargin
             recycle()

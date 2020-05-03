@@ -68,7 +68,7 @@ class SlidingMenu @JvmOverloads constructor(
         array.apply {
             menuRightMargin = getDimension(
                 R.styleable.view_SlidingMenu_view_rightSlideMargin,
-                dp2px(context, 50f).toFloat()
+                dp2px(50f).toFloat()
             )
             menuWidth = getScreenWidth(context) - menuRightMargin
             recycle()

@@ -133,4 +133,5 @@
             android:layout_height="200dp"
             app:layout_constraintStart_toEndOf="@+id/loading_view"
             app:layout_constraintTop_toBottomOf="@+id/viewLinearlayout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
