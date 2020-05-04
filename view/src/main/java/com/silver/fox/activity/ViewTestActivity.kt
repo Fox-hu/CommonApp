@@ -9,5 +9,6 @@ class ViewTestActivity : BaseListActivity() {
         activityMap["TestActivity"] = TestActivity::class.java
         activityMap["VerticalDragActivity"] = VerticalDragActivity::class.java
         activityMap["BubbleActivity"] = BubbleActivity::class.java
+        activityMap["LoveActivity"] = LoveActivity::class.java
     }
 }

@@ -74,3 +74,7 @@ fun PointF.getPointByPercent(target: PointF, percent: Float): PointF {
     return PointF(evaluateValue(percent, x, target.x), evaluateValue(percent, y, target.y))
 }
 
+fun PointF.isAvailable(): Boolean {
+    return !(x == 0f && y == 0f)
+}
+

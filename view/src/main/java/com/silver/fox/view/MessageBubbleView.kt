@@ -9,17 +9,11 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.view.animation.OvershootInterpolator
 import android.widget.FrameLayout
 import android.widget.ImageView
-import androidx.constraintlayout.solver.widgets.WidgetContainer
 import androidx.core.animation.doOnEnd
-import com.bumptech.glide.manager.TargetTracker
 import com.silver.fox.math.distance
-import com.silver.fox.viewext.bitmap
-import com.silver.fox.viewext.dp2px
-import com.silver.fox.viewext.getPointByPercent
-import com.silver.fox.viewext.getStatusBarHeight
+import com.silver.fox.viewext.*
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -31,8 +25,9 @@ class MessageBubbleView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    private var fixationPoint: PointF? = null
-    private var dragPoint: PointF? = null
+    private var fixationPoint: PointF = PointF(0f, 0f)
+    private var dragPoint: PointF = PointF(0f, 0f)
+
 
     var dragBitmap: Bitmap? = null
 
@@ -77,21 +72,21 @@ class MessageBubbleView @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas?) {
-        if (dragPoint != null && fixationPoint != null) {
+        if (dragPoint.isAvailable()&& fixationPoint.isAvailable()) {
             canvas?.run {
-                dragPoint?.run {
+                dragPoint.run {
                     drawCircle(x, y, dragRadius.toFloat(), paint)
                 }
 
                 getBezerPath()?.let {
-                    fixationPoint?.run {
+                    fixationPoint.run {
                         drawCircle(x, y, fixRadius.toFloat(), paint)
                         //画贝塞尔曲线
                         drawPath(it, paint)
                     }
                 }
                 dragBitmap?.run {
-                    drawBitmap(this, dragPoint!!.x - width / 2, dragPoint!!.y - height / 2, null)
+                    drawBitmap(this, dragPoint.x - width / 2, dragPoint.y - height / 2, null)
                 }
             }
         }
@@ -99,32 +94,32 @@ class MessageBubbleView @JvmOverloads constructor(
 
     private fun getBezerPath(): Path? {
         fixRadius = (FIX_MAX_RADIUS - distance(
-            fixationPoint!!.x.toDouble(),
-            fixationPoint!!.y.toDouble(),
-            dragPoint!!.x.toDouble(),
-            dragPoint!!.y.toDouble()
+            fixationPoint.x.toDouble(),
+            fixationPoint.y.toDouble(),
+            dragPoint.x.toDouble(),
+            dragPoint.y.toDouble()
         ) / 14).toInt()
         if (fixRadius < Fix_MIN_RADIUS) {
             return null
         } else {
             //求斜率
             val path = Path()
-            val dy = dragPoint!!.y - fixationPoint!!.y
-            val dx = dragPoint!!.x - fixationPoint!!.x
+            val dy = dragPoint.y - fixationPoint.y
+            val dx = dragPoint.x - fixationPoint.x
             val tanA = dy / dx
 
             val arcTanA = Math.atan(tanA.toDouble())
 
-            val p0x = (fixationPoint!!.x + fixRadius * sin(arcTanA)).toFloat()
-            val p0y = (fixationPoint!!.y - fixRadius * cos(arcTanA)).toFloat()
+            val p0x = (fixationPoint.x + fixRadius * sin(arcTanA)).toFloat()
+            val p0y = (fixationPoint.y - fixRadius * cos(arcTanA)).toFloat()
 
 
-            val p1x = (dragPoint!!.x + dragRadius * sin(arcTanA)).toFloat()
-            val p1y = (dragPoint!!.y - dragRadius * cos(arcTanA)).toFloat()
-            val p2x = (dragPoint!!.x - dragRadius * sin(arcTanA)).toFloat()
-            val p2y = (dragPoint!!.y + dragRadius * cos(arcTanA)).toFloat()
-            val p3x = (fixationPoint!!.x - fixRadius * sin(arcTanA)).toFloat()
-            val p3y = (fixationPoint!!.y + fixRadius * cos(arcTanA)).toFloat()
+            val p1x = (dragPoint.x + dragRadius * sin(arcTanA)).toFloat()
+            val p1y = (dragPoint.y - dragRadius * cos(arcTanA)).toFloat()
+            val p2x = (dragPoint.x - dragRadius * sin(arcTanA)).toFloat()
+            val p2y = (dragPoint.y + dragRadius * cos(arcTanA)).toFloat()
+            val p3x = (fixationPoint.x - fixRadius * sin(arcTanA)).toFloat()
+            val p3y = (fixationPoint.y + fixRadius * cos(arcTanA)).toFloat()
 
             path.moveTo(p0x, p0y)
 
@@ -139,8 +134,8 @@ class MessageBubbleView @JvmOverloads constructor(
 
     private fun getControlPoint(): PointF {
         return PointF(
-            (dragPoint!!.x + fixationPoint!!.x) / 2,
-            (dragPoint!!.y + fixationPoint!!.y) / 2
+            (dragPoint.x + fixationPoint.x) / 2,
+            (dragPoint.y + fixationPoint.y) / 2
         )
     }
 
@@ -152,8 +147,8 @@ class MessageBubbleView @JvmOverloads constructor(
 
 
     fun updateDrag(x: Float, y: Float) {
-        dragPoint?.x = x
-        dragPoint?.y = y
+        dragPoint.x = x
+        dragPoint.y = y
         invalidate()
     }
 
@@ -164,8 +159,8 @@ class MessageBubbleView @JvmOverloads constructor(
                 duration = 250
                 addUpdateListener {
                     val percent = it.animatedValue as Float
-                    val start = PointF(dragPoint!!.x, dragPoint!!.y)
-                    val end = PointF(fixationPoint!!.x, fixationPoint!!.y)
+                    val start = PointF(dragPoint.x, dragPoint.y)
+                    val end = PointF(fixationPoint.x, fixationPoint.y)
                     val point = start.getPointByPercent(end, percent)
                     updateDrag(point.x, point.y)
                 }

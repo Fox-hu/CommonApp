@@ -1,5 +1,6 @@
 package com.silver.fox.math
 
+import java.util.*
 import kotlin.math.abs
 import kotlin.math.sqrt
 
@@ -20,3 +21,7 @@ fun checkInRound(
 fun distance(startX: Double, startY: Double, endX: Double, endY: Double): Double {
     return sqrt(abs(startX - endX) * abs(startX - endX) + abs(startY - endY) * abs(startY - endY))
 }
+
+var Int.random: Int
+    get() = Random().nextInt(this)
+    set(value) {}
