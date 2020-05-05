@@ -12,7 +12,8 @@
     <color name="view_topview_title">#222222</color><!--自定义topview中间标题颜色-->
     <color name="view_white_ffffff">#ffffff</color>
     <color name="view_white_fcfcfc">#fcfcfc</color>
-    <color name="view_white_f0f0f0">#f0f0f0</color> <!--V8.4.5 原#f2f2f2白色列表的点击色号都统一改成#f0f0f0 lance.lu 2018/9/26-->
+    <color name="view_white_f0f0f0">#f0f0f0
+    </color> <!--V8.4.5 原#f2f2f2白色列表的点击色号都统一改成#f0f0f0 lance.lu 2018/9/26-->
 
     <color name="view_white_00">#00ffffff</color><!--0%白色-->
     <color name="view_white_20">#33ffffff</color><!--20%白色-->
@@ -47,5 +48,21 @@
     <color name="view_grey_cbcbcb">#cbcbcb</color>
     <color name="view_grey_e5e5e5">#e5e5e5</color>
     <color name="view_grey_e4e4e4">#e4e4e4</color>
+
+    <color name="view_orange">#FF9600</color>
+    <color name="view_aqua">#02D1AC</color>
+    <color name="view_yellow">#FFD200</color>
+    <color name="view_blue">#00C6FF</color>
+    <color name="view_green">#00E099</color>
+    <color name="view_pink">#FF3891</color>
+
+    <array name="view_splash_circle_colors">
+        <item>@color/view_blue</item>
+        <item>@color/view_green</item>
+        <item>@color/view_pink</item>
+        <item>@color/view_orange</item>
+        <item>@color/view_aqua</item>
+        <item>@color/view_yellow</item>
+    </array>
 
 </resources>

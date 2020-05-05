@@ -3,7 +3,8 @@
         package="com.silver.fox.view">
 
     <application>
-        <activity android:name="com.silver.fox.activity.LoveActivity"></activity>
+        <activity android:name="com.silver.fox.activity.SplashActivity"></activity>
+        <activity android:name="com.silver.fox.activity.LoveActivity" />
         <activity android:name="com.silver.fox.activity.BubbleActivity" />
         <activity android:name="com.silver.fox.activity.ViewTestActivity" />
         <activity android:name="com.silver.fox.activity.LockPatternActivity" />
