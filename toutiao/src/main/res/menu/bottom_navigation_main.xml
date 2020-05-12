@@ -24,7 +24,7 @@
         />
 
     <item
-        android:id="@+id/action_media"
+        android:id="@+id/home_media"
         android:enabled="true"
         android:icon="@drawable/ic_library_books_white_24dp"
         android:title="@string/media"

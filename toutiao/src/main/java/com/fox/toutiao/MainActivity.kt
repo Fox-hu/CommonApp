@@ -26,29 +26,17 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.absoluteValue
 
 class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>() {
-
-    override val viewModel: HomeViewModel by viewModel()
-
     private var lastBackPressMs = 0L
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    override fun startObserver() {
-        viewModel.itemId.observe(this, Observer {
-            toast("" + it)
-            drawer_layout.closeDrawer(GravityCompat.START)
-            when (it) {
-                R.id.nav_camera -> startActivity<ViewTestActivity>()
-                //findNavController().navigate(R.id.flow_step_one_dest, null, option)
-            }
-        })
-    }
+    override val viewModel: HomeViewModel by viewModel()
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_activity_main, menu)
         return true
     }
 
-    override fun initView() {
+    override fun bindDataAndEvent() {
         setSupportActionBar(toolbar)
 
         val host =
@@ -67,7 +55,7 @@ class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>() {
         toggle.syncState()
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.home_news, R.id.home_photo, R.id.home_video),
+            setOf(R.id.home_news, R.id.home_photo, R.id.home_video, R.id.home_media),
             drawer_layout
         )
 
@@ -75,6 +63,15 @@ class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>() {
 //        nav_view.setupWithNavController(navController)
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottom_navigation.setupWithNavController(navController)
+
+        viewModel.itemId.observe(this, Observer {
+            toast("" + it)
+            drawer_layout.closeDrawer(GravityCompat.START)
+            when (it) {
+                R.id.nav_camera -> startActivity<ViewTestActivity>()
+                //findNavController().navigate(R.id.flow_step_one_dest, null, option)
+            }
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -97,4 +94,5 @@ class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>() {
             }
         }
     }
+
 }

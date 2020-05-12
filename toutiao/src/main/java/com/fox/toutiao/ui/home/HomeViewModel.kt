@@ -1,6 +1,7 @@
 package com.fox.toutiao.ui.home
 
 
+import android.app.Application
 import android.view.MenuItem
 import androidx.lifecycle.MutableLiveData
 import com.silver.fox.base.BaseViewModel

@@ -11,26 +11,6 @@ import kotlinx.coroutines.cancel
 
 abstract class BaseFragment : Fragment(), CoroutineScope by MainScope() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(getLayoutResId(), container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initView()
-        initData()
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    abstract fun initView()
-
-    abstract fun initData()
-
-    abstract fun getLayoutResId(): Int
-
     override fun onDestroy() {
         super.onDestroy()
         cancel()
