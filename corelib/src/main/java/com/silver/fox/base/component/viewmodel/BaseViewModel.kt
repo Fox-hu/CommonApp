@@ -1,4 +1,4 @@
-package com.silver.fox.base
+package com.silver.fox.base.component.viewmodel
 
 import android.app.Activity
 import android.app.Application
@@ -7,15 +7,18 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.annotation.StringRes
 import androidx.lifecycle.*
-import com.silver.fox.Ktx
 import com.silver.fox.SnackbarModel
+import com.silver.fox.base.component.bean.OnActivityResultInfo
+import com.silver.fox.base.component.bean.StartActivityInfo
 import com.silver.fox.common.InitApp
 import com.silver.fox.ext.getString
+import com.silver.fox.ext.logd
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
+import kotlin.math.log
 
 
 open class BaseViewModel(app: Application = InitApp.CONTEXT as Application) :
@@ -24,54 +27,23 @@ open class BaseViewModel(app: Application = InitApp.CONTEXT as Application) :
     KoinComponent {
     private var mActivityIntent: Intent? = null
     private var mFragmentArguments: Bundle? = null
-    private val mShortToastMessage: SingleLiveEvent<String> = SingleLiveEvent()
-    private val mLongToastMessage: SingleLiveEvent<String> = SingleLiveEvent()
-    private val mWaitingDialogMessage: SingleLiveEvent<String> = SingleLiveEvent()
-    private val mHideWaitingDialog: SingleLiveEvent<Boolean> = SingleLiveEvent()
-    private val mStartActivityInfo: SingleLiveEvent<StartActivityInfo> = SingleLiveEvent()
-    private val mOnActivityResultInfo: SingleLiveEvent<OnActivityResultInfo> = SingleLiveEvent()
-    private val mFinishEvent: SingleLiveEvent<Boolean> = SingleLiveEvent()
-    private val mHideSoftKeyboard: SingleLiveEvent<Boolean> = SingleLiveEvent()
+    val mShortToastMessage: SingleLiveEvent<String> = SingleLiveEvent()
+    val mLongToastMessage: SingleLiveEvent<String> = SingleLiveEvent()
+    val mWaitingDialogMessage: SingleLiveEvent<String> = SingleLiveEvent()
+    val mHideWaitingDialog: SingleLiveEvent<Boolean> = SingleLiveEvent()
+    val mStartActivityInfo: SingleLiveEvent<StartActivityInfo> = SingleLiveEvent()
+    val mOnActivityResultInfo: SingleLiveEvent<OnActivityResultInfo> = SingleLiveEvent()
+    val mFinishEvent: SingleLiveEvent<Boolean> = SingleLiveEvent()
+    val mHideSoftKeyboard: SingleLiveEvent<Boolean> = SingleLiveEvent()
 
     val snackbarData = MutableLiveData<SnackbarModel>()
-
-    fun getShortToastMessage(): SingleLiveEvent<String> {
-        return mShortToastMessage
-    }
-
-    fun getLongToastMessage(): SingleLiveEvent<String> {
-        return mLongToastMessage
-    }
-
-    fun getWaitingDialogMessage(): SingleLiveEvent<String> {
-        return mWaitingDialogMessage
-    }
-
-    fun getHideWaitingDialog(): SingleLiveEvent<Boolean> {
-        return mHideWaitingDialog
-    }
-
-    fun getHideSoftKeyboard(): SingleLiveEvent<Boolean> {
-        return mHideSoftKeyboard
-    }
-
-    fun getStartActivityInfo(): SingleLiveEvent<StartActivityInfo> {
-        return mStartActivityInfo
-    }
-
-    fun getOnActivityResultInfo(): SingleLiveEvent<OnActivityResultInfo> {
-        return mOnActivityResultInfo
-    }
-
-    fun getFinishEvent(): SingleLiveEvent<Boolean> {
-        return mFinishEvent
-    }
 
     fun startActivity(intent: Intent?) {
         if (intent == null) {
             return
         }
-        mStartActivityInfo.value = StartActivityInfo(intent)
+        mStartActivityInfo.value =
+            StartActivityInfo(intent)
     }
 
     fun startActivity(t: Class<out Activity?>?) {
@@ -89,7 +61,11 @@ open class BaseViewModel(app: Application = InitApp.CONTEXT as Application) :
         intent: Intent?,
         requestCode: Int
     ) {
-        mStartActivityInfo.value = StartActivityInfo(intent!!, requestCode)
+        mStartActivityInfo.value =
+            StartActivityInfo(
+                intent!!,
+                requestCode
+            )
     }
 
     fun setResultAndFinish(bundle: Bundle?) {
@@ -101,7 +77,12 @@ open class BaseViewModel(app: Application = InitApp.CONTEXT as Application) :
     }
 
     fun setResultAndFinish(resultCode: Int, bundle: Bundle?) {
-        mOnActivityResultInfo.setValue(OnActivityResultInfo(resultCode, bundle))
+        mOnActivityResultInfo.setValue(
+            OnActivityResultInfo(
+                resultCode,
+                bundle
+            )
+        )
     }
 
     fun showToast(message: String?) {
@@ -254,22 +235,27 @@ open class BaseViewModel(app: Application = InitApp.CONTEXT as Application) :
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     open fun onCreate() {
+        javaClass.simpleName.logd("onCreate()")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     open fun onStart() {
+        javaClass.simpleName.logd("onStart()")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     open fun onResume() {
+        javaClass.simpleName.logd("onResume()")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     open fun onPause() {
+        javaClass.simpleName.logd("onPause()")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     open fun onDestroy() {
+        javaClass.simpleName.logd("onDestroy()")
     }
 
     private val mException: MutableLiveData<Throwable> = MutableLiveData()

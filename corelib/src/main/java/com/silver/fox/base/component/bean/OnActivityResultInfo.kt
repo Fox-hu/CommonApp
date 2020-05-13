@@ -1,4 +1,4 @@
-package com.silver.fox.base
+package com.silver.fox.base.component.bean
 
 import android.os.Bundle
 

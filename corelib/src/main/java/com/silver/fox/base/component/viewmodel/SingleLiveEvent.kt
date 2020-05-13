@@ -1,4 +1,4 @@
-package com.silver.fox.base
+package com.silver.fox.base.component.viewmodel
 
 import android.os.Looper
 import android.util.Log

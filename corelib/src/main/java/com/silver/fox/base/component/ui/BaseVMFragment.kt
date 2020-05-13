@@ -1,16 +1,27 @@
-package com.silver.fox.base
+package com.silver.fox.base.component.ui
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.NonNull
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.silver.fox.base.component.bean.OnActivityResultInfo
+import com.silver.fox.base.component.bean.StartActivityInfo
+import com.silver.fox.base.component.viewmodel.BaseViewModel
 import com.sliver.fox.base.BR
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
 
-abstract class BaseVMFragment<VM : BaseViewModel, VDB : ViewDataBinding> : BaseFragment() {
+abstract class BaseVMFragment<VM : BaseViewModel, VDB : ViewDataBinding> : Fragment(),
+    CoroutineScope by MainScope() {
 
     protected lateinit var dataBinding: ViewDataBinding
     abstract val viewModel: VM
@@ -34,28 +45,24 @@ abstract class BaseVMFragment<VM : BaseViewModel, VDB : ViewDataBinding> : BaseF
             executePendingBindings()
             setLifecycleOwner(this@BaseVMFragment)
         }
-        bindDataAndEvent()
         return dataBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        bindDataAndEvent()
     }
 
     abstract fun getLayoutResId(): Int
 
     protected open fun initBaseObserver() {
-        viewModel.getShortToastMessage()
-            .observe(this, Observer { showToast(it) })
-        viewModel.getLongToastMessage()
-            .observe(this, Observer { showLongToast(it) })
-        viewModel.getWaitingDialogMessage()
-            .observe(this, Observer { showWaitingDialog(it) })
-        viewModel.getHideWaitingDialog()
-            .observe(this, Observer { hideWaitingDialog(it) })
-        viewModel.getFinishEvent()
-            .observe(this, Observer { doFinish(it) })
-        viewModel.getStartActivityInfo().observe(this,
-            Observer { startActivity(it) })
-        viewModel.getOnActivityResultInfo().observe(this, Observer { onActivityResult(it) })
-        viewModel.getHideSoftKeyboard()
-            .observe(this, Observer { hideSoftKeyboard(it) })
+        viewModel.mShortToastMessage.observe(this, Observer { showToast(it) })
+        viewModel.mLongToastMessage.observe(this, Observer { showLongToast(it) })
+        viewModel.mWaitingDialogMessage.observe(this, Observer { showWaitingDialog(it) })
+        viewModel.mHideWaitingDialog.observe(this, Observer { hideWaitingDialog(it) })
+        viewModel.mFinishEvent.observe(this, Observer { doFinish(it) })
+        viewModel.mStartActivityInfo.observe(this, Observer { startActivity(it) })
+        viewModel.mOnActivityResultInfo.observe(this, Observer { onActivityResult(it) })
+        viewModel.mHideSoftKeyboard.observe(this, Observer { hideSoftKeyboard(it) })
     }
 
 //    利用泛型 获取class
@@ -105,4 +112,35 @@ abstract class BaseVMFragment<VM : BaseViewModel, VDB : ViewDataBinding> : BaseF
     }
 
     abstract fun bindDataAndEvent()
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cancel()
+    }
+
+    override fun onSaveInstanceState(@NonNull outState: Bundle) {
+        super.onSaveInstanceState(outState!!)
+        viewModel.onSaveInstanceState(outState)
+    }
+
+    open fun onRestoreInstanceState(
+        savedInstanceState: Bundle?,
+        persistentState: PersistableBundle?
+    ) {
+        viewModel.onRestoreInstanceState(savedInstanceState, persistentState)
+    }
+
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            viewModel.onActivityResultOK(requestCode, data)
+        } else if (resultCode == Activity.RESULT_CANCELED) {
+            viewModel.onActivityResultCancel(requestCode, data)
+        }
+    }
+
 }

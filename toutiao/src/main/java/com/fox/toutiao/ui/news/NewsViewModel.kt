@@ -1,21 +1,31 @@
 package com.fox.toutiao.ui.news
 
-import android.app.Application
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewModelScope
+import com.fox.toutiao.R
 import com.fox.toutiao.repository.NewsRepository
-import com.silver.fox.base.BaseViewModel
-import com.silver.fox.common.InitApp
+import com.fox.toutiao.ui.news.bean.NewsChannelBean
+import com.silver.fox.base.component.viewmodel.BaseViewModel
+import com.silver.fox.ext.getString
+import com.silver.fox.ext.getStringArray
+import kotlinx.android.synthetic.main.fragment_news.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class NewsViewModel(val repository: NewsRepository) : BaseViewModel() {
+class NewsViewModel(private val repository: NewsRepository) : BaseViewModel() {
 
-    fun getArticleList() {
-        viewModelScope.launch(Dispatchers.Main) {
-            val list = withContext(Dispatchers.IO) {
-                repository.getArticleList()
-            }
-        }
+    private val newsCategoryList: List<NewsChannelBean> by lazy {
+        repository.getNewsCategoryList()
     }
+
+    val fragmentList: List<Fragment> by lazy {
+        newsCategoryList.map {
+            NewsArticleFragment(it.channelId)
+        }.toList()
+    }
+    val titleList: List<String> by lazy {
+        newsCategoryList.map { it.channelName }.toList()
+    }
+
 }

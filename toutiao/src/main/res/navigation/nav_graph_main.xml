@@ -23,7 +23,7 @@
             android:id="@+id/home_video"
             android:name="com.fox.toutiao.ui.video.VideoFragment"
             android:label="@string/video"
-            tools:layout="@layout/video_fragment" />
+            tools:layout="@layout/fragment_video" />
     <fragment
             android:id="@+id/home_media"
             android:name="com.fox.toutiao.ui.media.MediaFragment"

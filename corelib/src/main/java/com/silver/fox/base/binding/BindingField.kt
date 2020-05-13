@@ -1,4 +1,4 @@
-package com.silver.fox.binding
+package com.silver.fox.base.binding
 
 
 import androidx.databinding.ObservableField

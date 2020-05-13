@@ -13,9 +13,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.fox.toutiao.databinding.ActivityMainBinding
 import com.fox.toutiao.ui.home.HomeViewModel
 import com.silver.fox.activity.ViewTestActivity
-import com.silver.fox.base.BaseVMActivity
+import com.silver.fox.base.component.ui.BaseVMActivity
 import com.silver.fox.ext.getString
-import com.silver.fox.ext.startKtxActivity
 import com.silver.fox.toSnackbarMsg
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -38,7 +37,6 @@ class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>() {
 
     override fun bindDataAndEvent() {
         setSupportActionBar(toolbar)
-
         val host =
             supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment? ?: return
 

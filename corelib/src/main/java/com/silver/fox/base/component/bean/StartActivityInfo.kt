@@ -1,4 +1,4 @@
-package com.silver.fox.base
+package com.silver.fox.base.component.bean
 
 import android.content.Intent
 
@@ -7,7 +7,8 @@ import android.content.Intent
  * 用于包在SingleLiveData中，View监听到ViewModel中该LiveData改变时进行页面跳转
  */
 class StartActivityInfo {
-    var requestCode = NO_REQUEST_CODE
+    var requestCode =
+        NO_REQUEST_CODE
     val intent: Intent
 
     constructor(intent: Intent) {

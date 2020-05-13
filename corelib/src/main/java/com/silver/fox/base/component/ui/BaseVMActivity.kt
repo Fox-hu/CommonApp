@@ -1,4 +1,4 @@
-package com.silver.fox.base
+package com.silver.fox.base.component.ui
 
 
 import android.content.Intent
@@ -8,12 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import com.silver.fox.base.component.bean.OnActivityResultInfo
+import com.silver.fox.base.component.bean.StartActivityInfo
+import com.silver.fox.base.component.viewmodel.BaseViewModel
 import com.sliver.fox.base.BR
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
-import java.lang.reflect.ParameterizedType
 
 
 abstract class BaseVMActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompatActivity(),
@@ -69,21 +70,14 @@ abstract class BaseVMActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCom
     }
 
     protected open fun initBaseObserver() {
-        viewModel.getShortToastMessage()
-            .observe(this, Observer { showToast(it) })
-        viewModel.getLongToastMessage()
-            .observe(this, Observer { showLongToast(it) })
-        viewModel.getWaitingDialogMessage()
-            .observe(this, Observer { showWaitingDialog(it) })
-        viewModel.getHideWaitingDialog()
-            .observe(this, Observer { hideWaitingDialog(it) })
-        viewModel.getFinishEvent()
-            .observe(this, Observer { doFinish(it) })
-        viewModel.getStartActivityInfo().observe(this,
-            Observer { startActivity(it) })
-        viewModel.getOnActivityResultInfo().observe(this, Observer { onActivityResult(it) })
-        viewModel.getHideSoftKeyboard()
-            .observe(this, Observer { hideSoftKeyboard(it) })
+        viewModel.mShortToastMessage.observe(this, Observer { showToast(it) })
+        viewModel.mLongToastMessage.observe(this, Observer { showLongToast(it) })
+        viewModel.mWaitingDialogMessage.observe(this, Observer { showWaitingDialog(it) })
+        viewModel.mHideWaitingDialog.observe(this, Observer { hideWaitingDialog(it) })
+        viewModel.mFinishEvent.observe(this, Observer { doFinish(it) })
+        viewModel.mStartActivityInfo.observe(this, Observer { startActivity(it) })
+        viewModel.mOnActivityResultInfo.observe(this, Observer { onActivityResult(it) })
+        viewModel.mHideSoftKeyboard.observe(this, Observer { hideSoftKeyboard(it) })
     }
 
     fun showToast(toastMessage: String) {
@@ -138,5 +132,11 @@ abstract class BaseVMActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCom
     override fun onDestroy() {
         super.onDestroy()
         cancel()
+    }
+
+    override fun onBackPressed() {
+        if (!viewModel.onBackPressed()) {
+            super.onBackPressed()
+        }
     }
 }

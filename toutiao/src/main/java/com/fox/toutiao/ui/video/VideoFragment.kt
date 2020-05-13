@@ -2,7 +2,7 @@ package com.fox.toutiao.ui.video
 
 import com.fox.toutiao.R
 import com.fox.toutiao.databinding.FragmentVideoBinding
-import com.silver.fox.base.BaseVMFragment
+import com.silver.fox.base.component.ui.BaseVMFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

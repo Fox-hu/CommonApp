@@ -2,7 +2,7 @@ package com.fox.toutiao.ui.media
 
 import com.fox.toutiao.R
 import com.fox.toutiao.databinding.FragmentPhotoBinding
-import com.silver.fox.base.BaseVMFragment
+import com.silver.fox.base.component.ui.BaseVMFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MediaFragment : BaseVMFragment<MediaViewModel, FragmentPhotoBinding>() {

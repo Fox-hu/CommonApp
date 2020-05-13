@@ -1,4 +1,4 @@
-package com.silver.fox.base
+package com.silver.fox.base.component.repository
 
 import com.fox.network.Response
 import com.fox.network.Result
