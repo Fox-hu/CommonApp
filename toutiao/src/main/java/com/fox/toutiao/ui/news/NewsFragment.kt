@@ -16,7 +16,6 @@ class NewsFragment : BaseVMFragment<NewsViewModel, FragmentNewsBinding>() {
     override fun getLayoutResId(): Int = R.layout.fragment_news
 
     override fun bindDataAndEvent() {
-
         tabLayout.tabMode = TabLayout.MODE_SCROLLABLE
         viewPager.adapter = object : FragmentStateAdapter(this) {
             override fun createFragment(position: Int) = viewModel.fragmentList[position]
