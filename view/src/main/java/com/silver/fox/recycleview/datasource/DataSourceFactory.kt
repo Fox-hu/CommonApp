@@ -80,6 +80,11 @@ class DataSourceFactory(val dataLoader: DataLoader) : DataSource.Factory<Int, An
         }
     }
 
+    fun checkRetry() {
+        if (retry != null) {
+            status.value = Status.LOAD_FAIL
+        }
+    }
 
     enum class Status {
         NONE, EMPTY, INITIALING, INITIAL_FAIL, INITIAL_SUCCESS, LOADING, LOAD_FAIL, LOAD_SUCCESS, COMPLETE

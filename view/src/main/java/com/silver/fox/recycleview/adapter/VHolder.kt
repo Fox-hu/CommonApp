@@ -20,18 +20,4 @@ abstract class VHolder<T, VH : RecyclerView.ViewHolder> {
         holder.itemView.tag = item
         onBindViewHolder(holder, item, position)
     }
-
-    protected fun onViewRecycled(holder: VH) {
-
-    }
-
-    protected fun onFailedToRecycleView(holder: VH): Boolean = false
-
-    protected fun onViewAttachedToWindow(holder: VH) {
-
-    }
-
-    protected fun onViewDetachedFromWindow(holder: VH) {
-
-    }
 }

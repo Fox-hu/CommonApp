@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Paint
 import android.graphics.PointF
+import android.os.Looper
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
@@ -14,6 +15,9 @@ import com.silver.fox.Ktx
  * @Author fox
  * @Date 2020/2/24 14:58
  */
+val isMainThread: Boolean
+    get() = Looper.getMainLooper() == Looper.myLooper()
+
 fun View.px2sp(sp: Int) = TypedValue.applyDimension(
     TypedValue.COMPLEX_UNIT_SP,
     sp.toFloat(),

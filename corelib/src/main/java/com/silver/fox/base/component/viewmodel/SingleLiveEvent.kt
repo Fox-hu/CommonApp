@@ -1,12 +1,12 @@
 package com.silver.fox.base.component.viewmodel
 
-import android.os.Looper
-import android.util.Log
 import androidx.annotation.MainThread
 import androidx.annotation.Nullable
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import com.silver.fox.ext.logw
+import com.silver.fox.viewext.isMainThread
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
@@ -31,13 +31,8 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
     @MainThread
     override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
         if (hasActiveObservers()) {
-            Log.w(
-                TAG,
-                "Multiple observers registered but only one will be notified of changes."
-            )
+            "Multiple observers registered but only one will be notified of changes.".logw("SingleLiveEvent")
         }
-
-
         // Observe the internal MutableLiveData
         super.observe(owner, Observer { t ->
             if (mPending.compareAndSet(true, false)) {
@@ -48,12 +43,8 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
 
     override fun observeForever(observer: Observer<in T>) {
         if (hasActiveObservers()) {
-            Log.w(
-                TAG,
-                "Multiple observers registered but only one will be notified of changes."
-            )
+            "Multiple observers registered but only one will be notified of changes.".logw("SingleLiveEvent")
         }
-
         // Observe the internal MutableLiveData
         super.observeForever { t ->
             if (mPending.compareAndSet(true, false)) {
@@ -77,12 +68,6 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
      */
     @MainThread
     fun call() {
-        setValue(null)
-    }
-
-    companion object {
-        private const val TAG = "SingleLiveEvent"
-        private val isMainThread: Boolean
-            get() = Looper.getMainLooper() == Looper.myLooper()
+        value = null
     }
 }

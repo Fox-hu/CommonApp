@@ -1,5 +1,6 @@
 package com.silver.fox.recycleview
 
+import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Message
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.silver.fox.recycleview.adapter.ViewTypes
 import com.silver.fox.recycleview.datasource.DataSourceFactory
 import com.silver.fox.recycleview.holder.DataBindingCell
 import com.silver.fox.recycleview.pojo.FooterPresenterModel
+import com.silver.fox.viewext.isMainThread
 import java.util.*
 
 /**
@@ -22,32 +24,34 @@ import java.util.*
 class DelegateAdapter(diffCallback: DiffUtil.ItemCallback<Any>, builder: Builder) :
     PagedListAdapter<Any, RecyclerView.ViewHolder>(diffCallback) {
 
-    var viewTypes: ViewTypes
-    var recyclerView: DataBindingRecyclerView
+    private val viewTypes: ViewTypes
+    private val recyclerView: DataBindingRecyclerView
+    private val inflater: LayoutInflater
+    private val handler: AdapterHandle = AdapterHandle()
 
     init {
         viewTypes = builder.viewTypes
         recyclerView = builder.recyclerView
+        inflater = LayoutInflater.from(recyclerView.context)
     }
 
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Any>() {
             override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
-                TODO("Not yet implemented")
+                return false
             }
 
+            @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
-                TODO("Not yet implemented")
+                return oldItem == newItem
             }
-
         }
     }
 
-    private lateinit var inflater: LayoutInflater
 
     override fun getItemViewType(position: Int): Int = getTypeOfIndex(position, getItem(position))
 
-    override fun getItem(position: Int): Any? {
+    public override fun getItem(position: Int): Any? {
         recyclerView.apply {
             if (position == 0 && super.getItemCount() == 0) {
                 if (dataStatus == DataSourceFactory.Status.INITIAL_FAIL) {
@@ -87,9 +91,6 @@ class DelegateAdapter(diffCallback: DiffUtil.ItemCallback<Any>, builder: Builder
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (inflater == null) {
-            inflater = LayoutInflater.from(parent.context)
-        }
         val vHolder = viewTypes.getItemView(viewType)
         return vHolder.onCreateViewHolder(inflater, parent)
     }
@@ -119,7 +120,14 @@ class DelegateAdapter(diffCallback: DiffUtil.ItemCallback<Any>, builder: Builder
                 }
             }
         }
+    }
 
+    fun statusChangeNotify() {
+        if (isMainThread) {
+            notifyDataSetChanged()
+        } else {
+            handler.notifyDataSetChanged()
+        }
     }
 
     @Suppress("UNCHECKED_CAST")

@@ -3,6 +3,7 @@ package com.silver.fox.recycleview.pojo
 import android.view.Gravity
 import android.view.View
 import com.silver.fox.ext.getString
+import com.silver.fox.view.R
 
 /**
  * @Author fox.hu
@@ -10,7 +11,7 @@ import com.silver.fox.ext.getString
  */
 class EmptyPresenterModel(var gravity: Int = Gravity.CENTER, var visibility: Int = View.VISIBLE) :
     Cloneable {
-    var text: String = ""
+    var text: String = R.string.view_common_data_empty.getString()
 
     fun setText(id: Int) {
         text = id.getString()

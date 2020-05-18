@@ -8,7 +8,7 @@ import androidx.databinding.ViewDataBinding
  */
 
 interface OnItemClickListener<VDB : ViewDataBinding> {
-    fun onItemClick(vdb: VDB, position: Int)
+    fun onItemClick(vdb: VDB)
 }
 
 interface OnItemLongClickListener<VDB : ViewDataBinding> {
@@ -19,6 +19,6 @@ interface OnItemViewBindCallBack<VDB : ViewDataBinding> {
     fun onItemViewBind(vdb: VDB, position: Int)
 }
 
-interface OnItemViewCreateCallBack<VDB:ViewDataBinding>{
+interface OnItemViewCreateCallBack<VDB : ViewDataBinding> {
     fun onItemCreate(vdb: VDB)
 }
