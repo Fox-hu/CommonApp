@@ -1,4 +1,4 @@
-package com.silver.fox.recycleview
+package com.silver.fox.recycleview.adapter
 
 import android.annotation.SuppressLint
 import android.os.Handler
@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.silver.fox.recycleview.adapter.Chain
-import com.silver.fox.recycleview.adapter.VHolder
-import com.silver.fox.recycleview.adapter.ViewTypes
+import com.silver.fox.recycleview.DataBindingRecyclerView
 import com.silver.fox.recycleview.datasource.DataSourceFactory
 import com.silver.fox.recycleview.holder.DataBindingCell
 import com.silver.fox.recycleview.pojo.FooterPresenterModel
@@ -27,7 +25,8 @@ class DelegateAdapter(diffCallback: DiffUtil.ItemCallback<Any>, builder: Builder
     private val viewTypes: ViewTypes
     private val recyclerView: DataBindingRecyclerView
     private val inflater: LayoutInflater
-    private val handler: AdapterHandle = AdapterHandle()
+    private val handler: AdapterHandle =
+        AdapterHandle()
 
     init {
         viewTypes = builder.viewTypes
@@ -157,7 +156,10 @@ class DelegateAdapter(diffCallback: DiffUtil.ItemCallback<Any>, builder: Builder
         }
 
         fun build(): DelegateAdapter {
-            return DelegateAdapter(DIFF_CALLBACK, this)
+            return DelegateAdapter(
+                DIFF_CALLBACK,
+                this
+            )
         }
     }
 

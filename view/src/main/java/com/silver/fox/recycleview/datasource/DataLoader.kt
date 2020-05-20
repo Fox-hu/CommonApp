@@ -9,7 +9,7 @@ import androidx.paging.PagedList
  */
 interface DataLoader {
 
-    val list: PagedList<Any>
+    var list: PagedList<Any>
 
     fun fetchData(pageAt: Int, pageSize: Int): LiveData<List<Any>>
 }

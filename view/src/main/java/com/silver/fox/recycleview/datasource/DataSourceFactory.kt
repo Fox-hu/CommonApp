@@ -3,6 +3,7 @@ package com.silver.fox.recycleview.datasource
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
+import androidx.paging.PagedList
 
 /**
  * @Author fox.hu
@@ -89,4 +90,35 @@ class DataSourceFactory(val dataLoader: DataLoader) : DataSource.Factory<Int, An
     enum class Status {
         NONE, EMPTY, INITIALING, INITIAL_FAIL, INITIAL_SUCCESS, LOADING, LOAD_FAIL, LOAD_SUCCESS, COMPLETE
     }
+}
+
+fun <T> List<T>.toPagedList(): PagedList<T> {
+    return PagedList.Builder(object : PageKeyedDataSource<Int, T>() {
+        override fun loadInitial(
+            params: LoadInitialParams<Int>,
+            callback: LoadInitialCallback<Int, T>
+        ) {
+            PagingExecutor.MAIN_THREAD_EXECUTOR.execute {
+                callback.onResult(
+                    ArrayList(this@toPagedList),
+                    null,
+                    null
+                )
+            }
+        }
+
+        override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, T>) {
+        }
+
+        override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, T>) {
+        }
+
+    }, pagedConfig()).setNotifyExecutor(PagingExecutor.MAIN_THREAD_EXECUTOR)
+        .setFetchExecutor(PagingExecutor.IO_THREAD_EXECUTOR).build()
+
+}
+
+fun pagedConfig(): PagedList.Config {
+    return PagedList.Config.Builder().setPrefetchDistance(5).setPageSize(30)
+        .setInitialLoadSizeHint(5).setEnablePlaceholders(false).build()
 }
