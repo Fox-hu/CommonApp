@@ -113,7 +113,7 @@ class DelegateAdapter(diffCallback: DiffUtil.ItemCallback<Any>, builder: Builder
                 if (item is FooterPresenterModel) {
                     holder.itemView.setOnClickListener {
                         if (recyclerView.dataStatus == DataSourceFactory.Status.LOAD_FAIL) {
-                            recyclerView.dataSourceFactory.retry()
+                            recyclerView.dataSourceFactory?.retry()
                         }
                     }
                 }
@@ -147,9 +147,9 @@ class DelegateAdapter(diffCallback: DiffUtil.ItemCallback<Any>, builder: Builder
         val recyclerView: DataBindingRecyclerView,
         var viewTypes: ViewTypes = ViewTypes()
     ) {
-        fun <T, VH : RecyclerView.ViewHolder> bind(
-            clazz: Class<T>,
-            vHolder: VHolder<T, VH>
+        fun <VH : RecyclerView.ViewHolder> bind(
+            clazz: Class<*>,
+            vHolder: VHolder<*, VH>
         ): Builder {
             viewTypes.save(clazz, vHolder)
             return this

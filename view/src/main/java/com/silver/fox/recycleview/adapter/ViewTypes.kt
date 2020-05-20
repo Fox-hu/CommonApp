@@ -11,7 +11,7 @@ class ViewTypes {
     private val vHolders: MutableList<VHolder<*, *>> = ArrayList()
     private val chains: MutableList<Chain<*>> = ArrayList()
 
-    fun <T, VH:RecyclerView.ViewHolder> save(clazz: Class<T>, vHolder: VHolder<T, VH>, chain: Chain<T> = DefaultChain()) {
+    fun <VH:RecyclerView.ViewHolder> save(clazz: Class<*>, vHolder: VHolder<*, VH>, chain: Chain<*> = DefaultChain<Any>()) {
         classes.add(clazz)
         vHolders.add(vHolder)
         chains.add(chain)

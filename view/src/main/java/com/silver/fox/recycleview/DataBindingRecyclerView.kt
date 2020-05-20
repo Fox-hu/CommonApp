@@ -3,6 +3,7 @@ package com.silver.fox.recycleview
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
@@ -15,9 +16,7 @@ import com.silver.fox.recycleview.adapter.DelegateAdapter
 import com.silver.fox.recycleview.datasource.DataLoader
 import com.silver.fox.recycleview.datasource.DataSourceFactory
 import com.silver.fox.recycleview.datasource.toPagedList
-import com.silver.fox.recycleview.holder.EmptyBindingCell
-import com.silver.fox.recycleview.holder.ErrorBindingCell
-import com.silver.fox.recycleview.holder.FooterBindingCell
+import com.silver.fox.recycleview.holder.*
 import com.silver.fox.recycleview.pojo.EmptyPresenterModel
 import com.silver.fox.recycleview.pojo.ErrorPresenterModel
 import com.silver.fox.recycleview.pojo.FooterPresenterModel
@@ -60,9 +59,12 @@ class DataBindingRecyclerView @JvmOverloads constructor(
         }
     }
 
-
     init {
         setAnimDuration(0)
+    }
+
+    fun <VDB : ViewDataBinding> bind(cell: Cell<VDB>) {
+        cell.presentModelClass?.let { adapterBuilder.bind(it,NormalCell(cell)) }
     }
 
     fun setLinearLayoutManager() {

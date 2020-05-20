@@ -1,5 +1,9 @@
 package com.component.kotlintest.first
 
+import android.os.Build
+import android.text.Html
+import androidx.annotation.RequiresApi
+import java.lang.StringBuilder
 import java.util.*
 import java.util.concurrent.CopyOnWriteArrayList
 import kotlin.collections.ArrayList
@@ -190,3 +194,74 @@ fun <T> T.decorate(decorated: T.() -> Unit) {
     println("+++ end action +++")
 }
 
+//9 DSL用法 使用DSL写一个html
+interface Element {
+    fun render(builder: StringBuilder, indent: String)
+}
+
+@DslMarker
+annotation class HtmlTagMarker
+
+@HtmlTagMarker
+abstract class Tag(val name: String) : Element {
+    val children = arrayListOf<Element>()
+    val attributes = hashMapOf<String, String>()
+
+    protected fun <T : Element> initTag(tag: T, init: T.() -> Unit): T {
+        tag.init()
+        children.add(tag)
+        return tag
+    }
+
+    override fun render(builder: StringBuilder, indent: String) {
+        builder.append("$indent<$name${renderAttributes()}>\n")
+        for (c in children) {
+            c.render(builder, "$indent  ")
+        }
+        builder.append("$indent</$name>\n")
+
+    }
+
+    private fun renderAttributes(): String {
+        val builder = StringBuilder()
+        for ((attr, value) in attributes) {
+            builder.append(" $attr=\"$value\"")
+        }
+        return builder.toString()
+    }
+
+    override fun toString(): String {
+        val builder = StringBuilder()
+        render(builder, "")
+        return builder.toString()
+    }
+}
+
+class TextElement(val text: String) : Element {
+    override fun render(builder: StringBuilder, indent: String) {
+        builder.append("$indent$text")
+    }
+}
+
+abstract class TagWithText(name: String) : Tag(name) {
+    operator fun String.unaryPlus() {
+        children.add(TextElement(this))
+    }
+}
+
+class HTML : TagWithText("html") {
+    fun head(init: Head.() -> Unit) = initTag(Head(), init)
+    fun body(init: Body.() -> Unit) = initTag(Body(), init)
+}
+
+class Head : TagWithText("head") {
+    fun title(init: Title.() -> Unit) = initTag(Title(), init)
+}
+
+class Body : TagWithText("body")
+class Title : TagWithText("title")
+
+
+fun html(init: HTML.() -> Unit): HTML {
+    return HTML().apply(init)
+}

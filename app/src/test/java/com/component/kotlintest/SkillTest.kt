@@ -83,4 +83,14 @@ class SkillTest {
             }
         }
     }
+
+
+    @Test
+    fun testDSL() {
+        print(html {
+            head {
+                title { +"HTML encoding with Kotlin" }
+            }
+        })
+    }
 }
