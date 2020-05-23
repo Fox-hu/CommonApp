@@ -1,8 +1,5 @@
 package com.component.kotlintest.first
 
-import android.os.Build
-import android.text.Html
-import androidx.annotation.RequiresApi
 import java.lang.StringBuilder
 import java.util.*
 import java.util.concurrent.CopyOnWriteArrayList

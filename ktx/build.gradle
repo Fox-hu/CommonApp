@@ -41,14 +41,13 @@ dependencies {
 
     api 'androidx.core:core-ktx:1.2.0-beta02'
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-//    api 'com.afollestad.material-dialogs:core:3.1.0'
+    //api 'com.afollestad.material-dialogs:core:3.1.0'
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0"
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-rc02"
     api 'androidx.lifecycle:lifecycle-extensions:2.2.0-rc02'
     api 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-rc02'
-//    api 'androidx.recyclerview:recyclerview:1.1.0-beta04'
+    //api 'androidx.recyclerview:recyclerview:1.1.0-beta04'
     api 'androidx.legacy:legacy-support-v4:1.0.0'
-
     // Koin for Android
     api "org.koin:koin-android:$koin_version"
     // or Koin for Lifecycle scoping
@@ -56,14 +55,16 @@ dependencies {
     // or Koin for Android Architecture ViewModel
     api "org.koin:koin-androidx-viewmodel:$koin_version"
 
+    //anko
     api "org.jetbrains.anko:anko-common:$anko_version"
     api "org.jetbrains.anko:anko-sqlite:$anko_version"
     //gson
     api 'com.google.code.gson:gson:2.8.5'
-
+    //navigation
     api 'androidx.navigation:navigation-fragment-ktx:2.2.1'
     api 'androidx.navigation:navigation-ui-ktx:2.2.1'
-
+    //annotation
+    api project(path: ':annotation')
     api "androidx.appcompat:appcompat:$androidx_appcompat_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
