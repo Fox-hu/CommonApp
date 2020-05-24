@@ -3,6 +3,7 @@ package com.fox.toutiao
 import android.view.Menu
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -10,6 +11,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.fox.annotation.Factory
+import com.fox.annotation.view.BindView
 import com.fox.toutiao.databinding.ActivityMainBinding
 import com.fox.toutiao.ui.home.HomeViewModel
 import com.silver.fox.activity.ViewTestActivity
@@ -29,6 +32,9 @@ class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>() {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override val viewModel: HomeViewModel by viewModel()
+
+    @BindView(R.id.drawer_layout)
+    var drawerLayout:DrawerLayout? = null
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_activity_main, menu)
