@@ -57,7 +57,7 @@ public class ViewProcessor extends AbstractProcessor {
             List<Element> viewBindElements = elementsMap.get(enclosingElement);
             if (viewBindElements == null) {
                 viewBindElements = new ArrayList<>();
-                elementsMap.put(element, viewBindElements);
+                elementsMap.put(enclosingElement, viewBindElements);
             }
             viewBindElements.add(element);
         }
