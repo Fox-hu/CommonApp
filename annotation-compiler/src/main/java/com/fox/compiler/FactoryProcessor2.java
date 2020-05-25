@@ -80,6 +80,7 @@ public class FactoryProcessor2 extends AbstractProcessor {
             try {
                 JavaFile.builder(pkg, TypeSpec.classBuilder(simpleName).addModifiers(
                         Modifier.PUBLIC).addMethod(addPizza).build()).build().writeTo(filer);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
