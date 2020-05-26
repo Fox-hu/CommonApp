@@ -1,6 +1,7 @@
 package com.fox.toutiao
 
 import android.view.Menu
+import androidx.annotation.CallSuper
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -11,7 +12,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.fox.annotation.Factory
 import com.fox.annotation.view.BindView
 import com.fox.toutiao.databinding.ActivityMainBinding
 import com.fox.toutiao.ui.home.HomeViewModel
@@ -33,6 +33,7 @@ class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>() {
 
     override val viewModel: HomeViewModel by viewModel()
 
+    //注解处理器demo 会生成MainActivity_ViewBinding类
     @BindView(R.id.drawer_layout)
     var drawerLayout:DrawerLayout? = null
 

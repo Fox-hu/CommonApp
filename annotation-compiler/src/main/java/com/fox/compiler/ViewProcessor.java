@@ -4,8 +4,11 @@ import com.fox.annotation.view.BindView;
 import com.fox.annotation.view.Unbinder;
 import com.google.auto.service.AutoService;
 import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.JavaFile;
+import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -23,6 +26,7 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.util.Elements;
 
 /**
  * @Author fox
@@ -34,12 +38,14 @@ import javax.lang.model.element.TypeElement;
 public class ViewProcessor extends AbstractProcessor {
     private Logger logger;
     private Filer filer;
+    private Elements elementsUtils;
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
         super.init(processingEnvironment);
         logger = new Logger(processingEnv.getMessager());
         filer = processingEnvironment.getFiler();
+        elementsUtils = processingEnvironment.getElementUtils();
     }
 
     @Override
@@ -66,20 +72,55 @@ public class ViewProcessor extends AbstractProcessor {
         for (Map.Entry<Element, List<Element>> entry : elementsMap.entrySet()) {
             Element activityElement = entry.getKey();
             List<Element> viewBindElements = entry.getValue();
+            //generate class declaration
 
-            String activityClassName = activityElement.getSimpleName().toString();
-            ClassName className = ClassName.get(Unbinder.class);
-            TypeSpec.Builder builder = TypeSpec.classBuilder(activityClassName + "_ViewBinding")
-                    .addModifiers(Modifier.FINAL, Modifier.PUBLIC).addSuperinterface(className);
+            String activityClassStr = activityElement.getSimpleName().toString();
+            ClassName activityClassName = ClassName.bestGuess(activityClassStr);
+            ClassName superInterfaceName = ClassName.get(Unbinder.class);
+            TypeSpec.Builder classBuilder = TypeSpec.classBuilder(activityClassName + "_ViewBinding")
+                    .addModifiers(Modifier.FINAL, Modifier.PUBLIC)
+                    .addSuperinterface(superInterfaceName)
+                    .addField(activityClassName,"target",Modifier.PRIVATE);
 
-//            try {
-//                JavaFile.builder("com.fox.gen", builder.build()).addFileComment("auto generate,do not modify").build()
-//                        .writeTo(filer);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+            //generate constructor method
+            MethodSpec.Builder constructorBuilder = MethodSpec.constructorBuilder()
+                    .addParameter(activityClassName,"target");
+            constructorBuilder.addStatement("this.target=target");
 
-        }
-        return false;
+            //generate unbind method
+            ClassName callSuperClassName = ClassName.get("androidx.annotation","CallSuper");
+            MethodSpec.Builder methodSpecBuilder = MethodSpec.methodBuilder("unbind")
+                    .addAnnotation(Override.class).addModifiers(Modifier.PUBLIC,Modifier.FINAL)
+                    .addAnnotation(callSuperClassName);
+            methodSpecBuilder.addStatement("$T target = this.target",activityClassName);
+            methodSpecBuilder.addStatement("if(target == null) throw new IllegalStateException(\"Bindings already cleared.\");");
+
+            for (Element viewBindElement : viewBindElements) {
+                String fileName = viewBindElement.getSimpleName().toString();
+                ClassName utilsClassName = ClassName.get("com.fox.toutiao.util","Utils");
+                int resId = viewBindElement.getAnnotation(BindView.class).value();
+                constructorBuilder.addStatement("target.set$L($T.findViewById(target,$L))",upperFirstCase(fileName),utilsClassName,resId);
+
+                methodSpecBuilder.addStatement("target.set$L(null)",upperFirstCase(fileName));
+            }
+
+            classBuilder.addMethod(constructorBuilder.build());
+            classBuilder.addMethod(methodSpecBuilder.build());
+
+            try {
+                String packageName = elementsUtils.getPackageOf(activityElement).getQualifiedName()
+                        .toString();
+                JavaFile.builder(packageName, classBuilder.build()).addFileComment(
+                        "auto generate,do not modify").build().writeTo(filer);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } return false;
+    }
+
+    //because kotlin use method instead property,for example getDrawerLayout() instead drawerLayout
+    private String upperFirstCase(String str) {
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 }
