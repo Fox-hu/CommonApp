@@ -27,7 +27,7 @@ class CustomTextView @JvmOverloads constructor(
         val arr =
             context.obtainStyledAttributes(attrs, R.styleable.view_MyTextView)
         arr.apply {
-            text = getString(R.styleable.view_MyTextView_view_myText)
+            text = getString(R.styleable.view_MyTextView_view_myText) ?: ""
             textColor = getColor(R.styleable.view_MyTextView_view_myTextColor, textColor)
             textSize =
                 getDimensionPixelSize(

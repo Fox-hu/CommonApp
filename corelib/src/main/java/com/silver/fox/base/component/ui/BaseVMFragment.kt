@@ -108,7 +108,7 @@ abstract class BaseVMFragment<VM : BaseViewModel, VDB : ViewDataBinding> : Fragm
     fun onActivityResult(onActivityResultInfo: OnActivityResultInfo) {
         val resultCode: Int = onActivityResultInfo.resultCode
         val bundle: Bundle? = onActivityResultInfo.resultBundle
-        activity?.setResult(resultCode, Intent().putExtras(bundle))
+        activity?.setResult(resultCode, if (bundle != null) Intent().putExtras(bundle) else Intent())
     }
 
     abstract fun bindDataAndEvent()
