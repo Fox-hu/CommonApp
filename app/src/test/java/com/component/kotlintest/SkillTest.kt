@@ -1,6 +1,7 @@
 package com.component.kotlintest
 
 import com.component.kotlintest.first.*
+import com.component.kotlintest.java.Son
 import org.junit.Test
 
 class SkillTest {
@@ -92,5 +93,10 @@ class SkillTest {
                 title { +"HTML encoding with Kotlin" }
             }
         })
+    }
+
+    @Test
+    fun TestOrder(){
+        Son()
     }
 }
