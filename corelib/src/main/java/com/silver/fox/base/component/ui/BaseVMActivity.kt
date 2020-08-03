@@ -18,7 +18,7 @@ import kotlinx.coroutines.cancel
 
 
 abstract class BaseVMActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompatActivity(),
-    CoroutineScope by MainScope() {
+        CoroutineScope by MainScope() {
 
     protected lateinit var dataBinding: DB
     abstract val viewModel: VM
@@ -27,7 +27,7 @@ abstract class BaseVMActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCom
         super.onCreate(savedInstanceState)
         lifecycle.addObserver(viewModel)
         dataBinding = DataBindingUtil.setContentView(
-            this, getLayoutResId()
+                this, getLayoutResId()
         )
         dataBinding.apply {
             setVariable(BR.viewModel, viewModel)
@@ -39,9 +39,9 @@ abstract class BaseVMActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCom
     }
 
     override fun onActivityResult(
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?
+            requestCode: Int,
+            resultCode: Int,
+            data: Intent?
     ) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
@@ -62,8 +62,8 @@ abstract class BaseVMActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCom
     }
 
     override fun onRestoreInstanceState(
-        savedInstanceState: Bundle?,
-        persistentState: PersistableBundle?
+            savedInstanceState: Bundle?,
+            persistentState: PersistableBundle?
     ) {
         super.onRestoreInstanceState(savedInstanceState, persistentState)
         viewModel.onRestoreInstanceState(savedInstanceState, persistentState)
@@ -106,7 +106,7 @@ abstract class BaseVMActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCom
     protected open fun onActivityResult(onActivityResultInfo: OnActivityResultInfo) {
         val resultCode: Int = onActivityResultInfo.resultCode
         val bundle: Bundle? = onActivityResultInfo.resultBundle
-        setResult(resultCode, Intent().putExtras(bundle))
+        setResult(resultCode, if (bundle != null) Intent().putExtras(bundle) else Intent())
         finish()
     }
 

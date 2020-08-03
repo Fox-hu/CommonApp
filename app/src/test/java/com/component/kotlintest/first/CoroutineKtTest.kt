@@ -1,5 +1,6 @@
 package com.component.kotlintest.first
 
+import com.component.kotlintest.test.Son
 import org.junit.Test
 
 /**
@@ -16,5 +17,10 @@ class CoroutineKtTest {
     @Test
     fun coro3() {
         corotines3()
+    }
+
+    @Test
+    fun TestOrder(){
+        Son()
     }
 }
