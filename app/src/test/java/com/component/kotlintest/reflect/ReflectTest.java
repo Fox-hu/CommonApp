@@ -35,7 +35,8 @@ public class ReflectTest {
         System.out.println(grandParent);
 
         //测试当前类由哪个类加载器（应用程序类加载器）
-        ClassLoader classLoader = Class.forName("com.component.kotlintest.java.Person").getClassLoader();
+        ClassLoader classLoader = Class.forName("com.component.kotlintest.java.Person")
+                .getClassLoader();
         System.out.println(classLoader);
 
         //jdk提供的类加载器（引导类加载器）
@@ -59,7 +60,10 @@ public class ReflectTest {
     }
 
     @Test
-    public void testNewInstance() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void testNewInstance() throws
+            ClassNotFoundException,
+            InstantiationException,
+            IllegalAccessException {
         String className = "com.component.kotlintest.java.Person";
         Class clazz = Class.forName(className);
 
@@ -128,13 +132,17 @@ public class ReflectTest {
     public void testConstructor() throws Exception {
         Class clazz = Class.forName("com.component.kotlintest.java.Person");
 
-        //获取Person类中全部Constructor对象
+        //获取Person类中全部Constructor对象 包含public和private的
+        Constructor[] declaredConstructors = clazz.getDeclaredConstructors();
+        for (Constructor declaredConstructor : declaredConstructors) {
+            System.out.println(declaredConstructor);
+        }
+
+        //获取Person类中全部访问权限是public的Constructor对象
         Constructor[] constructors = clazz.getConstructors();
         for (Constructor constructor : constructors) {
             System.out.println(constructor);
         }
-        //public com.component.kotlintest.java.Person()
-        //public com.component.kotlintest.java.Person(java.lang.String,int)
 
         //获取某一个 需要参数列表
         Constructor constructor = clazz.getConstructor(String.class, int.class);
@@ -159,7 +167,7 @@ public class ReflectTest {
                 throw new RuntimeException("年龄非法");
             }
         }
-        method.invoke(obj,20);
+        method.invoke(obj, 20);
         System.out.println(obj);
     }
 
