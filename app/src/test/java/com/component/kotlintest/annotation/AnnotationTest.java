@@ -3,6 +3,7 @@ package com.component.kotlintest.annotation;
 
 import com.component.kotlintest.java.annotation.AnnotationDemo;
 import com.component.kotlintest.java.annotation.TestAnnotation;
+import com.component.kotlintest.java.annotation.demo.MyJunitFrameWork;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,8 +53,10 @@ public class AnnotationTest {
                 }
             }
         }
+    }
 
-        TestAnnotation annotation1 = local.getAnnotation(TestAnnotation.class);
-
+    @Test
+    public void testDemo()throws Exception{
+        MyJunitFrameWork.handle();
     }
 }

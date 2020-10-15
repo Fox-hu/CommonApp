@@ -1,6 +1,8 @@
 package com.component.kotlintest.generic;
 
 
+import com.component.kotlintest.java.generic.B;
+import com.component.kotlintest.java.generic.C;
 import com.component.kotlintest.java.generic.TypeTest;
 
 import org.junit.Test;
@@ -26,5 +28,11 @@ public class GenericTest {
         System.out.println("TypeVariable2:" + Arrays.asList(typeVariable.getBounds()));
         System.out.println("TypeVariable3:" + typeVariable.getGenericDeclaration());
         System.out.println("TypeVariable4:" + typeVariable.getName());
+    }
+
+    @Test
+    public void testThis(){
+        new B();
+        new C();
     }
 }
