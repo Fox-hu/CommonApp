@@ -2,6 +2,7 @@ package com.component.kotlintest.java.generic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ public class TypeTest<T, V extends @Custom Number & Serializable> {
     public T t;
     public V v;
     public List<T> list = new ArrayList<>();
+    public Map<String,T> map = new HashMap<>();
 
     public T[] tArray;
     public List<T>[] ltArray;

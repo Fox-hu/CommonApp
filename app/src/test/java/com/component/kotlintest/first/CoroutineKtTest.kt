@@ -21,13 +21,6 @@ class CoroutineKtTest {
     }
 
     @Test
-    fun TestOrder(){
-        Son()
-    }
-
-
-
-    @Test
     fun test() {
         val student = Student("Bobo", 15)
         changeValue1(student) // student值未改变，不为null! 输出结果 student值为 name:Bobo、age:15
