@@ -36,6 +36,8 @@
                 android:name=".ui.activity.SettingActivity"
                 android:label="@string/settings"/>
 
+        <activity android:name=".fragment.FragmentActivity"/>
+
     </application>
 
 </manifest>
