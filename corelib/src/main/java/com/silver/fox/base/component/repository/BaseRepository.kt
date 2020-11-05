@@ -1,39 +1,38 @@
 package com.silver.fox.base.component.repository
 
-import com.fox.network.Response
-import com.fox.network.Result
+import com.fox.network.OriResponse
+import com.fox.network.OriResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import org.koin.core.KoinComponent
-import java.io.IOException
 
 open class BaseRepository : KoinComponent {
 
-    suspend fun <T : Any> apiCall(call: suspend () -> Response<T>): Response<T> = call.invoke()
+    suspend fun <T : Any> apiCall(call: suspend () -> OriResponse<T>): OriResponse<T> = call.invoke()
 
     suspend fun <T : Any> safeApiCall(
-        call: suspend () -> Result<T>,
+        call: suspend () -> OriResult<T>,
         errorMsg: String
-    ): Result<T> {
+    ): OriResult<T> {
         return try {
             call()
         } catch (e: Exception) {
-            Result.Error(IOException(errorMsg, e))
+            OriResult.Error(Exception(errorMsg, e))
         }
     }
 
     suspend fun <T : Any> executeResponse(
-        response: Response<T>,
+        response: OriResponse<T>,
         successBlock: (suspend CoroutineScope.() -> Unit)? = null,
         errorBlock: (suspend CoroutineScope.() -> Unit)? = null
-    ): Result<T> {
+    ): OriResult<T> {
         return coroutineScope {
             if (response.errorCode == -1) {
                 errorBlock?.let { it() }
-                Result.Error(IOException(response.errorMsg))
+                OriResult.Error(Exception(response.errorMsg))
             } else {
                 successBlock?.let { it() }
-                Result.Success(response.data)
+                OriResult.Success(response.data)
             }
         }
     }

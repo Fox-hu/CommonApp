@@ -21,6 +21,7 @@ class NewsArticleFragment : BaseVMFragment<NewsArticleViewModel, FragmentNewsArt
 //        val flowStepNumber = arguments?.getInt("categoryId")
         categoryId = arguments?.getString("categoryId") ?: ""
         viewModel.categoryId = categoryId
+//        viewModel.getBanners()
     }
 
 

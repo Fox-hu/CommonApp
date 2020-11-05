@@ -11,9 +11,9 @@ import okhttp3.CacheControl
 import okhttp3.OkHttpClient
 import java.io.File
 
-object ToutiaoRetrofitClient : BaseRetrofitClient() {
+object WanRetrofitClient : BaseRetrofitClient() {
 
-    val service by lazy { getService(ToutiaoService::class.java, ToutiaoService.BASE_URL) }
+    val service by lazy { getService(WanService::class.java, WanService.BASE_URL) }
 
     private val cookieJar by lazy {
         PersistentCookieJar(

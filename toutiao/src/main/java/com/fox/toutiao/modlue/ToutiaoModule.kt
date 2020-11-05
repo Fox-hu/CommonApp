@@ -1,5 +1,6 @@
 package com.fox.toutiao.modlue
 
+import com.fox.toutiao.repository.HomeRepository
 import com.fox.toutiao.repository.NewsArticleRepository
 import com.fox.toutiao.repository.NewsRepository
 import com.fox.toutiao.repository.PhotoRepository
@@ -27,6 +28,7 @@ val repositoryModule = module {
     single { NewsRepository() }
     single { NewsArticleRepository() }
     single { PhotoRepository() }
+    single { HomeRepository() }
 }
 
 val appModule = listOf(viewModelModule, repositoryModule)

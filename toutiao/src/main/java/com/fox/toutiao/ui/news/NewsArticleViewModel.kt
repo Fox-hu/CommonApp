@@ -1,21 +1,19 @@
 package com.fox.toutiao.ui.news
 
 import androidx.lifecycle.viewModelScope
-import com.fox.toutiao.repository.NewsArticleRepository
+import com.fox.toutiao.repository.HomeRepository
 import com.silver.fox.base.component.viewmodel.BaseViewModel
-import kotlinx.coroutines.Dispatchers
+import com.silver.fox.ext.logi
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class NewsArticleViewModel(private val repository: NewsArticleRepository) : BaseViewModel() {
+class NewsArticleViewModel(private val repository: HomeRepository) : BaseViewModel() {
 
     var categoryId: String = ""
 
-    fun getArticleList() {
-        viewModelScope.launch(Dispatchers.Main) {
-            val list = withContext(Dispatchers.IO) {
-                repository.getArticleList()
-            }
+    fun getBanners() {
+        viewModelScope.launch {
+            val banners = repository.getBanners()
+            banners.data.toString().logi("home")
         }
     }
 }

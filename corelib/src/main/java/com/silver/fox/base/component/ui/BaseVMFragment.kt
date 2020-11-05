@@ -42,8 +42,8 @@ abstract class BaseVMFragment<VM : BaseViewModel, VDB : ViewDataBinding> : Fragm
         dataBinding = DataBindingUtil.inflate(inflater, getLayoutResId(), container, false)
         dataBinding.apply {
             setVariable(BR.viewModel, viewModel)
-            executePendingBindings()
-            setLifecycleOwner(this@BaseVMFragment)
+//            executePendingBindings()
+            lifecycleOwner = viewLifecycleOwner
         }
         return dataBinding.root
     }
