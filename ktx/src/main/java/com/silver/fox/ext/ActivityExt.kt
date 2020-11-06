@@ -5,14 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import android.view.View
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import java.io.Serializable
-
-/**
- * Created by luyao
- * on 2019/7/9 14:17
- */
-
 
 inline fun <reified T : Activity> Activity.startKtxActivity(
     flags: Int? = null,
@@ -122,3 +120,18 @@ inline fun <reified T : Context> Context.getIntent(
                 }
         }
     }
+
+fun Activity.hideKeyboard() {
+    inputMethodManager?.hideSoftInputFromWindow((currentFocus ?: View(this)).windowToken, 0)
+    window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+    currentFocus?.clearFocus()
+}
+
+fun Activity.showKeyboard(et: EditText) {
+    et.requestFocus()
+    inputMethodManager?.showSoftInput(et, InputMethodManager.SHOW_IMPLICIT)
+}
+
+fun Activity.hideKeyboard(view: View) {
+    inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
+}
