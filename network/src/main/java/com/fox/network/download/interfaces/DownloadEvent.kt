@@ -4,7 +4,7 @@ package com.fox.network.download.interfaces
 import android.content.Context
 import android.os.Environment
 import com.fox.network.download.entity.DownloadInfo
-import com.job.network.entity.DownloadState
+import com.fox.network.download.entity.DownloadState
 
 /**
  * @Author fox.hu

@@ -1,6 +1,6 @@
 package com.fox.toutiao.network
 
-import com.fox.network.OriResponse
+import com.fox.network.request.OriResponse
 import com.fox.toutiao.bean.Banner
 import retrofit2.http.GET
 

@@ -3,7 +3,7 @@ package com.fox.network.download
 import com.fox.network.download.downloader.AriaDownloader
 import com.fox.network.download.interfaces.DownloadEvent
 import com.job.network.interfaces.DownloadInfoQuery
-import com.job.network.interfaces.DownloadLifeCycle
+import com.fox.network.download.interfaces.DownloadLifeCycle
 
 /**
 

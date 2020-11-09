@@ -1,4 +1,4 @@
-package com.fox.network
+package com.fox.network.request
 
 data class OriResponse<out T>(val errorCode: Int, val errorMsg: String, val data: T)
 

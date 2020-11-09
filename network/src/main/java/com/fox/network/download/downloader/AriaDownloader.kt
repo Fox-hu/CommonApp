@@ -10,7 +10,7 @@ import com.fox.network.download.entity.DownloadInfo
 import com.fox.network.download.interfaces.DownloadAble
 import com.fox.network.download.interfaces.DownloadEvent
 import com.j256.ormlite.dao.Dao
-import com.job.network.entity.DownloadState
+import com.fox.network.download.entity.DownloadState
 import com.silver.fox.ext.isNotNullAndEmpty
 import com.silver.fox.ext.logi
 import java.util.concurrent.CopyOnWriteArrayList

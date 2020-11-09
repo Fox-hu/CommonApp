@@ -1,4 +1,4 @@
-package com.job.network.interfaces
+package com.fox.network.download.interfaces
 
 
 /**

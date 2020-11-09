@@ -1,7 +1,7 @@
 package com.silver.fox.base.component.repository
 
-import com.fox.network.OriResponse
-import com.fox.network.OriResult
+import com.fox.network.request.OriResponse
+import com.fox.network.request.OriResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import org.koin.core.KoinComponent

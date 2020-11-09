@@ -1,4 +1,4 @@
-package com.job.network.entity
+package com.fox.network.download.entity
 
 /**
  * @Author fox.hu

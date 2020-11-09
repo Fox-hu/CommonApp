@@ -1,6 +1,6 @@
 package com.fox.toutiao.repository
 
-import com.fox.network.OriResult
+import com.fox.network.request.OriResult
 import com.fox.toutiao.bean.Banner
 import com.fox.toutiao.network.WanRetrofitClient
 import com.silver.fox.base.component.repository.BaseRepository
