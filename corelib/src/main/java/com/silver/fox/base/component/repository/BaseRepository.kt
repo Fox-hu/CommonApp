@@ -1,39 +1,24 @@
 package com.silver.fox.base.component.repository
 
+import androidx.lifecycle.MutableLiveData
+import com.fox.network.BaseRequest
 import com.fox.network.request.OriResponse
 import com.fox.network.request.OriResult
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import org.koin.core.KoinComponent
 
 open class BaseRepository : KoinComponent {
 
-    suspend fun <T : Any> apiCall(call: suspend () -> OriResponse<T>): OriResponse<T> = call.invoke()
-
-    suspend fun <T : Any> safeApiCall(
-        call: suspend () -> OriResult<T>,
-        errorMsg: String
-    ): OriResult<T> {
-        return try {
-            call()
-        } catch (e: Exception) {
-            OriResult.Error(Exception(errorMsg, e))
-        }
-    }
 
     suspend fun <T : Any> executeResponse(
-        response: OriResponse<T>,
-        successBlock: (suspend CoroutineScope.() -> Unit)? = null,
-        errorBlock: (suspend CoroutineScope.() -> Unit)? = null
-    ): OriResult<T> {
+        call: suspend () -> OriResponse<T>
+    ): MutableLiveData<OriResult<OriResponse<T>>> {
         return coroutineScope {
-            if (response.errorCode == -1) {
-                errorBlock?.let { it() }
-                OriResult.Error(Exception(response.errorMsg))
-            } else {
-                successBlock?.let { it() }
-                OriResult.Success(response.data)
-            }
+            object : BaseRequest<T>() {
+                override suspend fun createCall(): OriResponse<T> {
+                    return call()
+                }
+            }.startLoad()
         }
     }
 }

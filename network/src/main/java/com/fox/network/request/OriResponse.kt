@@ -1,16 +1,23 @@
 package com.fox.network.request
 
-data class OriResponse<out T>(val errorCode: Int, val errorMsg: String, val data: T)
+data class OriResponse<T>(
+    var status: Status = Status.NORMAL,
+    val errorCode: Int,
+    val errorMsg: String,
+    val data: T?
+) {
+    enum class Status {
+        NORMAL, FAIL, ERROR
+    }
 
-sealed class OriResult<out T : Any>(val data: T?){
+    companion object {
+        fun <T> Fail(): OriResponse<T> {
+            return OriResponse(Status.FAIL, -1, "加载错误", null)
+        }
 
-    data class Success<out T : Any>(val data1: T) : OriResult<T>(data1)
-    data class Error(val exception: Exception) : OriResult<Nothing>(null)
-
-    override fun toString(): String {
-        return when (this) {
-            is Success<*> -> "Success[data =$data]"
-            is Error -> "Error[exception=$exception]"
+        fun <T> Error(string: String?): OriResponse<T> {
+            return OriResponse(Status.ERROR, -2, string ?: "加载失败", null)
         }
     }
 }
+
