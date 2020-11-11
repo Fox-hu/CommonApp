@@ -47,6 +47,7 @@ abstract class BaseVMFragment<VM : BaseViewModel, VDB : ViewDataBinding> : Fragm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initVariable()
         lifecycle.addObserver(viewModel)
         viewModel.onActivityIntent(activity?.intent)
         viewModel.onFragmentArguments(arguments)

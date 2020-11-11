@@ -9,7 +9,6 @@ import org.koin.core.KoinComponent
 
 open class BaseRepository : KoinComponent {
 
-
     suspend fun <T : Any> executeResponse(
         call: suspend () -> OriResponse<T>
     ): MutableLiveData<OriResult<OriResponse<T>>> {

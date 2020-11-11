@@ -14,14 +14,13 @@ class NewsArticleFragment : BaseVMFragment<NewsArticleViewModel, FragmentNewsArt
 
     //    val safeArgs: NewsArticleFragmentArgs by navArgs()
 //    val flowStepNumber = safeArgs.categoryId
-    var categoryId: String = ""
+//    var categoryId: String = ""
 
     override fun getLayoutResId(): Int = R.layout.fragment_news_article
     override fun bindDataAndEvent() {
 //        val flowStepNumber = arguments?.getInt("categoryId")
-        categoryId = arguments?.getString("categoryId") ?: ""
-        viewModel.categoryId = categoryId
-        viewModel.getBanners()
+//        categoryId = arguments?.getString("categoryId") ?: ""
+//        viewModel.categoryId = categoryId
     }
 
 

@@ -29,17 +29,17 @@
             android:name="com.fox.toutiao.ui.media.MediaFragment"
             android:label="@string/media"
             tools:layout="@layout/fragment_media" />
-    <fragment
-            android:id="@+id/news_article"
-            android:name="com.fox.toutiao.ui.news.NewsArticleFragment"
-            android:label="fragment_news_article"
-            tools:layout="@layout/fragment_news_article">
+<!--    <fragment-->
+<!--            android:id="@+id/news_article"-->
+<!--            android:name="com.fox.toutiao.ui.news.NewsArticleFragment"-->
+<!--            android:label="fragment_news_article"-->
+<!--            tools:layout="@layout/fragment_news_article">-->
 
-        <argument
-                android:name="categoryId"
-                android:defaultValue="1"
-                app:argType="integer" />
-    </fragment>
+<!--        <argument-->
+<!--                android:name="categoryId"-->
+<!--                android:defaultValue="1"-->
+<!--                app:argType="integer" />-->
+<!--    </fragment>-->
 
     <activity
             android:id="@+id/viewTestActivity"

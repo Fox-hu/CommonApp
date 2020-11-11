@@ -26,7 +26,7 @@ abstract class BaseRequest<Result> {
                     resourceData.postValue(OriResult.actionSuccess(result))
                 }
             } catch (e: Exception) {
-                resourceData.postValue(OriResult.actionError(null, "请求错误"))
+                resourceData.postValue(OriResult.actionError(null, e.message))
             }
         }
         return resourceData

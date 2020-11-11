@@ -150,7 +150,7 @@ open class BaseViewModel(app: Application = InitApp.CONTEXT as Application) :
         return mActivityIntent
     }
 
-    open fun getFragmentArguments(): Bundle? {
+    fun getFragmentArguments(): Bundle? {
         return mFragmentArguments
     }
 
