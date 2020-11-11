@@ -1,6 +1,5 @@
 package com.fox.toutiao.repository
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.fox.network.request.OriResponse
 import com.fox.network.request.OriResult
@@ -12,7 +11,7 @@ import com.silver.fox.base.component.repository.BaseRepository
 class HomeRepository : BaseRepository() {
 
     suspend fun getBanners(): MutableLiveData<OriResult<OriResponse<List<Banner>>>> {
-        return executeResponse{
+        return executeResponse {
             ToutiaoRetrofitClient.getService<ToutiaoService>().getBanner()
         }
     }

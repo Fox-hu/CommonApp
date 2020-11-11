@@ -21,4 +21,9 @@ class NewsArticleViewModel(private val repository: HomeRepository) : BaseViewMod
             }
         }
     }
+
+    override fun onFragmentFirstVisible() {
+
+    }
+
 }

@@ -85,39 +85,39 @@ open class BaseViewModel(app: Application = InitApp.CONTEXT as Application) :
         )
     }
 
-    fun showToast(message: String?) {
+    open fun showToast(message: String?) {
         mShortToastMessage.value = message
     }
 
-    fun showLongToast(message: String?) {
+    open fun showLongToast(message: String?) {
         mLongToastMessage.value = message
     }
 
-    fun showWaitingDialog(message: String?) {
+    open fun showWaitingDialog(message: String?) {
         mWaitingDialogMessage.value = message
     }
 
-    fun hideWaitingDialog() {
+    open fun hideWaitingDialog() {
         mHideWaitingDialog.value = true
     }
 
 
-    fun showToast(@StringRes resId: Int) {
+    open fun showToast(@StringRes resId: Int) {
         showToast(resId.getString())
     }
 
-    fun showLongToast(@StringRes resId: Int) {
+    open fun showLongToast(@StringRes resId: Int) {
         showLongToast(resId.getString())
     }
 
-    fun showWaitingDialog(@StringRes resId: Int) {
+    open fun showWaitingDialog(@StringRes resId: Int) {
         showWaitingDialog(resId.getString())
     }
 
     /**
      * 关闭当前页面
      */
-    fun doFinish() {
+    open fun doFinish() {
         mFinishEvent.value = true
     }
 
@@ -126,7 +126,7 @@ open class BaseViewModel(app: Application = InitApp.CONTEXT as Application) :
      *
      * @param intent startActivity时传入的intent
      */
-    fun onActivityIntent(intent: Intent?) {
+    open fun onActivityIntent(intent: Intent?) {
         mActivityIntent = intent
     }
 
@@ -135,22 +135,22 @@ open class BaseViewModel(app: Application = InitApp.CONTEXT as Application) :
      *
      * @param intent 重启页面时传入的Intent
      */
-    fun onActivityNewIntent(intent: Intent) {
+    open fun onActivityNewIntent(intent: Intent) {
         mActivityIntent = intent
     }
 
     /**
      * 获取附属的数据
      */
-    fun onFragmentArguments(bundle: Bundle?) {
+    open fun onFragmentArguments(bundle: Bundle?) {
         mFragmentArguments = bundle
     }
 
-    fun getActivityIntent(): Intent? {
+    open fun getActivityIntent(): Intent? {
         return mActivityIntent
     }
 
-    fun getFragmentArguments(): Bundle? {
+    open fun getFragmentArguments(): Bundle? {
         return mFragmentArguments
     }
 
@@ -164,12 +164,12 @@ open class BaseViewModel(app: Application = InitApp.CONTEXT as Application) :
      * @param isVisible true  不可见 -> 可见
      * false 可见  -> 不可见
      */
-    fun onFragmentVisibleChange(isVisible: Boolean) {}
+    open fun onFragmentVisibleChange(isVisible: Boolean) {}
 
     /**
      * 在fragment首次可见时回调，可用于加载数据，防止每次进入都重复加载数据
      */
-    fun onFragmentFirstVisible() {}
+     open fun onFragmentFirstVisible() {}
 
     /**
      * View的onActivityResult被调用时，如果resultCode == RESULT_OK，该方法会被调用
@@ -179,7 +179,7 @@ open class BaseViewModel(app: Application = InitApp.CONTEXT as Application) :
      * @see BaseFragment.onActivityResult
      * @see BaseActivity.onActivityResult
      */
-    fun onActivityResultOK(
+    open fun onActivityResultOK(
         requestCode: Int,
         data: Intent?
     ) {
@@ -206,7 +206,7 @@ open class BaseViewModel(app: Application = InitApp.CONTEXT as Application) :
      * 如果返回了false，则由activity去处理这次返回按钮的点击，
      * activity的默认操作时对activity包含的fragment栈进行回退，或者finish
      */
-    fun onBackPressed(): Boolean {
+    open fun onBackPressed(): Boolean {
         return false
     }
 
@@ -226,7 +226,7 @@ open class BaseViewModel(app: Application = InitApp.CONTEXT as Application) :
     fun onRestoreInstanceState(
         savedInstanceState: Bundle?,
         persistentState: PersistableBundle?
-    ): Unit {
+    ){
     }
 
     /**
