@@ -2,8 +2,8 @@ package com.fox.network.request
 
 data class OriResponse<T>(
     var status: Status = Status.NORMAL,
-    val errorCode: Int,
-    val errorMsg: String,
+    val errorCode: Int = 0,
+    val errorMsg: String = "",
     var data: T?
 ) {
     enum class Status {
