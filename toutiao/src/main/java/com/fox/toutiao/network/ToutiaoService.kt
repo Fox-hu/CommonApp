@@ -3,7 +3,6 @@ package com.fox.toutiao.network
 import com.fox.network.request.OriResponse
 import com.fox.toutiao.bean.Banner
 import com.fox.toutiao.bean.MultiNewsArticleBean
-import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -26,11 +25,11 @@ interface ToutiaoService {
     suspend fun getNewsArticle(
         @Query("category") category: String?,
         @Query("max_behot_time") maxBehotTime: String?
-    ): OriResponse<MultiNewsArticleBean>
+    ): OriResponse<List<MultiNewsArticleBean>>
 
     @GET("http://lf.snssdk.com/api/news/feed/v62/?iid=12507202490&device_id=37487219424&refer=1&count=20&aid=13")
     suspend fun getNewsArticle2(
         @Query("category") category: String?,
         @Query("max_behot_time") maxBehotTime: String?
-    ): OriResponse<MultiNewsArticleBean>
+    ): OriResponse<List<MultiNewsArticleBean>>
 }

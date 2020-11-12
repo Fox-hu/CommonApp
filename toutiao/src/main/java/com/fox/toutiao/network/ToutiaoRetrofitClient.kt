@@ -9,6 +9,10 @@ object ToutiaoRetrofitClient : BaseRetrofitClient() {
             ToutiaoService::class.java to createService(
                 ToutiaoService::class.java,
                 ToutiaoService.BASE_URL
+            ),
+            WanService::class.java to createService(
+                WanService::class.java,
+                WanService.BASE_URL
             )
         )
 

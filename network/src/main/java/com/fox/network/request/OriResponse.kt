@@ -4,7 +4,7 @@ data class OriResponse<T>(
     var status: Status = Status.NORMAL,
     val errorCode: Int,
     val errorMsg: String,
-    val data: T?
+    var data: T?
 ) {
     enum class Status {
         NORMAL, FAIL, ERROR

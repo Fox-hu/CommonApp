@@ -1,7 +1,7 @@
 package com.fox.network
 
 
-import com.fox.network.adapter.LiveDataCallAdapterFactory
+import com.fox.network.log.HttpLogger
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
@@ -27,11 +27,11 @@ abstract class BaseRetrofitClient {
     private val client: OkHttpClient
         get() {
             val builder = OkHttpClient.Builder()
-            val httpLoggingInterceptor = HttpLoggingInterceptor()
+            val httpLoggingInterceptor = HttpLoggingInterceptor(HttpLogger())
             if (BuildConfig.DEBUG) {
                 httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
             } else {
-                httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
+                httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
             }
 
             builder.addInterceptor(httpLoggingInterceptor)
@@ -41,7 +41,7 @@ abstract class BaseRetrofitClient {
             return builder.build()
         }
 
-    val cookieJar by lazy {
+    private val cookieJar by lazy {
         PersistentCookieJar(
             SetCookieCache(),
             SharedPrefsCookiePersistor(Ktx.app)
@@ -76,7 +76,7 @@ abstract class BaseRetrofitClient {
     fun <S> createService(serviceClass: Class<S>, baseUrl: String): S =
         Retrofit.Builder().client(client)
             .addConverterFactory(GsonConverterFactory.create())
-//            .addCallAdapterFactory(LiveDataCallAdapterFactory())
+//            .addCallAdapterFactory(OriResponseCallAdapterFactory())
             .baseUrl(baseUrl)
             .build()
             .create(serviceClass)
