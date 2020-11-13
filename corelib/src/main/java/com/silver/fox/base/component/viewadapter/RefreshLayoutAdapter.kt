@@ -6,14 +6,15 @@ import com.silver.fox.ext.logi
 import com.silver.fox.recycleview.DataBindingRefreshLayout
 
 @BindingAdapter("status")
-fun DataBindingRefreshLayout.refresh(
-    status: OriResult.Status?
+fun refresh(
+        refreshLayout: DataBindingRefreshLayout,
+        status: OriResult.Status?
 ) {
     status?.apply {
         "status = ${status.name}".logi("DataBindingRefreshLayout")
         when (status) {
-            OriResult.Status.LOADING -> autoRefresh()
-            else -> stopRefresh()
+            OriResult.Status.LOADING -> refreshLayout.autoRefresh()
+            else -> refreshLayout.stopRefresh()
         }
     }
 }

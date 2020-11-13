@@ -2,11 +2,13 @@ package com.fox.toutiao.ui.news
 
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
+import com.fox.network.request.OriResult
 import com.fox.toutiao.R
 import com.fox.toutiao.databinding.FragmentNewsArticleBinding
 import com.silver.fox.base.component.ui.BaseVMFragment
+import com.silver.fox.ext.logi
 import kotlinx.android.synthetic.main.fragment_news_article.*
-import kotlinx.android.synthetic.main.fragment_news_article.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -15,8 +17,15 @@ class NewsArticleFragment : BaseVMFragment<NewsArticleViewModel, FragmentNewsArt
     override val viewModel: NewsArticleViewModel by viewModel()
 
     override fun getLayoutResId(): Int = R.layout.fragment_news_article
-    override fun bindDataAndEvent() {
 
+    override fun bindDataAndEvent() {
+//        viewModel.pageStatus.observe(viewLifecycleOwner, Observer {
+//            "status = ${it.name}".logi("DataBindingRefreshLayout")
+//            when (it) {
+//                OriResult.Status.LOADING -> refresh_layout.autoRefresh()
+//                else -> refresh_layout.stopRefresh()
+//            }
+//        })
     }
 
     companion object Factory {
@@ -28,4 +37,5 @@ class NewsArticleFragment : BaseVMFragment<NewsArticleViewModel, FragmentNewsArt
             return fragment
         }
     }
+
 }

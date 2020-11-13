@@ -45,6 +45,7 @@ class NewsArticleViewModel(private val repository: HomeRepository) : BaseViewMod
                 }
                 it.copyIgnoreData(OriResponse(data = list))
             }.observeForever {
+                "state = ${it.status.name}".logi("DataBindingRefreshLayout")
                 pageStatus.set(it.status)
             }
         }

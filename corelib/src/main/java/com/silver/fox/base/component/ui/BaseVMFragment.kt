@@ -63,6 +63,7 @@ abstract class BaseVMFragment<VM : BaseViewModel, VDB : ViewDataBinding> : Fragm
         dataBinding.apply {
             setVariable(BR.viewModel, viewModel)
             lifecycleOwner = viewLifecycleOwner
+            executePendingBindings()
         }
         return dataBinding.root
     }

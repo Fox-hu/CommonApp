@@ -18,7 +18,7 @@
 
         <com.silver.fox.recycleview.DataBindingRefreshLayout
                 android:id="@+id/refresh_layout"
-                status="@{viewModel.pageStatus}"
+                app:status="@{viewModel.pageStatus}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 

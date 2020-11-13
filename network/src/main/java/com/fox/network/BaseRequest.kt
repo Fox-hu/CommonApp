@@ -4,35 +4,32 @@ import androidx.lifecycle.MutableLiveData
 import com.fox.network.request.OriResponse
 import com.fox.network.request.OriResult
 import com.silver.fox.ext.logi
-import kotlinx.coroutines.coroutineScope
 
 /**
  * @Author fox.hu
  * @Date 2020/11/10 13:08
  */
 abstract class BaseRequest<Result> {
-    protected val resourceData: MutableLiveData<OriResult<OriResponse<Result>>> = MutableLiveData()
+    val resourceData: MutableLiveData<OriResult<OriResponse<Result>>> = MutableLiveData()
 
     abstract suspend fun createCall(): OriResponse<Result>
 
     suspend fun startLoad(): MutableLiveData<OriResult<OriResponse<Result>>> {
-        coroutineScope {
+        try {
             resourceData.postValue(OriResult.loading(null, "请求中"))
             "status  = ${OriResult.Status.LOADING.name} ,data = null,msg = null".logi("BaseRequest")
-            try {
-                val result = createCall()
-                if (result.errorCode == -1) {
-                    result.status = OriResponse.Status.FAIL
-                    "status  = ${OriResult.Status.ACTION_FAIL.name} ,data = ${result},msg = ${result.errorMsg}".logi("BaseRequest")
-                    resourceData.postValue(OriResult.actionFail(result))
-                } else {
-                    "status  = ${OriResult.Status.ACTION_SUCCESS.name} ,data = ${result},msg = ${result.errorMsg}".logi("BaseRequest")
-                    resourceData.postValue(OriResult.actionSuccess(result))
-                }
-            } catch (e: Exception) {
-                "status  = ${OriResult.Status.ACTION_ERROR.name} ,data = null,msg = ${e.message}".logi("BaseRequest")
-                resourceData.postValue(OriResult.actionError(null, e.message))
+            val result = createCall()
+            if (result.errorCode == -1) {
+                result.status = OriResponse.Status.FAIL
+                "status  = ${OriResult.Status.ACTION_FAIL.name} ,data = ${result},msg = ${result.errorMsg}".logi("BaseRequest")
+                resourceData.postValue(OriResult.actionFail(result))
+            } else {
+                "status  = ${OriResult.Status.ACTION_SUCCESS.name} ,data = ${result},msg = ${result.errorMsg}".logi("BaseRequest")
+                resourceData.postValue(OriResult.actionSuccess(result))
             }
+        } catch (e: Exception) {
+            "status  = ${OriResult.Status.ACTION_ERROR.name} ,data = null,msg = ${e.message}".logi("BaseRequest")
+            resourceData.postValue(OriResult.actionError(null, e.message))
         }
         return resourceData
     }
