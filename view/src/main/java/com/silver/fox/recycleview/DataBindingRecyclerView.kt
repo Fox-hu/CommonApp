@@ -49,7 +49,7 @@ class DataBindingRecyclerView @JvmOverloads constructor(
         }.build()
     }
 
-    private var refresh: SwipeRefreshLayout? = null
+    private var refresh: DataBindingRefreshLayout? = null
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
@@ -106,13 +106,13 @@ class DataBindingRecyclerView @JvmOverloads constructor(
         }
     }
 
-    private fun findRefresh(view: View): SwipeRefreshLayout? {
+    private fun findRefresh(view: View): DataBindingRefreshLayout? {
         return when (view.parent) {
             null -> {
                 null
             }
-            is SwipeRefreshLayout -> {
-                view.parent as SwipeRefreshLayout
+            is DataBindingRefreshLayout -> {
+                view.parent as DataBindingRefreshLayout
             }
             is View -> {
                 findRefresh(view.parent as View)

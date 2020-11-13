@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -17,21 +16,18 @@
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        <com.silver.fox.recycleview.DataBindingRefreshLayout
                 android:id="@+id/refresh_layout"
+                status="@{viewModel.pageStatus}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.silver.fox.recycleview.DataBindingRecyclerView
                     android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fadeScrollbars="true"
-                    android:scrollbarFadeDuration="1"
-                    android:scrollbars="vertical"
-                    app:layoutManager="LinearLayoutManager" />
+                    android:layout_height="match_parent" />
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </com.silver.fox.recycleview.DataBindingRefreshLayout>
 
     </LinearLayout>
 </layout>

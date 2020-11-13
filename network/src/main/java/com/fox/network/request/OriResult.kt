@@ -92,6 +92,6 @@ class OriResult<T> private constructor(
         }
     }
 
-    fun copyIgnoreData(data:Any):OriResult<Any> = OriResult(this.status,data,this.message)
+    fun <T>copyIgnoreData(data:T):OriResult<T> = OriResult<T>(this.status,data,this.message)
 
 }
