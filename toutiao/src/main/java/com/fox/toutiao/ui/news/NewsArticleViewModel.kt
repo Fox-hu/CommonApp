@@ -1,7 +1,9 @@
 package com.fox.toutiao.ui.news
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.fox.network.request.OriResponse
@@ -49,5 +51,14 @@ class NewsArticleViewModel(private val repository: HomeRepository) : BaseViewMod
                 pageStatus.set(it.status)
             }
         }
+
+//        val test = MutableLiveData<OriResult.Status>()
+//        test.postValue(OriResult.Status.LOADING)
+//
+//        test.observeForever {
+//            "state = ${it.name}".logi("DataBindingRefreshLayout")
+//        }
+//        test.postValue(OriResult.Status.ACTION_SUCCESS)
     }
+
 }

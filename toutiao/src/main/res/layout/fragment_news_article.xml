@@ -18,15 +18,21 @@
 
         <com.silver.fox.recycleview.DataBindingRefreshLayout
                 android:id="@+id/refresh_layout"
-                app:status="@{viewModel.pageStatus}"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                app:status="@{viewModel.pageStatus}">
 
-            <com.silver.fox.recycleview.DataBindingRecyclerView
-                    android:id="@+id/recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+<!--            <com.silver.fox.stateslayout.StatesLayout-->
+<!--                    android:id="@+id/states_layout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    app:status="@{viewModel.pageStatus}">-->
 
+                <com.silver.fox.recycleview.DataBindingRecyclerView
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+<!--            </com.silver.fox.stateslayout.StatesLayout>-->
         </com.silver.fox.recycleview.DataBindingRefreshLayout>
 
     </LinearLayout>
