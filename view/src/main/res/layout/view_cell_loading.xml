@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/loadingbg"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/view_grey_fafafa"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/common_loading_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+
+            <ProgressBar
+                android:id="@+id/loading_ring_progress"
+                android:layout_width="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="16dp"
+                android:indeterminate="true"
+                android:indeterminateDrawable="@drawable/view_progressbar_rotate_img_style" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:gravity="center"
+                android:text="@string/view_common_text_data_loading"
+                android:textColor="@color/view_grey_999999"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
