@@ -2,35 +2,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="@android:color/holo_red_light"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Fragment3" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/go_fragment"
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="跳转fragment" />
+            android:text="back" />
 
         <Button
-            android:id="@+id/stack_count"
+            android:id="@+id/pre_fragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="回退栈个数" />
-
+            android:text="Go_Fragment1" />
         <Button
-            android:id="@+id/stack_name"
+            android:id="@+id/clear_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="回退栈名称" />
-
+            android:text="Clear_All" />
     </LinearLayout >
 
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 </LinearLayout >

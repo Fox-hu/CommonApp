@@ -22,13 +22,22 @@ class FragmentActivity : AppCompatActivity() {
         findViewById<Button>(R.id.go_fragment).setOnClickListener {
             supportFragmentManager.apply {
                 beginTransaction().apply {
-                    add(R.id.container, fragment1, Fragment1::javaClass.name).commit()
+//                    add(R.id.container, fragment1, Fragment1::javaClass.name).commit()
+                    val commit = replace(R.id.container, fragment1).addToBackStack("fragment1").commit()
+                    toast(commit.toString())
                 }
             }
         }
 
         findViewById<Button>(R.id.stack_count).setOnClickListener {
             toast(supportFragmentManager.backStackEntryCount.toString())
+        }
+
+        findViewById<Button>(R.id.stack_name).setOnClickListener {
+            for (i in 0 until supportFragmentManager.backStackEntryCount) {
+                val backStackEntryAt = supportFragmentManager.getBackStackEntryAt(i)
+                toast(backStackEntryAt.name.toString())
+            }
         }
     }
 
