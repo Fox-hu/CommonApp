@@ -38,6 +38,7 @@
 
         <activity android:name=".fragment.FragmentActivity"/>
 
+        <activity android:name=".touch_event.TouchEventActivity"/>
     </application>
 
 </manifest>

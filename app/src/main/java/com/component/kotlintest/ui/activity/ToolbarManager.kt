@@ -10,6 +10,7 @@ import com.component.kotlintest.extensions.ctx
 import com.component.kotlintest.extensions.sildeEnter
 import com.component.kotlintest.extensions.sildeExit
 import com.component.kotlintest.fragment.FragmentActivity
+import com.component.kotlintest.touch_event.TouchEventActivity
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
@@ -30,6 +31,7 @@ interface ToolbarManager {
             when (it.itemId) {
                 R.id.action_settings -> toolbar.ctx.startActivity<SettingActivity>()
                 R.id.fragment -> toolbar.ctx.startActivity<FragmentActivity>()
+                R.id.touch -> toolbar.ctx.startActivity<TouchEventActivity>()
                 else -> App.instance.toast("Unknown option")
             }
             true

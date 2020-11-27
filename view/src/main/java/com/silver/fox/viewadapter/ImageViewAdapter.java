@@ -11,9 +11,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
 
-/**
- * created by francis.fan on 2018/12/27
- */
+
+
 public class ImageViewAdapter {
 
     /**
