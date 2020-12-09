@@ -11,5 +11,6 @@ class ViewTestActivity : BaseListActivity() {
         activityMap["BubbleActivity"] = BubbleActivity::class.java
         activityMap["LoveActivity"] = LoveActivity::class.java
         activityMap["SplashActivity"] = SplashActivity::class.java
+        activityMap["PaintCanvasActivity"] = PaintCanvasActivity::class.java
     }
 }
