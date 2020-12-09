@@ -43,7 +43,5 @@ class PaintColorView
         paint.color = Color.BLUE
         paint.style = Paint.Style.FILL_AND_STROKE//填充且描边
         canvas?.drawCircle(500f, 100f, radius, paint)
-
-
     }
 }
