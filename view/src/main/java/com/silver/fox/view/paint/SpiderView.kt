@@ -1,4 +1,4 @@
-package com.silver.fox.view
+package com.silver.fox.view.paint
 
 import android.content.Context
 import android.graphics.Canvas

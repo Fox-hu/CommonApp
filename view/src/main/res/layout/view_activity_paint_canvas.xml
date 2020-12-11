@@ -9,28 +9,28 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <com.silver.fox.view.paint_canvas.PaintColorView
+        <com.silver.fox.view.paint.PaintColorView
                 android:id="@+id/viewPaintcolorview"
                 android:layout_width="250dp"
                 android:layout_height="100dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        <com.silver.fox.view.paint_canvas.LineView
+        <com.silver.fox.view.paint.LineView
                 android:id="@+id/viewLineview"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 app:layout_constraintStart_toEndOf="@+id/viewPaintcolorview"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        <com.silver.fox.view.paint_canvas.PointView
+        <com.silver.fox.view.paint.PointView
                 android:id="@+id/viewPointview2"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 app:layout_constraintStart_toStartOf="@+id/viewPaintcolorview"
                 app:layout_constraintTop_toBottomOf="@+id/viewPaintcolorview" />
 
-        <com.silver.fox.view.paint_canvas.RectView
+        <com.silver.fox.view.paint.RectView
                 android:id="@+id/viewRectview"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
@@ -38,32 +38,79 @@
                 app:layout_constraintStart_toEndOf="@+id/viewPointview2"
                 app:layout_constraintTop_toBottomOf="@+id/viewLineview" />
 
-        <com.silver.fox.view.paint_canvas.PathView
+        <com.silver.fox.view.paint.PathView
                 android:id="@+id/viewPathview"
                 android:layout_width="200dp"
                 android:layout_height="100dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/viewPointview2" />
 
-        <com.silver.fox.view.paint_canvas.OvalView
+        <com.silver.fox.view.paint.OvalView
+                android:id="@+id/viewOvalview"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/viewPathview"
                 app:layout_constraintTop_toBottomOf="@+id/viewRectview" />
 
-        <com.silver.fox.view.paint_canvas.PathFillTypeView
+        <com.silver.fox.view.paint.PathFillTypeView
                 android:id="@+id/viewPathfilltypeview"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/viewPathview" />
 
-        <com.silver.fox.view.SpiderView
+        <com.silver.fox.view.paint.SpiderView
+                android:id="@+id/viewSpiderview"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/viewPathfilltypeview" />
 
+        <com.silver.fox.view.canvas.RegionView
+                android:id="@+id/viewRegionview"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:layout_constraintTop_toBottomOf="@+id/viewSpiderview" />
+
+        <com.silver.fox.view.canvas.RegionOpView
+                android:id="@+id/viewRegionOpview"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintTop_toBottomOf="@+id/viewRegionview" />
+
+        <com.silver.fox.view.canvas.CanvasView
+                android:id="@+id/viewCanvasview"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewRegionOpview" />
+
+        <com.silver.fox.view.canvas.CanvasClipView
+                android:id="@+id/viewCanvasClipview"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/viewCanvasview"
+                app:layout_constraintTop_toBottomOf="@+id/viewRegionOpview" />
+
+
+        <com.silver.fox.view.canvas.CanvasSaveRestoreView
+                android:id="@+id/viewCanvassaverestoreview"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintEnd_toStartOf="@+id/viewCanvassaveIndexview"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewCanvasClipview" />
+
+        <com.silver.fox.view.canvas.CanvasRestoreIndexView
+                android:id="@+id/viewCanvassaveIndexview"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/viewCanvassaverestoreview"
+                app:layout_constraintTop_toBottomOf="@+id/viewCanvasClipview" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
