@@ -21,6 +21,18 @@ android {
         }
     }
 
+    kapt {
+        useBuildCache = true
+        javacOptions {
+            option("-Xmaxerrs", 500)
+        }
+    }
+
+    dexOptions {
+        preDexLibraries true
+        maxProcessCount 8
+    }
+
 }
 
 dependencies {

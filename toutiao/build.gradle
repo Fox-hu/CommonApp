@@ -49,6 +49,18 @@ android {
         jvmTarget = "1.8"
     }
 
+    kapt {
+        useBuildCache = true
+        javacOptions {
+            option("-Xmaxerrs", 500)
+        }
+    }
+
+    dexOptions {
+        preDexLibraries true
+        maxProcessCount 8
+    }
+
     aaptOptions.cruncherEnabled = false
     aaptOptions.useNewCruncher = false
 }
