@@ -11,6 +11,7 @@
         <activity android:name="com.silver.fox.activity.VerticalDragActivity" />
         <activity android:name="com.silver.fox.activity.PaintCanvasActivity" />
         <activity android:name="com.silver.fox.activity.ShapeActivity" />
+        <activity android:name="com.silver.fox.activity.ScrollActivity" />
         <activity
                 android:name="com.silver.fox.activity.TestActivity"
                 android:theme="@style/view_AppTheme.NoActionBar" />

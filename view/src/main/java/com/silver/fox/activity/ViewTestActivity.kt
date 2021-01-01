@@ -13,6 +13,6 @@ class ViewTestActivity : BaseListActivity() {
         activityMap["SplashActivity"] = SplashActivity::class.java
         activityMap["PaintCanvasActivity"] = PaintCanvasActivity::class.java
         activityMap["ShapeActivity"] = ShapeActivity::class.java
-
+        activityMap["ScrollActivity"] = ScrollActivity::class.java
     }
 }
