@@ -69,7 +69,7 @@ class ColorTrackTextView
         canvas?.save()
 
         //根据进度算出 裁剪区域的大小
-        val progress = currentProgress * width
+        //控件只在这个区域内进行绘制
         canvas?.clipRect(start, 0, end, height)
 
         val text = text.toString()

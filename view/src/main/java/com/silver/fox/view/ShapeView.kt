@@ -66,8 +66,4 @@ class ShapeView @JvmOverloads constructor(
         }
         invalidate()
     }
-
-    fun stopExchange() {
-
-    }
 }

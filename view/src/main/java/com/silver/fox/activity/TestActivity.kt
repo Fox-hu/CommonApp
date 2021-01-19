@@ -10,6 +10,9 @@ import kotlinx.android.synthetic.main.view_activity_test.*
 
 class TestActivity : AppCompatActivity() {
 
+    @Volatile
+    var changeShape = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.view_activity_test)
@@ -42,7 +45,7 @@ class TestActivity : AppCompatActivity() {
 
     fun exchange(view: View) {
         Thread {
-            while (true) {
+            while (changeShape) {
                 runOnUiThread {
                     shape_view.exchange()
                 }
@@ -52,6 +55,6 @@ class TestActivity : AppCompatActivity() {
     }
 
     fun stopExchange(view: View) {
-        loading_view.visibility = View.GONE
+        changeShape = false
     }
 }
