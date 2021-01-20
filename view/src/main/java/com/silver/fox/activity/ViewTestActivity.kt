@@ -14,5 +14,6 @@ class ViewTestActivity : BaseListActivity() {
         activityMap["PaintCanvasActivity"] = PaintCanvasActivity::class.java
         activityMap["ShapeActivity"] = ShapeActivity::class.java
         activityMap["ScrollActivity"] = ScrollActivity::class.java
+        activityMap["ViewGroupTransition"] = ViewGroupTransitionActivity::class.java
     }
 }
