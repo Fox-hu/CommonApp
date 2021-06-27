@@ -15,5 +15,7 @@ class ViewTestActivity : BaseListActivity() {
         activityMap["ShapeActivity"] = ShapeActivity::class.java
         activityMap["ScrollActivity"] = ScrollActivity::class.java
         activityMap["ViewGroupTransition"] = ViewGroupTransitionActivity::class.java
+        activityMap["CoordinatorLayoutActivity"] = CoordinatorLayoutActivity::class.java
+        activityMap["StatusBarTestActivity"] = StatusBarTestActivity::class.java
     }
 }

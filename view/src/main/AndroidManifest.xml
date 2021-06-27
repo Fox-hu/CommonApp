@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.silver.fox.view">
+    package="com.silver.fox.view" >
 
-    <application>
-        <activity android:name="com.silver.fox.activity.SplashActivity"></activity>
+    <application >
+        <activity android:name="com.silver.fox.activity.SplashActivity" />
         <activity android:name="com.silver.fox.activity.LoveActivity" />
         <activity android:name="com.silver.fox.activity.BubbleActivity" />
         <activity android:name="com.silver.fox.activity.ViewTestActivity" />
@@ -13,12 +13,20 @@
         <activity android:name="com.silver.fox.activity.ShapeActivity" />
         <activity android:name="com.silver.fox.activity.ScrollActivity" />
         <activity android:name="com.silver.fox.activity.ViewGroupTransitionActivity" />
+        <activity android:name="com.silver.fox.activity.CoordinatorLayoutActivity" />
+        <activity android:name="com.silver.fox.activity.StatusBarTestActivity" />
         <activity
-                android:name="com.silver.fox.activity.TestActivity"
-                android:theme="@style/view_AppTheme.NoActionBar" />
+            android:name="com.silver.fox.activity.statusbar.FullScreenActivity"
+            android:theme="@style/view_AppTheme.NoActionBar" />
         <activity
-                android:name="com.silver.fox.activity.SlideActivity"
-                android:theme="@style/view_AppTheme.NoActionBar" />
-    </application>
+            android:name="com.silver.fox.activity.statusbar.NormalStatusActivity"
+            android:theme="@style/view_AppTheme.NoActionBar" />
+        <activity
+            android:name="com.silver.fox.activity.TestActivity"
+            android:theme="@style/view_AppTheme.NoActionBar" />
+        <activity
+            android:name="com.silver.fox.activity.SlideActivity"
+            android:theme="@style/view_AppTheme.NoActionBar" />
+    </application >
 
-</manifest>
+</manifest >

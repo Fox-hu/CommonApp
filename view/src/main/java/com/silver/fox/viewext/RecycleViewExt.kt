@@ -39,14 +39,11 @@ class NormalAdapter(private val mDatas: List<String>) :
     }
 }
 
-val data =
-    listOf<String>("a", "b", "c", "d", "e", "f", "g", "h", "i")
-
 fun RecyclerView.createTest(context: Context) {
     val layoutManager = LinearLayoutManager(context)
     layoutManager.isSmoothScrollbarEnabled = true
     setLayoutManager(layoutManager)
     setHasFixedSize(true)
-    adapter = NormalAdapter(data)
+    adapter = NormalAdapter(listOf<String>("a", "b", "c", "d", "e", "f", "g", "h", "i"))
 }
 
