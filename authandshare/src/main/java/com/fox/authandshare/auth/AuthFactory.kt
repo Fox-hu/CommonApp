@@ -3,7 +3,6 @@ package com.fox.authandshare.auth
 import android.app.Activity
 
 import com.fox.authandshare.auth.qq.QQAuth
-import com.fox.authandshare.auth.sina.SinaAuth
 import com.fox.authandshare.auth.wechat.WeChatAuth
 import com.fox.authandshare.platform.PlatForm
 
@@ -19,7 +18,7 @@ object AuthFactory {
         return when (platForm) {
             PlatForm.QQ -> QQAuth(activity)
             PlatForm.WEIXIN -> WeChatAuth(activity)
-            PlatForm.SINA -> SinaAuth(activity)
+//            PlatForm.SINA -> SinaAuth(activity)
             else -> {
                 QQAuth(activity)
             }

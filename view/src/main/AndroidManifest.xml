@@ -22,6 +22,9 @@
             android:name="com.silver.fox.activity.statusbar.NormalStatusActivity"
             android:theme="@style/view_AppTheme.NoActionBar" />
         <activity
+            android:name="com.silver.fox.activity.statusbar.NotchCompatActivity"
+            android:theme="@style/view_AppTheme.NoActionBar" />
+        <activity
             android:name="com.silver.fox.activity.TestActivity"
             android:theme="@style/view_AppTheme.NoActionBar" />
         <activity

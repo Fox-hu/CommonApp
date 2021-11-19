@@ -1,3 +1,4 @@
+/*
 package com.fox.authandshare.auth.sina
 
 import android.app.Activity
@@ -15,10 +16,12 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.lang.ref.WeakReference
 
+*/
 /**
  * @author fox.hu
  * @date 2018/8/24
- */
+ *//*
+
 
 class SinaAuth(activity: Activity) : IAuth {
     private val mActivity: WeakReference<Activity> = WeakReference(activity)
@@ -108,3 +111,4 @@ class SinaAuth(activity: Activity) : IAuth {
         private val TAG = SinaAuth::class.java.simpleName
     }
 }
+*/
