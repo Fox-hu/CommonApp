@@ -49,4 +49,5 @@ dependencies {
     api project(path: ':view')
     api project(path: ':authandshare')
     api project(path: ':storage')
+    api project(path: ':hardware')
 }
