@@ -5,7 +5,7 @@ ext {
                buildToolsVersion: "29.0.0",
                minSdkVersion    : 21,
                targetSdkVersion : 29,
-               applicationId    : 'com.fox',
+               applicationId    : 'com.fox.testdemo',
                versionCode      : 1,
                versionName      : '1.1',
                multiDexEnabled  : true,]
