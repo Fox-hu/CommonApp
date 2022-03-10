@@ -2,19 +2,15 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-
 android {
     compileSdkVersion rootProject.android.compileSdkVersion
     buildToolsVersion rootProject.android.buildToolsVersion
-
-    resourcePrefix "corelib"
 
     defaultConfig {
         minSdkVersion rootProject.android.minSdkVersion
         targetSdkVersion rootProject.android.targetSdkVersion
         versionCode 1
         versionName "1.0"
-
     }
 
     buildTypes {
@@ -22,10 +18,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-
-    dataBinding { // DataBinding 开启
-        enabled true
     }
 
     kapt {
@@ -39,16 +31,10 @@ android {
         preDexLibraries true
         maxProcessCount 8
     }
+
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    api project(path: ':network')
-    api project(path: ':view')
-    api project(path: ':authandshare')
-    api project(path: ':storage')
-    api project(path: ':hardware')
-    api project(path: ':media')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(path: ':ktx')
 }

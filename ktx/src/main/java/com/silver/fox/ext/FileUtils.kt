@@ -1,13 +1,11 @@
 package com.silver.fox.ext
 
-import java.io.*
+import android.content.Context
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 import java.nio.ByteBuffer
 import java.text.DecimalFormat
-
-/**
- * Created by luyao
- * on 2019/7/23 9:29
- */
 
 /**
  * Return the file size, include all sub files
@@ -118,4 +116,8 @@ fun copyFolder(sourceFolder: File, destFolder: File, overwrite: Boolean, func: (
             copyFile(subFile, File(destFolder, subFile.name), overwrite, func)
         }
     }
+}
+
+fun getExternalDir(context: Context, folder: String): String {
+    return context.getExternalFilesDir(folder)?.path + File.separator
 }
