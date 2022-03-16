@@ -18,6 +18,7 @@ import com.fox.toutiao.ui.home.HomeViewModel
 import com.silver.fox.activity.ViewTestActivity
 import com.silver.fox.base.component.ui.BaseVMActivity
 import com.silver.fox.ext.getString
+import com.silver.fox.media.MediaDemoActivity
 import com.silver.fox.toSnackbarMsg
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -74,6 +75,7 @@ class MainActivity : BaseVMActivity<HomeViewModel, ActivityMainBinding>() {
             drawer_layout.closeDrawer(GravityCompat.START)
             when (it) {
                 R.id.nav_camera -> startActivity<ViewTestActivity>()
+                R.id.nav_gallery -> startActivity<MediaDemoActivity>()
                 //findNavController().navigate(R.id.flow_step_one_dest, null, option)
             }
         })
