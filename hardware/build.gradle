@@ -5,6 +5,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion rootProject.android.compileSdkVersion
     buildToolsVersion rootProject.android.buildToolsVersion
+    resourcePrefix "hardware"
 
     defaultConfig {
         minSdkVersion rootProject.android.minSdkVersion
