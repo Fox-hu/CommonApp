@@ -6,6 +6,10 @@
         <activity
             android:name=".MediaDemoActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".MediaDemoActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
