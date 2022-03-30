@@ -1,5 +1,7 @@
 package com.silver.fox.activity
 
+import com.silver.fox.base.BaseListActivity
+
 
 class ViewTestActivity : BaseListActivity() {
 

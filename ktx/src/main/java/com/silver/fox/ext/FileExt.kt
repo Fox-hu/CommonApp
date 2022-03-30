@@ -1,6 +1,6 @@
 package com.silver.fox.ext
 
-import java.io.File
+import java.io.*
 import java.nio.charset.Charset
 
 val File.canListFiles: Boolean
@@ -99,3 +99,17 @@ fun File.rename(newName: String) =
 /** Rename to newFile's name */
 fun File.rename(newFile: File) =
     if (newFile.exists()) false else renameTo(newFile)
+
+/**
+ * turn target File to bytearray
+ */
+fun File.getBytes(): ByteArray? {
+    val inputStream: InputStream = DataInputStream(FileInputStream(this))
+    var len: Int
+    val size = 1024
+    val bos = ByteArrayOutputStream()
+    var buf = ByteArray(size)
+    while (inputStream.read(buf, 0, size).also { len = it } != -1) bos.write(buf, 0, len)
+    buf = bos.toByteArray()
+    return buf
+}

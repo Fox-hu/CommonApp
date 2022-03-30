@@ -4,11 +4,16 @@
 
     <application>
         <activity
-            android:name=".MediaDemoActivity"
+            android:name=".MediaDemoListActivity"
             android:exported="false" />
-
         <activity
-            android:name=".MediaDemoActivity"
+            android:name=".RtmpDemoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AudioMixActivity"
+            android:exported="false" />
+        <activity
+            android:name=".H264PlayActivity"
             android:exported="false" />
     </application>
 
