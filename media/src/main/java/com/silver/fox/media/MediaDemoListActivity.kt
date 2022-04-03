@@ -5,6 +5,6 @@ import com.silver.fox.base.BaseListActivity
 class MediaDemoListActivity : BaseListActivity() {
     override fun initItem() {
         activityMap["RtmpDemoActivity"] = RtmpDemoActivity::class.java
-        activityMap["H264PlayActivity"] = H264PlayActivity::class.java
+        activityMap["ScreenToH264Activity"] = ScreenToH264Activity::class.java
     }
 }

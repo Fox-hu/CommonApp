@@ -215,3 +215,22 @@ fun deleteDirectory(fileOrDirectory: File) {
     }
     fileOrDirectory.delete()
 }
+
+fun ByteArray.toFile(path: String?) {
+    path ?: return
+    var writer: FileOutputStream? = null
+    try {
+        // 打开一个写文件器，构造函数中的第二个参数true表示以追加形式写文件
+        writer = FileOutputStream(path, true)
+        writer.write(this)
+        writer.write('\n'.toInt())
+    } catch (e: IOException) {
+        e.printStackTrace()
+    } finally {
+        try {
+            writer?.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+}

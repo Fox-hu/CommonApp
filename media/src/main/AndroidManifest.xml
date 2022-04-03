@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.silver.fox.media">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!--录屏权限-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!--android 9.0上使用前台服务，需要添加权限-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <application>
         <activity
             android:name=".MediaDemoListActivity"
@@ -13,8 +18,13 @@
             android:name=".AudioMixActivity"
             android:exported="false" />
         <activity
-            android:name=".H264PlayActivity"
+            android:name=".ScreenToH264Activity"
             android:exported="false" />
+        <!--录屏service-->
+        <service
+            android:name=".ScreenCaptureService"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection" />
     </application>
 
 </manifest>
