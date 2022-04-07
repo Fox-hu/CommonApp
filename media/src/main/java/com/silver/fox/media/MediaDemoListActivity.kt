@@ -6,5 +6,6 @@ class MediaDemoListActivity : BaseListActivity() {
     override fun initItem() {
         activityMap["RtmpDemoActivity"] = RtmpDemoActivity::class.java
         activityMap["ScreenToH264Activity"] = ScreenToH264Activity::class.java
+        activityMap["CameraCaptureActivity"] = CameraCaptureActivity::class.java
     }
 }

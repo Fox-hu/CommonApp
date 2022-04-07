@@ -12,7 +12,7 @@ import android.media.AudioManager
 import android.text.TextUtils
 import android.util.Log
 
-class HeadSetHelp {
+class HeadSetHelp(val context: Context, val onHeadsetInterface: OnHeadsetInterface) {
     private val TAG = "HeadSetHelp"
     /** 用来判断耳机的状态：
      * 0：有线耳机已断开
@@ -30,22 +30,8 @@ class HeadSetHelp {
         private var blueHeadSetState = HEAD_BLUE_SET_OFF
     }
 
-    private var audioManager: AudioManager
-    private var context: Context
-    private var onheadsetInterface: onHeadsetInterface
+    private val audioManager: AudioManager
     private var isEarphone = false
-
-    constructor(context: Context, onheadsetinterface: onHeadsetInterface) {
-        this.context = context
-        this.onheadsetInterface = onheadsetinterface
-        audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-
-        getBlueDeviceState() // 先获取蓝牙状态再添加广播，防止插拔事件广播先到
-        val filter = IntentFilter()
-        filter.addAction(Intent.ACTION_HEADSET_PLUG)
-        filter.addAction(BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED)
-        context.registerReceiver(mBroadReceiver, filter, null, null)
-    }
 
     private val mBroadReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -89,6 +75,15 @@ class HeadSetHelp {
         }
     }
 
+    init {
+        audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        getBlueDeviceState() // 先获取蓝牙状态再添加广播，防止插拔事件广播先到
+        val filter = IntentFilter()
+        filter.addAction(Intent.ACTION_HEADSET_PLUG)
+        filter.addAction(BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED)
+        context.registerReceiver(mBroadReceiver, filter, null, null)
+    }
+
     private fun getBlueDeviceState() {
         val defaultAdapter = BluetoothAdapter.getDefaultAdapter()
         //记得加上蓝牙权限
@@ -112,7 +107,7 @@ class HeadSetHelp {
         isEarphone = tempEarphone
         // todo 不插耳机的情况下是否走外放是否也要设置一下，但是业务端容易出问题？比如，会不会插耳机他也设外放
         audioManager.isSpeakerphoneOn = !isEarphone
-        onheadsetInterface.onHeadsetStateChange(isEarphone)
+        onHeadsetInterface.onHeadsetStateChange(isEarphone)
     }
 
     /**
@@ -132,7 +127,7 @@ class HeadSetHelp {
         }
     }
 
-    interface onHeadsetInterface{
+    interface OnHeadsetInterface{
         fun onHeadsetStateChange(earphone: Boolean)
     }
 }

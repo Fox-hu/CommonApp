@@ -20,6 +20,9 @@
         <activity
             android:name=".ScreenToH264Activity"
             android:exported="false" />
+        <activity
+            android:name=".CameraCaptureActivity"
+            android:exported="false" />
         <!--录屏service-->
         <service
             android:name=".ScreenCaptureService"
