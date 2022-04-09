@@ -51,13 +51,10 @@ class CameraCaptureActivity : AppCompatActivity() {
                     pictureFile.createNewFile()
                     val filecon = FileOutputStream(pictureFile)
                     //ImageFormat.NV21 and ImageFormat.YUY2 for now
-                    val image = YuvImage(
-                        data,
-                        ImageFormat.NV21,
-                        size!!.height,
-                        size.width,
-                        null
-                    ) //将NV21 data保存成YuvImage
+                    //这里注意 如果是横屏展示
+                    val image  = YuvImage(data, ImageFormat.NV21, size!!.width, size.height, null)
+                    //如果是竖屏  因为旋转了之后 宽高互换了
+//                    val image = YuvImage(data, ImageFormat.NV21, size!!.height, size.width, null)
                     //图像压缩
                     image.compressToJpeg(
                         Rect(0, 0, image.width, image.height),

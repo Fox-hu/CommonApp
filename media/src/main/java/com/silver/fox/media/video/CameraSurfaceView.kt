@@ -44,10 +44,13 @@ class CameraSurfaceView @JvmOverloads constructor(
             size = parameters.previewSize
             try {
                 setPreviewDisplay(holder)
+                //预览图像旋转90度 如果不设置 摄像头默认是横屏展示的 注意 这里改的只是预览图像的角度 输出数据仍然是 横屏的图像
                 setDisplayOrientation(90)
 //              int bitsPerPixel = ImageFormat.getBitsPerPixel(ImageFormat.NV21);
 //              buffer = new byte[size.width*size.height * bitsPerPixel /8]; 3/2的来源
                 buffer = ByteArray(size!!.width * size!!.height * 3 / 2)
+                //在onPreviewFrame中调用addCallbackBuffer(data)
+                //就可以一直复用原来开辟的那个内存空间了,视频数据data永远都只会保持在一个地址中,只是其中的内容在不断的变化
                 addCallbackBuffer(buffer)
                 setPreviewCallbackWithBuffer(this@CameraSurfaceView)
                 startPreview()
@@ -63,21 +66,26 @@ class CameraSurfaceView @JvmOverloads constructor(
     override fun surfaceDestroyed(holder: SurfaceHolder?) {
     }
 
-    //setPreviewCallbackWithBuffer 在启动预览后，需要手动调用Camera.addCallbackBuffer(data)
+//setPreviewCallbackWithBuffer 在启动预览后，需要手动调用Camera.addCallbackBuffer(data)
 //触发回调，byte[]数据需要根据一帧画面的尺寸提前创建传入
 //例如NV21格式，size = width * height * 3 / 2;
     override fun onPreviewFrame(data: ByteArray, camera: Camera?) {
         if (isCapture) {
-            portraitData2Raw(data)
             isCapture = false
+
+            //如果是这句 则data的数据是横屏的
             action?.let { it(data, size) }
+
+            //这句是将横屏的数据旋转90，生成竖屏的照片
+//            val rotated = portraitData2Raw(data)
+//            action?.let { it(rotated, size) }
         }
-        //data数据就是采集的画面数据
+        //data数据就是采集的画面数据 不能省 否则不能用
         //回收缓存，下次仍然会使用，所以不需要再开辟新的缓存，达到优化的目的
         mCamera?.addCallbackBuffer(data)
     }
 
-    private fun portraitData2Raw(data: ByteArray) {
+    private fun portraitData2Raw(data: ByteArray): ByteArray{
         val width = size!!.width
         val height = size!!.height
         //        旋转y
@@ -98,5 +106,6 @@ class CameraSurfaceView @JvmOverloads constructor(
                 buffer!![k++] = data[y_len + width * i + j + 1]
             }
         }
+        return buffer!!
     }
 }
