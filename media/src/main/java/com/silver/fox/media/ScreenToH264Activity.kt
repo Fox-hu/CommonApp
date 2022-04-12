@@ -20,6 +20,10 @@ import com.silver.fox.media.video.H264Player
 import com.silver.fox.media.video.ScreenToH264Encoder
 import java.io.File
 
+/**
+ * 录制屏幕操作 生成h264文件
+ * 并播放该h264文件
+ */
 class ScreenToH264Activity : AppCompatActivity() {
 
     private var path: String = ""

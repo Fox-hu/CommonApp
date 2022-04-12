@@ -23,6 +23,9 @@
         <activity
             android:name=".CameraCaptureActivity"
             android:exported="false" />
+        <activity
+            android:name=".AudioEditActivity"
+            android:exported="false" />
         <!--录屏service-->
         <service
             android:name=".ScreenCaptureService"

@@ -17,6 +17,9 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 
+/**
+ * 捕捉摄像头的数据，生成照片
+ */
 class CameraCaptureActivity : AppCompatActivity() {
 
     var cameraSurfaceView: CameraSurfaceView? = null
