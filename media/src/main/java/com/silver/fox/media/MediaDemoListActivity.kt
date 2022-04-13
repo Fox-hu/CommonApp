@@ -8,5 +8,6 @@ class MediaDemoListActivity : BaseListActivity() {
         activityMap["ScreenToH264Activity"] = ScreenToH264Activity::class.java
         activityMap["CameraCaptureActivity"] = CameraCaptureActivity::class.java
         activityMap["AudioEditActivity"] = AudioEditActivity::class.java
+        activityMap["AudioMixActivity"] = AudioMixActivity::class.java
     }
 }
