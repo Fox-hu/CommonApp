@@ -17,6 +17,7 @@ class CameraSurfaceView @JvmOverloads constructor(
     private var mCamera: Camera? = null
     private var size: Camera.Size? = null
     var buffer: ByteArray? = null
+    var nv12: ByteArray? = null
     var action: ((ByteArray, Camera.Size?) -> Unit)? = null
 
     @Volatile
@@ -49,6 +50,7 @@ class CameraSurfaceView @JvmOverloads constructor(
 //              int bitsPerPixel = ImageFormat.getBitsPerPixel(ImageFormat.NV21);
 //              buffer = new byte[size.width*size.height * bitsPerPixel /8]; 3/2的来源
                 buffer = ByteArray(size!!.width * size!!.height * 3 / 2)
+                nv12 = ByteArray(size!!.width * size!!.height * 3 / 2)
                 //在onPreviewFrame中调用addCallbackBuffer(data)
                 //就可以一直复用原来开辟的那个内存空间了,视频数据data永远都只会保持在一个地址中,只是其中的内容在不断的变化
                 addCallbackBuffer(buffer)
@@ -74,11 +76,11 @@ class CameraSurfaceView @JvmOverloads constructor(
             isCapture = false
 
             //如果是这句 则data的数据是横屏的
-            action?.let { it(data, size) }
+//            action?.let { it(data, size) }
 
             //这句是将横屏的数据旋转90，生成竖屏的照片
-//            val rotated = portraitData2Raw(data)
-//            action?.let { it(rotated, size) }
+            portraitData2Raw(data)
+            action?.let { it(nv12!!, size) }
         }
         //data数据就是采集的画面数据 不能省 否则不能用
         //回收缓存，下次仍然会使用，所以不需要再开辟新的缓存，达到优化的目的
@@ -96,16 +98,16 @@ class CameraSurfaceView @JvmOverloads constructor(
         for (j in 0 until width) {
             for (i in height - 1 downTo 0) {
 //                存值  k++  0          取值  width * i + j
-                buffer!![k++] = data[width * i + j]
+                nv12!![k++] = data[width * i + j]
             }
         }
         //        旋转uv
         for (j in 0 until width step 2){
             for (i in uvHeight - 1 downTo 0) {
-                buffer!![k++] = data[y_len + width * i + j]
-                buffer!![k++] = data[y_len + width * i + j + 1]
+                nv12!![k++] = data[y_len + width * i + j]
+                nv12!![k++] = data[y_len + width * i + j + 1]
             }
         }
-        return buffer!!
+        return nv12!!
     }
 }
