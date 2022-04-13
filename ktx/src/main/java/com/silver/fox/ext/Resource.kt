@@ -11,8 +11,12 @@ import com.silver.fox.Ktx
 @ColorInt
 fun Int.getColor(context: Context = Ktx.app): Int = ContextCompat.getColor(context, this)
 
-
 fun Int.getString(context: Context = Ktx.app): String = context.getString(this)
+
+fun Int.px2dp(context: Context = Ktx.app): Int {
+    val scale = context.resources.displayMetrics.density
+    return (dp * scale + 0.5f).toInt()
+}
 
 fun Int.getStringArray(context: Context = Ktx.app): Array<String> =
     context.resources.getStringArray(this)
@@ -33,7 +37,11 @@ fun View.dp2px(dp: Int): Int {
 }
 
 val Int.dp
-    get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), Resources.getSystem().displayMetrics)
+    get() = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        this.toFloat(),
+        Resources.getSystem().displayMetrics
+    )
 
 fun View.px2dp(px: Int): Int {
     val scale = resources.displayMetrics.density

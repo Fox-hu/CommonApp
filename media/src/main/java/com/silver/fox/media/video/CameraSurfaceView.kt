@@ -16,7 +16,10 @@ class CameraSurfaceView @JvmOverloads constructor(
 ) : SurfaceView(context, attrs, defStyleAttr), SurfaceHolder.Callback, Camera.PreviewCallback {
     private var mCamera: Camera? = null
     private var size: Camera.Size? = null
+    //buffer这个byteArray用于给摄像头复用 避免开辟新的缓存，达到优化的目的
     var buffer: ByteArray? = null
+    //这里需要一个新的byteArray,因为buffer这个byteArray被设置为addCallbackBuffer(buffer) 系统使用
+    //如果继续使用buffer这个byteArray 会导致生成的照片花屏
     var nv12: ByteArray? = null
     var action: ((ByteArray, Camera.Size?) -> Unit)? = null
 
@@ -31,7 +34,6 @@ class CameraSurfaceView @JvmOverloads constructor(
         action = cb
         isCapture = !isCapture
     }
-
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun surfaceCreated(holder: SurfaceHolder?) {
@@ -71,6 +73,7 @@ class CameraSurfaceView @JvmOverloads constructor(
 //setPreviewCallbackWithBuffer 在启动预览后，需要手动调用Camera.addCallbackBuffer(data)
 //触发回调，byte[]数据需要根据一帧画面的尺寸提前创建传入
 //例如NV21格式，size = width * height * 3 / 2;
+//注意 即使预览时摄像头旋转了90度 但摄像头返回的数据data 仍然是横屏的数据
     override fun onPreviewFrame(data: ByteArray, camera: Camera?) {
         if (isCapture) {
             isCapture = false
@@ -78,7 +81,7 @@ class CameraSurfaceView @JvmOverloads constructor(
             //如果是这句 则data的数据是横屏的
 //            action?.let { it(data, size) }
 
-            //这句是将横屏的数据旋转90，生成竖屏的照片
+            //这句是将摄像头生成的横屏数据旋转90，生成竖屏的照片
             portraitData2Raw(data)
             action?.let { it(nv12!!, size) }
         }
@@ -87,6 +90,7 @@ class CameraSurfaceView @JvmOverloads constructor(
         mCamera?.addCallbackBuffer(data)
     }
 
+    //将data旋转90度后的数据存入nv12数组中
     private fun portraitData2Raw(data: ByteArray): ByteArray{
         val width = size!!.width
         val height = size!!.height

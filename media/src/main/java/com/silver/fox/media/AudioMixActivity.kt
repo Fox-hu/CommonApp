@@ -9,6 +9,7 @@ import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 import com.jaygoo.widget.RangeSeekBar
 import com.silver.fox.ext.copyAssets
+import com.silver.fox.ext.dp
 import com.silver.fox.media.rtmp.encoder.PermissionUtils
 import java.io.File
 import java.io.IOException
@@ -72,8 +73,8 @@ class AudioMixActivity : AppCompatActivity() {
     private fun startPlay(path: String) {
         videoView?.apply {
             val layoutParams = layoutParams
-            layoutParams.height = 480
-            layoutParams.width = 640
+            layoutParams.height = 480.dp.toInt()
+            layoutParams.width = 640.dp.toInt()
             this.layoutParams = layoutParams
             setVideoPath(path)
             start()
@@ -81,8 +82,8 @@ class AudioMixActivity : AppCompatActivity() {
                 mDuration = mp.duration / 1000
                 mp.isLooping = true
                 rangeSeekBar?.apply {
-                    setRange(0f, duration.toFloat())
-                    setValue(0f, duration.toFloat())
+                    setRange(0f, mDuration.toFloat())
+                    setValue(0f, mDuration.toFloat())
                     isEnabled = true
                     requestLayout()
                     setOnRangeChangedListener { _, min, _, _ ->
