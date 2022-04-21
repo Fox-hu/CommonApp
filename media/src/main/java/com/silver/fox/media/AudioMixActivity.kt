@@ -5,11 +5,14 @@ import android.os.Handler
 import android.view.View
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
+import android.widget.Toast
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 import com.jaygoo.widget.RangeSeekBar
 import com.silver.fox.ext.copyAssets
 import com.silver.fox.ext.dp
+import com.silver.fox.media.mix.MixProcess
+import com.silver.fox.media.mix.MixProcess1
 import com.silver.fox.media.rtmp.encoder.PermissionUtils
 import java.io.File
 import java.io.IOException
@@ -50,10 +53,6 @@ class AudioMixActivity : AppCompatActivity() {
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
             override fun onStopTrackingTouch(seekBar: SeekBar) {}
         })
-    }
-
-    override fun onResume() {
-        super.onResume()
         val videoPath = File("${filesDir?.parentFile?.path}", "input.mp4").absolutePath
         try {
             copyAssets(
@@ -73,7 +72,7 @@ class AudioMixActivity : AppCompatActivity() {
     private fun startPlay(path: String) {
         videoView?.apply {
             val layoutParams = layoutParams
-            layoutParams.height = 480.dp.toInt()
+            layoutParams.height = 360.dp.toInt()
             layoutParams.width = 640.dp.toInt()
             this.layoutParams = layoutParams
             setVideoPath(path)
@@ -104,7 +103,36 @@ class AudioMixActivity : AppCompatActivity() {
         }
     }
 
-    fun clip(view: View){
-
+    fun clip(view: View) {
+        //
+        val videoFile = File("${filesDir?.parentFile?.path}", "input.mp4")
+        val audioFile = File("${filesDir?.parentFile?.path}", "music.mp3")
+        val outputFile = File("${filesDir?.parentFile?.path}", "output.mp4")
+        Thread {
+            MixProcess.mixAudioTrack(
+                videoFile.absolutePath,
+                audioFile.absolutePath,
+                outputFile.absolutePath,
+                (rangeSeekBar!!.currentRange[0] * 1000 * 1000).toInt(),
+                (rangeSeekBar!!.currentRange[1] * 1000 * 1000).toInt(),
+                voiceVolume,
+                musicVolume
+            )
+// 用MixProcess1巨慢无比 原因待查
+//            MixProcess1(videoFile.absolutePath,
+//                audioFile.absolutePath,
+//                outputFile.absolutePath).mixAudioTrack(
+//                (rangeSeekBar!!.currentRange[0] * 1000 * 1000).toInt(),
+//                (rangeSeekBar!!.currentRange[1] * 1000 * 1000).toInt(),
+//                voiceVolume,
+//                musicVolume
+//            )
+            runOnUiThread {
+                startPlay(
+                    outputFile.absolutePath
+                )
+                Toast.makeText(this, "剪辑完毕", Toast.LENGTH_SHORT).show()
+            }
+        }.start()
     }
 }

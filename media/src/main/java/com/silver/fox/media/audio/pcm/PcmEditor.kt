@@ -6,6 +6,7 @@ import android.media.MediaExtractor
 import android.media.MediaFormat
 import com.silver.fox.common.InitApp
 import com.silver.fox.ext.logi
+import com.silver.fox.media.getTrackIndex
 import java.io.File
 import java.io.FileOutputStream
 import java.nio.ByteBuffer
@@ -30,7 +31,7 @@ class PcmEditor(private val inputPath: String) {
     init {
         extractor.setDataSource(inputPath)
         //选择音频轨
-        val audioTrack = getAudioTrack()
+        val audioTrack = extractor.getTrackIndex("audio/")
         extractor.selectTrack(audioTrack)
         //获取该音频轨的格式信息
         audioFormat = extractor.getTrackFormat(audioTrack)
@@ -50,7 +51,7 @@ class PcmEditor(private val inputPath: String) {
         if (endTime < startTime) return
         extractor.seekTo(startTime.toLong(), MediaExtractor.SEEK_TO_CLOSEST_SYNC)
         mediaCodec.start()
-        val pcmFile = File("${InitApp.CONTEXT.filesDir?.parentFile?.path}", "output.pcm")
+        val pcmFile = File("${InitApp.CONTEXT.filesDir?.parentFile?.path}", "output_${System.currentTimeMillis()}.pcm")
         if (pcmFile.exists()) pcmFile.delete()
         val writeChannel = FileOutputStream(pcmFile).channel
 
@@ -122,16 +123,5 @@ class PcmEditor(private val inputPath: String) {
         mediaCodec.stop()
         mediaCodec.release()
         callback(pcmFile.absolutePath)
-    }
-
-    private fun getAudioTrack(): Int {
-        for (i in 0..extractor.trackCount) {
-            if (extractor.getTrackFormat(i).getString(MediaFormat.KEY_MIME)!!
-                    .startsWith("audio/")
-            ) {
-                return i
-            }
-        }
-        return -1
     }
 }
