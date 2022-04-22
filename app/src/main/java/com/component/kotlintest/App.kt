@@ -1,7 +1,7 @@
 package com.component.kotlintest
 
 import android.app.Application
-import com.component.kotlintest.extensions.DelegatesExt
+import com.component.kotlintest.app.extensions.DelegatesExt
 
 class App :Application(){
     //伴生对象，相当于static

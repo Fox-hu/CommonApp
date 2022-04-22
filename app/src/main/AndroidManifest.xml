@@ -25,7 +25,7 @@
         </activity>
 
         <activity
-                android:name=".ui.activity.DetailActivity"
+                android:name="com.component.kotlintest.app.activity.DetailActivity"
                 android:parentActivityName=".MainActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
@@ -33,12 +33,12 @@
         </activity>
 
         <activity
-                android:name=".ui.activity.SettingActivity"
+                android:name="com.component.kotlintest.app.activity.SettingActivity"
                 android:label="@string/settings"/>
 
-        <activity android:name=".fragment.FragmentActivity"/>
+        <activity android:name="com.component.kotlintest.app.fragment.FragmentActivity"/>
 
-        <activity android:name=".touch_event.TouchEventActivity"/>
+        <activity android:name="com.component.kotlintest.demo.touch_event.TouchEventActivity"/>
     </application>
 
 </manifest>

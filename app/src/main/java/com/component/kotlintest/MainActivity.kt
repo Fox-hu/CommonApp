@@ -4,13 +4,13 @@ import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.component.kotlintest.adapter.ForecastListAdapter
-import com.component.kotlintest.demain.commands.RequestForecastCommand
-import com.component.kotlintest.extensions.DelegatesExt
-import com.component.kotlintest.ui.activity.CoroutineScopeActivity
-import com.component.kotlintest.ui.activity.DetailActivity
-import com.component.kotlintest.ui.activity.SettingActivity
-import com.component.kotlintest.ui.activity.ToolbarManager
+import com.component.kotlintest.app.adapter.ForecastListAdapter
+import com.component.kotlintest.app.demain.commands.RequestForecastCommand
+import com.component.kotlintest.app.extensions.DelegatesExt
+import com.component.kotlintest.app.activity.CoroutineScopeActivity
+import com.component.kotlintest.app.activity.DetailActivity
+import com.component.kotlintest.app.activity.SettingActivity
+import com.component.kotlintest.app.activity.ToolbarManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.find

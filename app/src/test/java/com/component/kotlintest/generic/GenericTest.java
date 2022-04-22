@@ -1,9 +1,9 @@
 package com.component.kotlintest.generic;
 
 
-import com.component.kotlintest.java.generic.B;
-import com.component.kotlintest.java.generic.C;
-import com.component.kotlintest.java.generic.TypeTest;
+import com.component.kotlintest.demo.java.generic.B;
+import com.component.kotlintest.demo.java.generic.C;
+import com.component.kotlintest.demo.java.generic.TypeTest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

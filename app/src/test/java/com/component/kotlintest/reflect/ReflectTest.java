@@ -1,8 +1,8 @@
 package com.component.kotlintest.reflect;
 
 
-import com.component.kotlintest.java.AgeValidator;
-import com.component.kotlintest.java.Person;
+import com.component.kotlintest.demo.java.AgeValidator;
+import com.component.kotlintest.demo.java.Person;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,7 +35,7 @@ public class ReflectTest {
         System.out.println(grandParent);
 
         //测试当前类由哪个类加载器（应用程序类加载器）
-        ClassLoader classLoader = Class.forName("com.component.kotlintest.java.Person")
+        ClassLoader classLoader = Class.forName("com.component.kotlintest.demo.java.Person")
                 .getClassLoader();
         System.out.println(classLoader);
 
@@ -55,7 +55,7 @@ public class ReflectTest {
         clazz = person.getClass();
 
         //通过全类名 框架开发多用此方式
-        String className = "com.component.kotlintest.java.Person";
+        String className = "com.component.kotlintest.demo.java.Person";
         clazz = Class.forName(className);
     }
 
@@ -64,7 +64,7 @@ public class ReflectTest {
             ClassNotFoundException,
             InstantiationException,
             IllegalAccessException {
-        String className = "com.component.kotlintest.java.Person";
+        String className = "com.component.kotlintest.demo.java.Person";
         Class clazz = Class.forName(className);
 
         Object obj = clazz.newInstance();
@@ -73,7 +73,7 @@ public class ReflectTest {
 
     @Test
     public void testMethod() throws Exception {
-        Class clazz = Class.forName("com.component.kotlintest.java.Person");
+        Class clazz = Class.forName("com.component.kotlintest.demo.java.Person");
 
         //获取该类即所继承的所有方法 不能获取private方法
         Method[] methods = clazz.getMethods();
@@ -100,7 +100,7 @@ public class ReflectTest {
 
     @Test
     public void testFiled() throws Exception {
-        Class clazz = Class.forName("com.component.kotlintest.java.Person");
+        Class clazz = Class.forName("com.component.kotlintest.demo.java.Person");
 
         //获取所有共有、私有字段 不包含父类字段
         Field[] declaredFields = clazz.getDeclaredFields();
@@ -130,7 +130,7 @@ public class ReflectTest {
 
     @Test
     public void testConstructor() throws Exception {
-        Class clazz = Class.forName("com.component.kotlintest.java.Person");
+        Class clazz = Class.forName("com.component.kotlintest.demo.java.Person");
 
         //获取Person类中全部Constructor对象 包含public和private的
         Constructor[] declaredConstructors = clazz.getDeclaredConstructors();
@@ -155,7 +155,7 @@ public class ReflectTest {
 
     @Test
     public void testAnnotation() throws Exception {
-        Class clazz = Class.forName("com.component.kotlintest.java.Person");
+        Class clazz = Class.forName("com.component.kotlintest.demo.java.Person");
         Object obj = clazz.newInstance();
 
         Method method = clazz.getDeclaredMethod("setAge", int.class);

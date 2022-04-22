@@ -1,7 +1,8 @@
 package com.component.kotlintest
 
-import com.component.kotlintest.first.*
-import com.component.kotlintest.java.Son
+import com.component.kotlintest.demo.first.*
+import com.component.kotlintest.demo.java.Son
+import com.component.kotlintest.demo.kotlin_demo.*
 import org.junit.Test
 
 class SkillTest {
