@@ -1,5 +1,7 @@
 package com.component.kotlintest.test;
 
+import com.component.kotlintest.demo.java.Son;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -14,10 +16,5 @@ public class JavaTest {
     @Test
     public void testOrder() {
         new Son();
-    }
-
-    @Test
-    public void testMap() {
-        new MapTest().test();
     }
 }

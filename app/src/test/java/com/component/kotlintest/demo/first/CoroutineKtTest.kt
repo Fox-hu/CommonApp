@@ -2,7 +2,6 @@ package com.component.kotlintest.demo.first
 
 import com.component.kotlintest.demo.kotlin_demo.corotines1
 import com.component.kotlintest.demo.kotlin_demo.corotines3
-import com.component.kotlintest.test.Student
 import org.junit.Test
 
 /**
@@ -20,6 +19,8 @@ class CoroutineKtTest {
     fun coro3() {
         corotines3()
     }
+
+    class Student(var name:String, var age:Int)
 
     @Test
     fun test() {
