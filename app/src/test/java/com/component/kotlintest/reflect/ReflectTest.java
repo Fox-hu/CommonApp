@@ -1,6 +1,7 @@
 package com.component.kotlintest.reflect;
 
 
+import com.component.kotlintest.demo.concurrency.threadstates.BlockWaitingTimeWaiting;
 import com.component.kotlintest.demo.java.AgeValidator;
 import com.component.kotlintest.demo.java.Person;
 
@@ -169,6 +170,33 @@ public class ReflectTest {
         }
         method.invoke(obj, 20);
         System.out.println(obj);
+    }
+
+    @Test
+    public void testThreadStates() {
+        BlockWaitingTimeWaiting runnable = new BlockWaitingTimeWaiting();
+        Thread thread1 = new Thread(runnable);
+        thread1.start();
+        Thread thread2 = new Thread(runnable);
+        thread2.start();
+
+        try {
+            Thread.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // thread1持有锁, 线程运行到正在sleep,所以是TIMED_WAITING
+        System.out.println("thread1 states = " + thread1.getState());
+        // thread2在syn代码块内正在等待锁释放 状态是BLOCKED
+        System.out.println("thread2 states = " + thread2.getState());
+
+        try {
+            Thread.sleep(1300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // 等待了1300ms后 thread1已调用了wait方法 状态是WAITING
+        System.out.println("thread1 states = " + thread1.getState());
     }
 
 }
