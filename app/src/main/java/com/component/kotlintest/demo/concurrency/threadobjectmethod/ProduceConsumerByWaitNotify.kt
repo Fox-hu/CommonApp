@@ -58,5 +58,6 @@ fun main() {
     val producer = Produce(storage)
     val consume = Consumer(storage)
     Thread(producer).start()
+    Thread.sleep(1000)
     Thread(consume).start()
 }
