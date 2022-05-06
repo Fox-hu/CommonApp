@@ -15,7 +15,7 @@
             android:name=".RtmpDemoActivity"
             android:exported="false" />
         <activity
-            android:name=".AudioMixActivity"
+            android:name=".AudioVideoMixActivity"
             android:exported="false" />
         <activity
             android:name=".ScreenToH264Activity"
@@ -24,7 +24,10 @@
             android:name=".CameraCaptureActivity"
             android:exported="false" />
         <activity
-            android:name=".AudioEditActivity"
+            android:name=".AudioFlipActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VideoMixActivity"
             android:exported="false" />
         <!--录屏service-->
         <service

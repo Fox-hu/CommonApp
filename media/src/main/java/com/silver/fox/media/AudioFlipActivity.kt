@@ -12,7 +12,7 @@ import java.io.File
 /**
  * 将一个音频裁减成一个新音频
  */
-class AudioEditActivity : AppCompatActivity() {
+class AudioFlipActivity : AppCompatActivity() {
 
     @Volatile
     private var isClip = false

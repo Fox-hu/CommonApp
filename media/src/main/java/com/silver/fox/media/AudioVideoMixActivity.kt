@@ -16,8 +16,10 @@ import com.silver.fox.media.mix.MixProcess1
 import com.silver.fox.media.rtmp.encoder.PermissionUtils
 import java.io.File
 import java.io.IOException
-
-class AudioMixActivity : AppCompatActivity() {
+/**
+ * 将一个mp4文件与一个mp3文件进行裁剪，并合成一个新的mp4文件
+ */
+class AudioVideoMixActivity : AppCompatActivity() {
     var videoView: VideoView? = null
     var rangeSeekBar: RangeSeekBar? = null
     var musicSeekBar: SeekBar? = null
