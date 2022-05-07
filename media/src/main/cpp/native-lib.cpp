@@ -7,7 +7,7 @@
 extern "C" {
 #include "librtmp/rtmp.h"
 }
-#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,"DDDDDD",__VA_ARGS__)
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,"silver_fox",__VA_ARGS__)
 typedef struct {
     int16_t sps_len;
     int16_t pps_len;
@@ -35,7 +35,7 @@ void prepareVideo(int8_t *data, int len, Live *live) {
                 && data[i + 2] == 0x00
                 && data[i + 3] == 0x01) {
                 //0x00 0x00 0x00 0x01 7 sps 0x00 0x00 0x00 0x01 8 pps
-                //将sps pps分开
+                //将sps pps分开 根据文档 找到0x68，0x68前的数据就是sps数据，0x68后的数据是pps数据
                 //找到pps
                 LOGI("将sps pps分开");
                 if (data[i + 4] == 0x68) {
@@ -91,7 +91,7 @@ RTMPPacket *createVideoPackage(int8_t *buf, int len, const long tms, Live *live)
     return packet;
 
 }
-
+//发送sps和pps帧
 RTMPPacket *createVideoPackage(Live *live) {
     int body_size = 13 + live->sps_len + 3 + live->pps_len;
     RTMPPacket *packet = (RTMPPacket *) malloc(sizeof(RTMPPacket));
@@ -136,17 +136,21 @@ RTMPPacket *createVideoPackage(Live *live) {
     return packet;
 }
 
+// 发送视频  有如下几个步骤
+// 1、获取sps、pps数据 暂存至结构体中
+// 2、每次发送i帧前 都要将sps、pps的数据随i帧一起发送出去
+// 3、发送b帧、p帧
 int sendVideo(int8_t *buf, int len, long tms) {
-    int ret;
+    int ret = 0;
     //buf[4] == 0x67
-    if ((buf[4] & 0x1F) == 7) {//sps pps
+    if (buf[4] == 0x67) {//sps pps
         if (live && (!live->pps || !live->sps)) {
             prepareVideo(buf, len, live);
         }
     } else {
         //buf[4] == 0x65
-        if ((buf[4] & 0x1F) == 5) {//关键帧 I 帧
-            RTMPPacket *packet = createVideoPackage(live);//发送sps pps
+        if (buf[4] == 0x65) {//关键帧 I 帧
+            RTMPPacket *packet = createVideoPackage(live);//发送sps pps帧
             if (!(ret = sendPacket(packet))) {
             }
         }
