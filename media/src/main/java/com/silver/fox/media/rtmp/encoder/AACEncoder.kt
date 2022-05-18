@@ -15,9 +15,9 @@ class AACEncoder : Runnable {
     private val rate = 64000 //9600
 
     //录音设置
-    private val sampleRate = 44100 //采样率，默认44.1k
-    private val channelCount = 1 //音频采样通道，默认2通道
-    private val channelConfig = AudioFormat.CHANNEL_IN_MONO //通道设置，默认立体声
+    private val sampleRate = 48000 //采样率，默认44.1k
+    private val channelCount = 2 //音频采样通道，默认2通道
+    private val channelConfig = AudioFormat.CHANNEL_IN_STEREO //通道设置，默认立体声
     private val audioFormat = AudioFormat.ENCODING_PCM_16BIT //设置采样数据格式，默认16比特PCM
     private var isRecording = false
     private var mThread: Thread? = null
@@ -31,7 +31,7 @@ class AACEncoder : Runnable {
                 MediaFormat.KEY_AAC_PROFILE,
                 MediaCodecInfo.CodecProfileLevel.AACObjectLC
             )
-            setInteger(MediaFormat.KEY_CHANNEL_MASK, AudioFormat.CHANNEL_IN_MONO)
+            setInteger(MediaFormat.KEY_CHANNEL_MASK, AudioFormat.CHANNEL_IN_STEREO)
             setInteger(MediaFormat.KEY_BIT_RATE, rate)
             val data = byteArrayOf(0x11.toByte(), 0x90.toByte())
             val mCSD0 = ByteBuffer.wrap(data)

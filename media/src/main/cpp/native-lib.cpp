@@ -56,7 +56,7 @@ void prepareVideo(int8_t *data, int len, Live *live) {
 }
 
 RTMPPacket *createVideoPackage(int8_t *buf, int len, const long tms, Live *live) {
-//    分隔符被抛弃了      --buf指的是651
+//  java层传输一帧的数据下来时是带着分隔符00 00 00 01的 而构建rtmp包则不需要分隔符了 此时将buf指向分隔符后第一位 长度去掉分隔符的长度
     buf += 4;
     len -= 4;
     int body_size = len + 9;
@@ -91,6 +91,7 @@ RTMPPacket *createVideoPackage(int8_t *buf, int len, const long tms, Live *live)
     return packet;
 
 }
+
 //发送sps和pps帧
 RTMPPacket *createVideoPackage(Live *live) {
     int body_size = 13 + live->sps_len + 3 + live->pps_len;
@@ -163,14 +164,13 @@ int sendVideo(int8_t *buf, int len, long tms) {
 RTMPPacket *createAudioPacket(int8_t *buf, const int len, const int type, const long tms,
                               Live *live) {
 
-//    组装音频包  两个字节    是固定的   af    如果是第一次发  你就是 01       如果后面   00  或者是 01  aac
+//    组装音频包 还需要+两个字节    首字节是固定的   af    如果是第一次发  第二个字节是01 否则是00
     int body_size = len + 2;
     RTMPPacket *packet = (RTMPPacket *) malloc(sizeof(RTMPPacket));
     RTMPPacket_Alloc(packet, body_size);
 //         音频头
     packet->m_body[0] = 0xAF;
     if (type == 1) {
-//        头
         packet->m_body[1] = 0x00;
     } else {
         packet->m_body[1] = 0x01;
@@ -236,8 +236,9 @@ Java_com_silver_fox_media_rtmp_CameraLive_connect(JNIEnv *env, jobject thiz, jst
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_silver_fox_media_rtmp_CameraLive_sendData(JNIEnv *env, jobject thiz, jbyteArray data_, jint len,
-                                           jlong tms, jint type) {
+Java_com_silver_fox_media_rtmp_CameraLive_sendData(JNIEnv *env, jobject thiz, jbyteArray data_,
+                                                   jint len,
+                                                   jlong tms, jint type) {
     int ret;
     jbyte *data = env->GetByteArrayElements(data_, NULL);
     switch (type) {
@@ -270,7 +271,7 @@ Java_com_silver_fox_media_rtmp_CameraLive_disconnect(JNIEnv *env, jobject thiz) 
         }
         free(live);
         live = 0;
-        if (rtmp_read){
+        if (rtmp_read) {
             RTMP_Close(rtmp_read);
             RTMP_Free(rtmp_read);
         }
@@ -281,35 +282,35 @@ Java_com_silver_fox_media_rtmp_CameraLive_disconnect(JNIEnv *env, jobject thiz) 
 extern "C"
 JNIEXPORT jbyteArray JNICALL
 Java_com_silver_fox_media_rtmp_CameraLive_readData(JNIEnv *env, jobject thiz) {
-    if (!rtmp_read){
-        rtmp_read=RTMP_Alloc();
+    if (!rtmp_read) {
+        rtmp_read = RTMP_Alloc();
         RTMP_Init(rtmp_read);
         //set connection timeout,default 30s
-        rtmp_read->Link.timeout=10;
+        rtmp_read->Link.timeout = 10;
         // HKS's live URL
-        if(!RTMP_SetupURL(rtmp_read,"rtmp://192.168.123.196/live/livestrea2")){
-            RTMP_Log(RTMP_LOGERROR,"SetupURL Err\n");
+        if (!RTMP_SetupURL(rtmp_read, "rtmp://192.168.123.196/live/livestrea2")) {
+            RTMP_Log(RTMP_LOGERROR, "SetupURL Err\n");
             RTMP_Free(rtmp_read);
         }
         //1hour
-        RTMP_SetBufferMS(rtmp_read, 3600*1000);
-        if(!RTMP_Connect(rtmp_read,NULL)){
-            RTMP_Log(RTMP_LOGERROR,"Connect Err\n");
+        RTMP_SetBufferMS(rtmp_read, 3600 * 1000);
+        if (!RTMP_Connect(rtmp_read, NULL)) {
+            RTMP_Log(RTMP_LOGERROR, "Connect Err\n");
             RTMP_Free(rtmp_read);
         }
-        if(!RTMP_ConnectStream(rtmp_read,0)){
-            RTMP_Log(RTMP_LOGERROR,"ConnectStream Err\n");
+        if (!RTMP_ConnectStream(rtmp_read, 0)) {
+            RTMP_Log(RTMP_LOGERROR, "ConnectStream Err\n");
             RTMP_Close(rtmp_read);
             RTMP_Free(rtmp_read);
         }
     }
 
-    int nRead=0;
-    int bufsize=1024*1024;
-    char* buf=(char*)malloc(bufsize);
-    memset(buf,0,bufsize);
-    nRead=RTMP_Read(rtmp_read,buf,bufsize);
-    LOGI("bufsize : %d",bufsize);
+    int nRead = 0;
+    int bufsize = 1024 * 1024;
+    char *buf = (char *) malloc(bufsize);
+    memset(buf, 0, bufsize);
+    nRead = RTMP_Read(rtmp_read, buf, bufsize);
+    LOGI("bufsize : %d", bufsize);
     char arr[bufsize];
     strcpy(arr, buf);
     memcpy(arr, buf, sizeof(arr));
@@ -354,8 +355,9 @@ Java_com_silver_fox_media_rtmp_ScreenLive_connect(JNIEnv *env, jobject thiz, jst
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_silver_fox_media_rtmp_ScreenLive_sendData(JNIEnv *env, jobject thiz, jbyteArray data_, jint len,
-                                           jlong tms, jint type) {
+Java_com_silver_fox_media_rtmp_ScreenLive_sendData(JNIEnv *env, jobject thiz, jbyteArray data_,
+                                                   jint len,
+                                                   jlong tms, jint type) {
     int ret;
     jbyte *data = env->GetByteArrayElements(data_, NULL);
     switch (type) {

@@ -18,7 +18,7 @@ class AudioCodec(private val screenLive: ScreenLive) : Thread() {
         try {
             val mediaFormat = MediaFormat.createAudioFormat(
                 MediaFormat.MIMETYPE_AUDIO_AAC,
-                44100, 1
+                44100, 2
             )
             //编码规格，可以看成质量
             mediaFormat.setInteger(
