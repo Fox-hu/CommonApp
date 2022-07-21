@@ -2,6 +2,11 @@ package com.silver.fox.ext
 
 import java.io.*
 import java.nio.charset.Charset
+import java.util.*
+import java.util.zip.ZipEntry
+import java.util.zip.ZipException
+import java.util.zip.ZipFile
+import java.util.zip.ZipInputStream
 
 val File.canListFiles: Boolean
     get() = canRead() and isDirectory
@@ -112,4 +117,71 @@ fun File.getBytes(): ByteArray? {
     while (inputStream.read(buf, 0, size).also { len = it } != -1) bos.write(buf, 0, len)
     buf = bos.toByteArray()
     return buf
+}
+
+fun File.unzip( targetDirectory: File?) {
+    val zis = ZipInputStream(
+        BufferedInputStream(FileInputStream(this))
+    )
+    zis.use { it ->
+        var ze: ZipEntry
+        var count: Int
+        val buffer = ByteArray(8192)
+        while (it.nextEntry.also { ze = it } != null) {
+            val file = File(targetDirectory, ze.name)
+            val dir = if (ze.isDirectory) file else file.parentFile
+            if (!dir.isDirectory && !dir.mkdirs()) throw FileNotFoundException(
+                "Failed to ensure directory: " +
+                        dir.absolutePath
+            )
+            if (ze.isDirectory) continue
+            val fout = FileOutputStream(file)
+            fout.use { f ->
+                while (it.read(buffer).also { count = it } != -1) f.write(buffer, 0, count)
+            }
+            /* if time should be restored as well
+            long time = ze.getTime();
+            if (time > 0)
+                file.setLastModified(time);
+            */
+        }
+    }
+}
+
+/**
+ * 解压缩功能.
+ * 将zipFile文件解压到folderPath目录下.
+ *
+ * @throws Exception
+ */
+fun File.upZipFile(folderPath: String) {
+    val zfile = ZipFile(this)
+    val zList: Enumeration<*> = zfile.entries()
+    var ze: ZipEntry? = null
+    val size = 1024 * 64
+    val buf = ByteArray(size)
+    while (zList.hasMoreElements()) {
+        ze = zList.nextElement() as ZipEntry
+        val destFile = File(File(folderPath), ze.name)
+        if (ze.isDirectory) {
+            if (destFile.isFile) {
+                destFile.delete()
+            }
+            destFile.mkdirs()
+            continue
+        }
+        val parent = destFile.parentFile
+        if (!parent.exists()) {
+            parent.mkdirs()
+        }
+        val os: OutputStream = BufferedOutputStream(FileOutputStream(destFile))
+        val inputStream: InputStream = BufferedInputStream(zfile.getInputStream(ze))
+        var readLen = 0
+        while (inputStream.read(buf, 0, size).also { readLen = it } != -1) {
+            os.write(buf, 0, readLen)
+        }
+        inputStream.close()
+        os.close()
+    }
+    zfile.close()
 }

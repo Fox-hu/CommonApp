@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 /**
- * @Author p310s
+ * @Author fox.hu
  * @Date 2021/7/5 4:19 下午
  */
 public class NotchCompat {

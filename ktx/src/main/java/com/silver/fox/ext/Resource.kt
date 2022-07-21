@@ -1,6 +1,7 @@
 package com.silver.fox.ext
 
 import android.content.Context
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.util.TypedValue
 import android.view.View
@@ -13,9 +14,16 @@ fun Int.getColor(context: Context = Ktx.app): Int = ContextCompat.getColor(conte
 
 fun Int.getString(context: Context = Ktx.app): String = context.getString(this)
 
-fun Int.px2dp(context: Context = Ktx.app): Int {
-    val scale = context.resources.displayMetrics.density
-    return (dp * scale + 0.5f).toInt()
+fun Int.dp2px(context: Context? =  Ktx.app): Int {
+    if (this <= 0) return 0
+    val scale = context?.resources?.displayMetrics?.density ?: 0f
+    return (this * scale + 0.5f).toInt()
+}
+
+fun Float.dp2px(context: Context? =  Ktx.app): Int {
+    if (this <= 0) return 0
+    val scale = context?.resources?.displayMetrics?.density ?: 0f
+    return (this * scale + 0.5f).toInt()
 }
 
 fun Int.getStringArray(context: Context = Ktx.app): Array<String> =
@@ -36,6 +44,11 @@ fun View.dp2px(dp: Int): Int {
     return (dp * scale + 0.5f).toInt()
 }
 
+fun View.px2dp(px: Int): Int {
+    val scale = resources.displayMetrics.density
+    return (px / scale + 0.5f).toInt()
+}
+
 val Int.dp
     get() = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
@@ -43,7 +56,11 @@ val Int.dp
         Resources.getSystem().displayMetrics
     )
 
-fun View.px2dp(px: Int): Int {
-    val scale = resources.displayMetrics.density
-    return (px / scale + 0.5f).toInt()
-}
+val Context.screenRadio: Float
+    get() {
+        return if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            screenHeight.toFloat() / screenWidth.toFloat()
+        } else {
+            screenWidth.toFloat() / screenHeight.toFloat()
+        }
+    }

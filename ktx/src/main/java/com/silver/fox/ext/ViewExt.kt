@@ -1,16 +1,14 @@
 package com.silver.fox.ext
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
+import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.view.View
+import android.view.ViewOutlineProvider
 import android.view.ViewTreeObserver
 import android.widget.ImageView
 import androidx.annotation.Px
 import androidx.annotation.RequiresApi
-import androidx.core.view.drawToBitmap
 
 /**
  * Set view visible
@@ -179,3 +177,29 @@ fun View.clickN(count: Int = 1, interval: Long = 1000, action: () -> Unit) {
         }
     }
 }
+
+fun View.corner(corner: Float) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        outlineProvider = TextureVideoViewOutlineProvider(corner.dp2px(context).toFloat())
+        clipToOutline = true
+    }
+}
+
+
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+class TextureVideoViewOutlineProvider(private val mRadius: Float) :
+    ViewOutlineProvider() {
+    override fun getOutline(view: View, outline: Outline) {
+        val rect = Rect()
+        view.getGlobalVisibleRect(rect)
+        val leftMargin = 0
+        val topMargin = 0
+        val selfRect = Rect(
+            leftMargin, topMargin,
+            rect.right - rect.left - leftMargin, rect.bottom - rect.top - topMargin
+        )
+        outline.setRoundRect(selfRect, mRadius)
+    }
+}
+
+
